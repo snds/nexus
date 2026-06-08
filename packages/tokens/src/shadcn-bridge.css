@@ -54,4 +54,15 @@
 [data-slot="button"][data-slot="button"] {
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
+  /* When Tailwind Preflight is OFF (Docusaurus, to preserve Infima) a bare <button> falls back to
+     the user-agent `2px outset` bevel — a skeuomorphic raised edge. Force `solid` (what Preflight
+     sets) to kill the bevel. High specificity so it always wins; safe because the `outline` variant
+     also wants solid. */
+  border-style: solid;
+}
+
+/* Low specificity on purpose: default to no border, but let the `outline` variant's `.border`
+   utility (1px, emitted later in the cascade) override this. Pairs with the forced `solid` above. */
+[data-slot="button"] {
+  border-width: 0;
 }
