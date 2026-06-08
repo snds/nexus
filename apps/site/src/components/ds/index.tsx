@@ -37,6 +37,25 @@ export function SwatchGrid({ tokens, kind }: { tokens: [string, string][]; kind?
   );
 }
 
+export function Ramp({ prefix }: { prefix: string }) {
+  const [, force] = useState(0);
+  useEffect(() => force((n) => n + 1), []);
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, margin: "12px 0" }}>
+      {Array.from({ length: 12 }, (_, i) => i + 1).map((i) => {
+        const name = `${prefix}-${i}`;
+        return (
+          <div key={i} style={{ width: 64 }}>
+            <div style={{ height: 44, borderRadius: 8, background: `hsl(var(${name}))`, boxShadow: "inset 0 0 0 1px hsl(var(--nx-border))" }} />
+            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "hsl(var(--nx-fg-subtle))", marginTop: 4 }}>{i}</div>
+            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 9, color: "hsl(var(--nx-fg-subtle))" }}>{val(name) || "—"}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function Specimen({ children, padded = true }: { children: ReactNode; padded?: boolean }) {
   return (
     <div

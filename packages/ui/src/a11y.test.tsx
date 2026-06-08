@@ -23,6 +23,7 @@ import * as stateBlock from "./components/nexus/StateBlock.stories.js";
 import * as stepper from "./components/nexus/Stepper.stories.js";
 import * as toolButton from "./components/nexus/ToolButton.stories.js";
 import * as tooltip from "./components/nexus/Tooltip.stories.js";
+import * as text from "./components/nexus/Text.stories.js";
 
 type StoryModule = {
   default: { title: string; component: ComponentType<Record<string, unknown>> };
@@ -44,6 +45,7 @@ const MODULES: StoryModule[] = [
   stepper,
   toolButton,
   tooltip,
+  text,
 ] as unknown as StoryModule[];
 
 // Page/landmark rules don't apply to isolated component snippets.

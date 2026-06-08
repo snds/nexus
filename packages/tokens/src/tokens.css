@@ -1,51 +1,95 @@
 /**
- * NTX design tokens — SINGLE SOURCE OF TRUTH for appearance.
- * Dark-first: :root IS the dark theme (SOC analysts work in dark rooms).
- * .light is the override. No component may hardcode color/space/radius — reference these.
+ * NTX design tokens — SINGLE SOURCE OF TRUTH for appearance, in three tiers:
+ *   L0 PRIMITIVES — raw scales: neutral + accent color RAMPS, the type scale, entity/severity
+ *                   palettes. The vocabulary; not used directly by components.
+ *   L1 SEMANTICS  — purpose aliases (--nx-bg, --nx-fg, --nx-accent, …) that point at primitives.
+ *                   This is what components consume.
+ *   (L2 component tokens live with their components / the Text variants.)
  *
- * Two product-specific semantic channels (architecture §5):
- *   --entity-*    : node color = ENTITY TYPE (legacy 6-color taxonomy kept). PROVISIONAL values
- *                   pending the entity-family → color map sign-off. Glyph disambiguates within a family.
- *   --severity-*  : verdict on its OWN channel (never reuses entity color).
+ * Dark-first: :root IS the dark theme. `:root.light` re-points the PRIMITIVE ramps; the
+ * semantic aliases follow automatically. HSL triplets (used as `hsl(var(--token))`).
  */
 
 :root {
-  /* ---- neutral surface ramp (dark-first) ---- */
-  /* Radix-style background contexts (cool, hue 222):
-   *   --nx-bg        = step 1, the app/canvas surface — coolest, near-black.
-   *   --nx-surface-1 = step 2, panels/cards — one step up so chrome lifts off the canvas. */
-  --nx-bg: 222 38% 5%;            /* app / graph canvas background (cool near-black) */
-  --nx-surface-1: 222 26% 10%;    /* panels / cards (raised background context) */
-  --nx-surface-2: 222 20% 13%;    /* raised / popover */
-  --nx-surface-3: 222 18% 17%;    /* hover / selected row */
-  --nx-border: 222 14% 22%;
-  --nx-border-strong: 222 14% 30%;
-  --nx-fg: 210 30% 96%;           /* primary text */
-  --nx-fg-muted: 214 14% 66%;     /* secondary text */
-  --nx-fg-subtle: 214 13% 62%;    /* tertiary / captions — ≥4.5:1 (WCAG AA) on dark surfaces */
+  /* ============================================================ L0 — PRIMITIVES */
 
-  /* ---- brand / interactive ---- */
-  --nx-accent: 205 90% 56%;       /* Proofpoint-ish blue; interactive primary */
-  --nx-accent-fg: 0 0% 100%;
-  --nx-ring: 205 90% 56%;
+  /* ---- neutral ramp (cool, hue ~222): 1 = app bg … 12 = primary text ---- */
+  --nx-neutral-1: 222 38% 5%;
+  --nx-neutral-2: 222 26% 10%;
+  --nx-neutral-3: 222 20% 13%;
+  --nx-neutral-4: 222 18% 17%;
+  --nx-neutral-5: 222 16% 20%;
+  --nx-neutral-6: 222 14% 22%;
+  --nx-neutral-7: 222 14% 30%;
+  --nx-neutral-8: 220 13% 44%;
+  --nx-neutral-9: 214 13% 62%;
+  --nx-neutral-10: 214 14% 66%;
+  --nx-neutral-11: 213 18% 80%;
+  --nx-neutral-12: 210 30% 96%;
 
-  /* ---- entity types (color = type). PROVISIONAL — confirm family→color map ---- */
-  --entity-actor: 0 72% 58%;        /* adversary */
-  --entity-campaign: 28 90% 58%;    /* orchestration */
-  --entity-malware: 350 75% 56%;    /* malicious payload */
-  --entity-exploit: 320 60% 60%;    /* technique */
-  --entity-sid: 265 60% 65%;        /* detection signature */
-  --entity-hash: 200 70% 58%;       /* file artifact */
-  --entity-url: 190 70% 52%;        /* web infra */
-  --entity-domain: 175 65% 48%;     /* infra */
-  --entity-ip: 160 60% 48%;         /* infra */
-  --entity-hostname: 150 50% 52%;   /* infra */
-  --entity-filename: 215 14% 60%;   /* neutral artifact */
-  --entity-email: 45 85% 58%;       /* message */
-  --entity-message: 50 80% 56%;     /* message */
-  --entity-scan: 215 12% 55%;       /* neutral / process */
+  /* ---- accent ramp (blue, hue ~205): 9 = solid interactive ---- */
+  --nx-accent-1: 210 40% 8%;
+  --nx-accent-2: 209 45% 11%;
+  --nx-accent-3: 208 60% 16%;
+  --nx-accent-4: 207 70% 21%;
+  --nx-accent-5: 206 75% 27%;
+  --nx-accent-6: 205 78% 34%;
+  --nx-accent-7: 205 82% 42%;
+  --nx-accent-8: 205 86% 49%;
+  --nx-accent-9: 205 90% 56%;
+  --nx-accent-10: 205 92% 62%;
+  --nx-accent-11: 205 95% 72%;
+  --nx-accent-12: 205 100% 90%;
 
-  /* ---- severity / verdict (own channel) ---- */
+  --nx-white: 0 0% 100%;
+
+  /* ---- type scale (primitives) ----
+   * sizes (rem on a 16px root), weights, line-heights, letter-spacing. */
+  --nx-text-2xs: 0.6875rem; /* 11 */
+  --nx-text-xs: 0.75rem;    /* 12 */
+  --nx-text-sm: 0.8125rem;  /* 13 */
+  --nx-text-base: 0.875rem; /* 14 — UI default */
+  --nx-text-md: 1rem;       /* 16 */
+  --nx-text-lg: 1.125rem;   /* 18 */
+  --nx-text-xl: 1.25rem;    /* 20 */
+  --nx-text-2xl: 1.5rem;    /* 24 */
+  --nx-text-3xl: 1.875rem;  /* 30 */
+  --nx-text-4xl: 2.25rem;   /* 36 */
+  --nx-text-5xl: 2.75rem;   /* 44 */
+
+  --nx-weight-regular: 400;
+  --nx-weight-medium: 500;
+  --nx-weight-semibold: 600;
+  --nx-weight-bold: 700;
+
+  --nx-leading-none: 1;
+  --nx-leading-tight: 1.15;
+  --nx-leading-snug: 1.3;
+  --nx-leading-normal: 1.5;
+  --nx-leading-relaxed: 1.65;
+
+  --nx-tracking-tight: -0.01em;
+  --nx-tracking-normal: 0em;
+  --nx-tracking-wide: 0.02em;
+  --nx-tracking-wider: 0.06em;
+
+  /* ---- entity palette (color = entity type). PROVISIONAL — single-tone primitives ---- */
+  --entity-actor: 0 72% 58%;
+  --entity-campaign: 28 90% 58%;
+  --entity-malware: 350 75% 56%;
+  --entity-exploit: 320 60% 60%;
+  --entity-sid: 265 60% 65%;
+  --entity-hash: 200 70% 58%;
+  --entity-url: 190 70% 52%;
+  --entity-domain: 175 65% 48%;
+  --entity-ip: 160 60% 48%;
+  --entity-hostname: 150 50% 52%;
+  --entity-filename: 215 14% 60%;
+  --entity-email: 45 85% 58%;
+  --entity-message: 50 80% 56%;
+  --entity-scan: 215 12% 55%;
+
+  /* ---- severity palette (verdict — its own channel) ---- */
   --severity-malicious: 0 78% 56%;
   --severity-phishing: 330 75% 56%;
   --severity-suspicious: 28 90% 56%;
@@ -53,53 +97,77 @@
   --severity-benign: 145 60% 45%;
   --severity-unknown: 215 12% 52%;
 
-  /* ---- alert (toasts/indicators, from legacy Icon/Alert) ---- */
   --alert-error: 0 78% 56%;
   --alert-warning: 38 92% 54%;
   --alert-success: 145 60% 45%;
 
-  /* ---- radius / spacing / type scale ---- */
+  /* ============================================================ L1 — SEMANTICS */
+
+  /* Two Radix-style background contexts + raised surfaces. */
+  --nx-bg: var(--nx-neutral-1);            /* app / canvas */
+  --nx-surface-1: var(--nx-neutral-2);     /* panels / cards */
+  --nx-surface-2: var(--nx-neutral-3);     /* raised / popover */
+  --nx-surface-3: var(--nx-neutral-4);     /* hover / selected */
+  --nx-border: var(--nx-neutral-6);
+  --nx-border-strong: var(--nx-neutral-7);
+  --nx-fg: var(--nx-neutral-12);           /* primary text */
+  --nx-fg-muted: var(--nx-neutral-10);     /* secondary text */
+  --nx-fg-subtle: var(--nx-neutral-9);     /* tertiary — ≥4.5:1 AA on dark surfaces */
+
+  --nx-accent: var(--nx-accent-9);         /* interactive primary */
+  --nx-accent-fg: var(--nx-white);
+  --nx-ring: var(--nx-accent-9);
+
+  /* ---- radius ---- */
   --nx-radius: 0.5rem;
   --nx-radius-sm: 0.375rem;
   --nx-radius-lg: 0.75rem;
 
+  /* ---- fonts ---- */
   --nx-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --nx-font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
-  /* ---- motion (durations + easing) ----
-   * Standard chrome transitions reference these. The canvas exposes a richer, reviewable
-   * preset layer (Smooth/Floaty/Snappy/Instant) on top for node entry choreography. */
-  --nx-motion-fast: 150ms;        /* micro-interactions (hover, press) */
-  --nx-motion-base: 220ms;        /* component state / edge fade */
-  --nx-motion-slow: 300ms;        /* larger element / default node entry */
-  --nx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* entrances (decelerate) */
-  --nx-ease-standard: cubic-bezier(0.2, 0, 0, 1); /* general UI */
+  /* ---- motion ---- */
+  --nx-motion-fast: 150ms;
+  --nx-motion-base: 220ms;
+  --nx-motion-slow: 300ms;
+  --nx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --nx-ease-standard: cubic-bezier(0.2, 0, 0, 1);
 
   /* ---- node treatment ---- */
-  --nx-node-fill: hsl(var(--nx-bg) / 0.48);  /* translucent fill shared by every node */
-  --nx-node-blur: 6px;                       /* backdrop blur behind a node (softens edges) */
+  --nx-node-fill: hsl(var(--nx-bg) / 0.48);
+  --nx-node-blur: 6px;
 }
 
-/* Scope the light override to the document root (html.light / :root.light).
- * A bare `.light` selector collides with any third-party element that carries a
- * `light` class — React Flow v12 stamps exactly that on its canvas container — which
- * would silently re-theme an entire subtree. Theme is a document-level concern. */
+/* Light override — re-point the PRIMITIVE ramps; semantics follow automatically. */
 :root.light {
-  --nx-bg: 210 30% 99%;
-  --nx-surface-1: 0 0% 100%;
-  --nx-surface-2: 210 30% 98%;
-  --nx-surface-3: 210 24% 94%;
-  --nx-border: 214 20% 88%;
-  --nx-border-strong: 214 18% 78%;
-  --nx-fg: 222 30% 12%;
-  --nx-fg-muted: 215 16% 38%;
-  --nx-fg-subtle: 215 14% 52%;
+  --nx-neutral-1: 210 30% 99%;
+  --nx-neutral-2: 0 0% 100%;
+  --nx-neutral-3: 210 30% 98%;
+  --nx-neutral-4: 210 24% 94%;
+  --nx-neutral-5: 214 22% 91%;
+  --nx-neutral-6: 214 20% 88%;
+  --nx-neutral-7: 214 18% 78%;
+  --nx-neutral-8: 215 16% 60%;
+  --nx-neutral-9: 215 14% 52%;
+  --nx-neutral-10: 215 16% 38%;
+  --nx-neutral-11: 220 22% 24%;
+  --nx-neutral-12: 222 30% 12%;
 
-  --nx-accent: 205 90% 46%;
-  --nx-accent-fg: 0 0% 100%;
-  --nx-ring: 205 90% 46%;
+  --nx-accent-1: 210 60% 98%;
+  --nx-accent-2: 209 70% 95%;
+  --nx-accent-3: 208 80% 90%;
+  --nx-accent-4: 207 82% 83%;
+  --nx-accent-5: 206 84% 75%;
+  --nx-accent-6: 205 86% 66%;
+  --nx-accent-7: 205 88% 58%;
+  --nx-accent-8: 205 90% 50%;
+  --nx-accent-9: 205 90% 46%;
+  --nx-accent-10: 205 92% 41%;
+  --nx-accent-11: 205 95% 34%;
+  --nx-accent-12: 210 60% 16%;
 
-  /* entity + severity hues hold; darken slightly for light-bg contrast */
+  /* entity + severity hues darken slightly for light-bg contrast */
   --entity-url: 190 75% 42%;
   --entity-domain: 175 70% 38%;
   --entity-ip: 160 65% 38%;

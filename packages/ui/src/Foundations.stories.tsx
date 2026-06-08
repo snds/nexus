@@ -1,6 +1,7 @@
 /** Foundations/Tokens — the design tokens (read live from :root) that every component and
  *  surface consumes. The single source of truth in @nexus/tokens. */
 import type { Meta, StoryObj } from "@storybook/react";
+import { Text, type TextVariant } from "./components/nexus/Text.js";
 
 const meta: Meta = { title: "Foundations/Tokens" };
 export default meta;
@@ -81,6 +82,64 @@ export const RadiusAndMotion: Story = {
             <p className="font-mono text-xs">{val(n) || "—"}</p>
             <p className="text-[11px] text-[hsl(var(--nx-fg-muted))]">{l}</p>
             <p className="font-mono text-[10px] text-[hsl(var(--nx-fg-subtle))]">{n}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  ),
+};
+
+function Ramp({ prefix }: { prefix: string }) {
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+      {Array.from({ length: 12 }, (_, i) => i + 1).map((i) => {
+        const name = `${prefix}-${i}`;
+        return (
+          <div key={i} style={{ width: 64 }}>
+            <div style={{ height: 48, borderRadius: 8, background: `hsl(var(${name}))`, boxShadow: "inset 0 0 0 1px hsl(var(--nx-border))" }} />
+            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "hsl(var(--nx-fg-subtle))", marginTop: 4 }}>{i}</div>
+            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 9, color: "hsl(var(--nx-fg-subtle))" }}>{val(name) || "—"}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export const PrimitiveColors: Story = {
+  name: "Primitive ramps",
+  render: () => (
+    <div className="max-w-4xl text-[hsl(var(--nx-fg))]">
+      <H>Neutral ramp — --nx-neutral-1 … 12</H>
+      <p className="mb-3 text-[11px] text-[hsl(var(--nx-fg-subtle))]">Surfaces alias 1–4, borders 6–7, text 9/10/12.</p>
+      <Ramp prefix="--nx-neutral" />
+      <H>Accent ramp — --nx-accent-1 … 12 (9 = solid)</H>
+      <Ramp prefix="--nx-accent" />
+    </div>
+  ),
+};
+
+const SIZES = ["2xs", "xs", "sm", "base", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl"];
+const TVARS: TextVariant[] = ["display", "h1", "h2", "h3", "title", "body", "body-sm", "label", "caption", "overline", "code"];
+
+export const Typography: Story = {
+  render: () => (
+    <div className="max-w-4xl text-[hsl(var(--nx-fg))]">
+      <H>Type scale (primitives)</H>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        {SIZES.map((s) => (
+          <div key={s} style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
+            <code style={{ width: 130, flexShrink: 0, fontFamily: "var(--nx-font-mono)", fontSize: 11, color: "hsl(var(--nx-fg-subtle))" }}>--nx-text-{s}</code>
+            <span style={{ fontSize: `var(--nx-text-${s})`, color: "hsl(var(--nx-fg))" }}>Aa</span>
+          </div>
+        ))}
+      </div>
+      <H>Text variants (semantic)</H>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {TVARS.map((v) => (
+          <div key={v} style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
+            <code style={{ width: 90, flexShrink: 0, fontFamily: "var(--nx-font-mono)", fontSize: 11, color: "hsl(var(--nx-fg-subtle))" }}>{v}</code>
+            <Text variant={v}>The quick brown fox</Text>
           </div>
         ))}
       </div>

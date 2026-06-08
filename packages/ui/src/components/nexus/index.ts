@@ -9,6 +9,7 @@ export { CountChip, type CountChipProps } from "./CountChip.js";
 
 // Iconography.
 export { Icon, type IconProps } from "./Icon.js";
+export { Text, type TextProps, type TextVariant, type TextTone } from "./Text.js";
 export { ToolButton, type ToolButtonProps } from "./ToolButton.js";
 export { Tooltip, type TooltipProps, type TooltipSide } from "./Tooltip.js";
 export { Modal, type ModalProps } from "./Modal.js";

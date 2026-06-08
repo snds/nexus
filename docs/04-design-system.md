@@ -42,6 +42,7 @@ automated axe suite below.
 | Component | Kind | Export | Purpose |
 |---|---|---|---|
 | **`Icon`** | Primitive | `@nexus/ui/nexus` | A Material Symbol. Outlined by default; **`filled` only for active states**. Min size 20px for standalone controls. |
+| **`Text`** | Primitive | ″ | Typography component — `variant` (display/h1–h3/title/body/body-sm/label/caption/overline/code) composed from the L0 type primitives; `tone` for color. The semantic type layer. |
 | **`ToolButton`** | Primitive | ″ | Square icon control with built-in `Tooltip`. Shared by the top-right graph actions **and** the bottom-left zoom/fit/lock/motion controls. Variant: `active`. |
 | **`Tooltip`** | Primitive | ″ | Real (DOM) hover/focus tooltip — not the browser `title`. Variant: `side` (top/bottom/left/right). Wrap any icon-only control. |
 | **`EntityIcon`** | Primitive | ″ | EntityType → glyph, colored by entity token. `filled` for active. |
@@ -111,6 +112,11 @@ hex-selected (SVG halo path), VIP, the count chip, and the no-pip case.
 Every value resolves through the token layer (`--nx-*`, `--entity-*`, `--severity-*`).
 Notable bindings:
 
+- **Tiers** → L0 primitives (`--nx-neutral-1…12`, `--nx-accent-1…12` ramps; the type scale
+  `--nx-text-*` / `--nx-weight-*` / `--nx-leading-*` / `--nx-tracking-*`; entity/severity palettes)
+  → L1 semantics that **alias** them (`--nx-bg: var(--nx-neutral-1)`, `--nx-accent: var(--nx-accent-9)`, …).
+  Light mode re-points the primitive ramps; semantics follow.
+- **Typography** → the `Text` component is the semantic type layer (variant → primitives).
 - **Family color** → `--entity-{colorToken}` (e.g. `--entity-malware`).
 - **Verdict** → `--severity-{verdict}` (pip, badge, stat tone).
 - **Backgrounds (two Radix-style contexts)** → `--nx-bg` (step 1: app **and** graph canvas,

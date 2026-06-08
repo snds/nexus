@@ -3,41 +3,85 @@ sidebar_position: 2
 title: Foundations
 ---
 
-import { SwatchGrid } from '@site/src/components/ds';
+import { SwatchGrid, Ramp } from '@site/src/components/ds';
+import { Text } from '@nexus/ui/nexus';
 
 # Foundations
 
-Tokens are the single source of truth — no component hardcodes a hue, blur, or duration.
-Values below are **read live from `:root`**.
+Tokens are the single source of truth, in three tiers: **L0 primitives** (raw ramps + the type
+scale), **L1 semantics** (purpose aliases that point at primitives), and component tokens (with
+their components). No component hardcodes a hue, size, or duration. Values are **read live from
+`:root`**.
 
-## Background contexts
+## Primitive color ramps (L0)
 
-Two Radix-style background steps — the app/canvas (step 1) and panels that lift off it
-(step 2) — plus raised/hover surfaces.
+The raw scales every semantic color aliases. Neutral drives surfaces, borders and text; accent
+drives interactive.
 
-<SwatchGrid tokens={[['--nx-bg','App / canvas · bg 1'],['--nx-surface-1','Panels · bg 2'],['--nx-surface-2','Raised / popover'],['--nx-surface-3','Hover / selected']]} />
+**Neutral** — `--nx-neutral-1 … 12` (1 = app bg → 12 = primary text)
 
-## Borders & accent
+<Ramp prefix="--nx-neutral" />
 
-<SwatchGrid kind="border" tokens={[['--nx-border','Border'],['--nx-border-strong','Border strong'],['--nx-accent','Accent (interactive)'],['--nx-ring','Focus ring']]} />
+**Accent** — `--nx-accent-1 … 12` (9 = solid interactive)
 
-## Text
+<Ramp prefix="--nx-accent" />
 
-<SwatchGrid kind="text" tokens={[['--nx-fg','Primary'],['--nx-fg-muted','Muted'],['--nx-fg-subtle','Subtle · ≥4.5:1 AA']]} />
+## Type primitives (L0)
 
-## Entity color (channel — type)
+The type scale, weights, line-heights and tracking. Composed into the semantic text variants
+below — never used as raw values in product.
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 10, margin: '16px 0' }}>
+  {['2xs','xs','sm','base','md','lg','xl','2xl','3xl','4xl','5xl'].map((s) => (
+    <div key={s} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
+      <code style={{ width: 120, color: 'hsl(var(--nx-fg-subtle))', fontSize: 11 }}>--nx-text-{s}</code>
+      <span style={{ fontSize: `var(--nx-text-${s})`, color: 'hsl(var(--nx-fg))' }}>The quick brown fox</span>
+    </div>
+  ))}
+</div>
+
+- **Weights** — `--nx-weight-regular | medium | semibold | bold` (400 / 500 / 600 / 700)
+- **Line height** — `--nx-leading-none | tight | snug | normal | relaxed`
+- **Tracking** — `--nx-tracking-tight | normal | wide | wider`
+
+## Text variants (semantic)
+
+The `Text` component selects a semantic style composed from the type primitives. This is how
+text is used in product — never raw `font-size`.
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 12, margin: '16px 0' }}>
+  {['display','h1','h2','h3','title','body','body-sm','label','caption','overline','code'].map((v) => (
+    <div key={v} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
+      <code style={{ width: 84, flexShrink: 0, color: 'hsl(var(--nx-fg-subtle))', fontSize: 11 }}>{v}</code>
+      <Text variant={v}>The quick brown fox</Text>
+    </div>
+  ))}
+</div>
+
+Tones: <Text as="span" tone="default">default</Text> · <Text as="span" tone="muted">muted</Text> · <Text as="span" tone="subtle">subtle</Text> · <Text as="span" tone="accent">accent</Text>.
+
+## Semantic color (L1)
+
+### Background contexts
+
+<SwatchGrid tokens={[['--nx-bg','App / canvas → neutral-1'],['--nx-surface-1','Panels → neutral-2'],['--nx-surface-2','Raised → neutral-3'],['--nx-surface-3','Hover → neutral-4']]} />
+
+### Borders, accent & text
+
+<SwatchGrid kind="border" tokens={[['--nx-border','Border → neutral-6'],['--nx-border-strong','Strong → neutral-7'],['--nx-accent','Accent → accent-9'],['--nx-ring','Ring → accent-9']]} />
+<SwatchGrid kind="text" tokens={[['--nx-fg','Primary → neutral-12'],['--nx-fg-muted','Muted → neutral-10'],['--nx-fg-subtle','Subtle → neutral-9 · AA']]} />
+
+### Entity palette (channel — type)
 
 <SwatchGrid tokens={[['--entity-actor','actor'],['--entity-campaign','campaign'],['--entity-malware','malware'],['--entity-exploit','exploit'],['--entity-sid','sid'],['--entity-hash','hash'],['--entity-url','url'],['--entity-domain','domain'],['--entity-ip','ip'],['--entity-hostname','hostname'],['--entity-filename','filename'],['--entity-email','email'],['--entity-message','message'],['--entity-scan','scan']]} />
 
-## Severity (own channel — verdict)
+### Severity palette (own channel — verdict)
 
 <SwatchGrid tokens={[['--severity-malicious','malicious'],['--severity-phishing','phishing'],['--severity-suspicious','suspicious'],['--severity-medium','medium'],['--severity-benign','benign'],['--severity-unknown','unknown']]} />
 
-## Radius, motion & type
+## Radius & motion
 
 - **Radius** — `--nx-radius-sm` · `--nx-radius` · `--nx-radius-lg`.
-- **Motion** — `--nx-motion-fast|base|slow` + `--nx-ease-out|standard`. Standard transitions
-  reference these; the canvas adds a reviewable preset layer (Smooth / Floaty / Snappy) on top.
-- **Type** — `--nx-font-sans` (UI) and `--nx-font-mono` (hashes / indicators).
+- **Motion** — `--nx-motion-fast | base | slow` + `--nx-ease-out | standard`.
 
-See the live, interactive versions in the **[Storybook → Foundations](/nexus/storybook/?path=/story/foundations-tokens--colors)** section.
+Explore everything interactively in **[Storybook → Foundations](/nexus/storybook/?path=/story/foundations-tokens--primitive-ramps)**.
