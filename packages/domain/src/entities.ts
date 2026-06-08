@@ -96,24 +96,49 @@ export interface UserProfile {
 export type EntityFamily =
   | "adversary" | "artifact" | "identifier" | "file" | "host" | "web" | "comms" | "meta";
 
+/** Node silhouette — the shape channel. A coarse macro-grouping (4 shapes) that the 8 color
+ *  families nest into, so shape and color reinforce one identity (colorblind redundancy). */
+export type EntityShape = "circle" | "square" | "diamond" | "hexagon";
+
 export interface EntityFamilyMeta {
   readonly key: EntityFamily;
   readonly label: string;
-  /** Radix hue the family's members share (for the legend swatch + docs). */
+  /** Radix hue the family's members share (legend swatch + node color). */
   readonly hue: string;
+  /** Node silhouette for this family (legend header + canvas node + minimap, one source). */
+  readonly shape: EntityShape;
 }
 
-/** Ordered for legend display (threat-forward first). */
+/**
+ * THE single source for the node language. Both the legend and the canvas/minimap derive a node's
+ * shape + color from its family here — so they always match. Ordered for legend display.
+ *   shape = macro-class (circle threats · square infrastructure · diamond detections · hexagon comms)
+ *   hue   = the family's maximally-distinct color (DDR DS-2026-006)
+ */
 export const ENTITY_FAMILIES: readonly EntityFamilyMeta[] = [
-  { key: "adversary", label: "Adversary", hue: "crimson" },
-  { key: "artifact", label: "Malicious artifact", hue: "plum" },
-  { key: "identifier", label: "Identifier", hue: "orange" },
-  { key: "file", label: "File", hue: "yellow" },
-  { key: "host", label: "Host", hue: "teal" },
-  { key: "web", label: "Web", hue: "cyan" },
-  { key: "comms", label: "Comms", hue: "iris" },
-  { key: "meta", label: "Meta", hue: "gray" },
+  { key: "adversary", label: "Adversary", hue: "crimson", shape: "circle" },
+  { key: "artifact", label: "Malicious artifact", hue: "plum", shape: "circle" },
+  { key: "identifier", label: "Identifier", hue: "orange", shape: "diamond" },
+  { key: "file", label: "File", hue: "yellow", shape: "square" },
+  { key: "host", label: "Host", hue: "teal", shape: "square" },
+  { key: "web", label: "Web", hue: "cyan", shape: "square" },
+  { key: "comms", label: "Comms", hue: "iris", shape: "hexagon" },
+  { key: "meta", label: "Meta", hue: "gray", shape: "diamond" },
 ];
+
+const FAMILY_BY_KEY = Object.fromEntries(ENTITY_FAMILIES.map((f) => [f.key, f])) as Record<
+  EntityFamily,
+  EntityFamilyMeta
+>;
+
+/** Family metadata for an entity type — the join everything reads from. */
+export function familyOf(type: EntityType): EntityFamilyMeta {
+  return FAMILY_BY_KEY[ENTITY_META[type].family];
+}
+/** Node silhouette for a type (derived from its family — the single source). */
+export function shapeOfType(type: EntityType): EntityShape {
+  return familyOf(type).shape;
+}
 
 /** Display metadata per type — maps a type to its token + glyph id (resolved in the UI layer). */
 export interface EntityTypeMeta {

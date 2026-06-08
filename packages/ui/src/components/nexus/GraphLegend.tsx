@@ -11,6 +11,7 @@ import { useState } from "react";
 import type { EntityType, Verdict } from "@nexus/domain";
 import { ENTITY_META, ENTITY_FAMILIES } from "@nexus/domain";
 import { EntityIcon } from "./EntityIcon.js";
+import { ShapeIcon } from "./ShapeIcon.js";
 
 const VERDICT_LABEL: Record<Verdict, string> = {
   malicious: "Malicious",
@@ -71,13 +72,14 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
       <div className="flex flex-col gap-2">
         {families.map((fam) => (
           <div key={fam.key}>
-            {/* Family header: the color swatch IS the "color = family" contract. */}
+            {/* Family header = a mini-node: the family's SHAPE in its COLOR (matches the canvas). */}
             <p className="mb-1 flex items-center gap-1.5 text-[9px] font-medium uppercase tracking-wide text-[var(--nx-fg-subtle)]">
               <span
-                className="h-2.5 w-2.5 shrink-0 rounded-full"
-                style={{ background: `var(--entity-${ENTITY_META[fam.types[0]!].colorToken})` }}
-                aria-hidden
-              />
+                className="inline-flex shrink-0"
+                style={{ color: `var(--entity-${ENTITY_META[fam.types[0]!].colorToken})` }}
+              >
+                <ShapeIcon shape={fam.shape} size={11} />
+              </span>
               {fam.label}
             </p>
             {/* Sub-rows: icon = the specific type within the family. */}

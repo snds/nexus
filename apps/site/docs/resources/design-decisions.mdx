@@ -114,3 +114,22 @@ stable ID for cross-tool reference.
   icon = type). (2) Identity and intent hues can coincide (e.g. identifier-orange vs caution-orange),
   accepted because form disambiguates. (3) `phishing` sits in the danger band (crimson) rather than
   as a unique verdict, preserving the ramp's monotonic order.
+
+## DS-2026-007 — One source for the node language (legend ≡ canvas)
+
+- **Status:** Active · **Severity:** Medium · **Date:** 2026-06-08
+- **Context:** The node *shape* came from one taxonomy (`shapeOf` — 4 shape groups) while *color*
+  came from another (the 8 color families), so the canvas and the legend grouped the same nodes
+  two different ways. They didn't match.
+- **Decision:** Make the **family the single source** for both channels. `ENTITY_FAMILIES`
+  (`@nexus/domain`) now defines each family's `hue` **and** `shape`; `ENTITY_META[type].family`
+  joins a type to it; `shapeOfType` / `familyOf` derive everything. `nodeShape.shapeOf` delegates to
+  the domain source, the canvas/minimap render shape + color from the family, and the **GraphLegend
+  family header is a mini-node** — the family's shape silhouette in its color. Legend and canvas are
+  identical by construction.
+- **Model:** shape = 4 macro-classes (circle threats · square infrastructure · diamond
+  detections/identifiers · hexagon comms) that the 8 color families **nest into** — so shape + color
+  reinforce one identity (a colorblind-safe redundancy), and the icon reads the specific type.
+- **Tradeoffs:** Some types changed shape to align with their family (e.g. exploit diamond→circle as
+  an artifact). Two families can share a shape (distinguished by color); within a shape, color +
+  icon disambiguate.

@@ -8,19 +8,25 @@ import { NodeBadge } from '@nexus/ui/nexus';
 
 # The node system
 
-`NodeBadge` is the variant-driven graph node — the Figma "Node" component set. **Color = type,
-shape = family, verdict = its own pip**; flags (VIP / status / imposter / +N) combine into one
-top-right cluster. Every node shares a translucent token fill behind a backdrop blur so edges
-recede behind it.
+`NodeBadge` is the variant-driven graph node — the Figma "Node" component set. **Color = family,
+shape = family macro, icon = the specific type, verdict = its own pip**; flags (VIP / status /
+imposter / +N) combine into one top-right cluster. Every node shares a translucent token fill
+behind a backdrop blur so edges recede behind it.
 
-## Families (shape channel)
+A node's **shape and color both come from one source** — the entity's family (`ENTITY_FAMILIES`
+in `@nexus/domain`). The [GraphLegend](/docs/components/graph/graph-legend) reads the *same* source,
+so the legend and the canvas always match. Shape is the coarse macro (circle threats · square
+infrastructure · diamond detections/identifiers · hexagon comms); color is the specific
+[family](/docs/foundations/color); the icon is the type within it.
+
+## Families (shape + color channel)
 
 <Specimen>
-  <NodeBadge family="circle" role="neighbor" colorToken="actor" glyph="badge" label="TA511" sublabel="actor" verdict="malicious" />
-  <NodeBadge family="circle" role="neighbor" colorToken="campaign" glyph="campaign" label="Zloader Botnet" sublabel="campaign" verdict="suspicious" />
-  <NodeBadge family="diamond" role="neighbor" colorToken="exploit" glyph="gpp_bad" label="CVE-2021-40444" sublabel="exploit" />
-  <NodeBadge family="hexagon" role="neighbor" colorToken="email" glyph="alternate_email" label="rcastle@acme.com" sublabel="email address" verdict="medium" />
-  <NodeBadge family="square" role="neighbor" colorToken="domain" glyph="language" label="acme.com" sublabel="domain" />
+  <NodeBadge family="circle" role="neighbor" colorToken="actor" glyph="badge" label="TA511" sublabel="actor · adversary" verdict="malicious" />
+  <NodeBadge family="circle" role="neighbor" colorToken="malware" glyph="coronavirus" label="Zloader" sublabel="malware · artifact" verdict="suspicious" />
+  <NodeBadge family="diamond" role="neighbor" colorToken="sid" glyph="gpp_bad" label="ET 2031" sublabel="sid · identifier" />
+  <NodeBadge family="hexagon" role="neighbor" colorToken="email" glyph="alternate_email" label="rcastle@acme.com" sublabel="email · comms" verdict="medium" />
+  <NodeBadge family="square" role="neighbor" colorToken="domain" glyph="language" label="acme.com" sublabel="domain · web" />
 </Specimen>
 
 ## Role, states & indicators
