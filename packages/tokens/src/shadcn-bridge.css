@@ -43,8 +43,15 @@
  * color, not shadow). Zero ONLY `--tw-shadow` so the drop shadow goes flat while the
  * focus-visible ring (which composes into `--tw-ring-shadow`) is untouched.
  * Floating overlays (Popover/Dialog/Tooltip/Menu) keep their shadow — they genuinely float.
+ *
+ * The doubled attribute selector is deliberate: it raises specificity to (0,2,0) so this beats
+ * Tailwind's `.shadow` utility (0,1,0) regardless of source order. Tailwind v3 emits utilities as
+ * plain rules (no native @layer); depending on @import order `.shadow` can be emitted AFTER this
+ * rule — at equal specificity it would then win and the drop shadow reappears (it did in the docs
+ * build, though not in the Vite demo). Higher specificity makes the flatten order-independent
+ * across all three surfaces. Works for asChild too (any element carrying data-slot="button").
  */
-[data-slot="button"] {
+[data-slot="button"][data-slot="button"] {
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
 }
