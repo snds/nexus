@@ -143,35 +143,47 @@
 
   --nx-node-fill: color-mix(in srgb, var(--nx-bg) 48%, transparent);
 
-  /* ---- context / status channels → Radix hue stacks (solid = step 9) ---- */
-  --alert-error: var(--nx-red-dark-9);
-  --alert-warning: var(--nx-amber-dark-9);
-  --alert-success: var(--nx-grass-dark-9);
-  --alert-info: var(--nx-blue-dark-9);
+  /* ---- INTENT / OUTCOME axis (the shared semantic ramp; reserved hues — never identity) ----
+   * One source of truth for "outcome" color. Verdict severity (ordinal/diverging) and status
+   * alerts both alias onto it. Always paired with an icon + label downstream. */
+  --intent-danger: var(--nx-red-dark-9);
+  --intent-caution: var(--nx-orange-dark-9);
+  --intent-warning: var(--nx-amber-dark-9);
+  --intent-success: var(--nx-grass-dark-9);
+  --intent-info: var(--nx-blue-dark-9);
+  --intent-neutral: var(--nx-gray-dark-9);
 
-  /* ---- severity (verdict) → hue stacks ---- */
-  --severity-malicious: var(--nx-red-dark-9);
-  --severity-phishing: var(--nx-pink-dark-9);
-  --severity-suspicious: var(--nx-orange-dark-9);
-  --severity-medium: var(--nx-amber-dark-9);
-  --severity-benign: var(--nx-grass-dark-9);
-  --severity-unknown: var(--nx-gray-dark-9);
+  /* status / alerts → intent */
+  --alert-error: var(--intent-danger);
+  --alert-warning: var(--intent-warning);
+  --alert-success: var(--intent-success);
+  --alert-info: var(--intent-info);
 
-  /* ---- entity (color = type) → hue stacks ---- */
-  --entity-actor: var(--nx-red-dark-9);
-  --entity-campaign: var(--nx-orange-dark-9);
-  --entity-malware: var(--nx-crimson-dark-9);
-  --entity-exploit: var(--nx-plum-dark-9);
-  --entity-sid: var(--nx-purple-dark-9);
-  --entity-hash: var(--nx-blue-dark-9);
-  --entity-url: var(--nx-cyan-dark-9);
-  --entity-domain: var(--nx-teal-dark-9);
-  --entity-ip: var(--nx-jade-dark-9);
-  --entity-hostname: var(--nx-grass-dark-9);
-  --entity-filename: var(--nx-slate-dark-9);
-  --entity-email: var(--nx-amber-dark-9);
-  --entity-message: var(--nx-yellow-dark-9);
-  --entity-scan: var(--nx-sage-dark-9);
+  /* verdict severity → DIVERGING ordinal ramp on the intent axis (malicious→benign);
+   * phishing sits in the danger band (crimson, reserved to intent); unknown is off-axis. */
+  --severity-malicious: var(--intent-danger);
+  --severity-phishing: var(--nx-crimson-dark-9);
+  --severity-suspicious: var(--intent-caution);
+  --severity-medium: var(--intent-warning);
+  --severity-benign: var(--intent-success);
+  --severity-unknown: var(--intent-neutral);
+
+  /* entity TYPE → IDENTITY-ZONE hues only (never the reserved intent hues red/orange/amber/
+   * grass/blue/gray); nominal/categorical, grouped into hue families, paired with shape + icon. */
+  --entity-actor: var(--nx-purple-dark-9);      /* adversary */
+  --entity-campaign: var(--nx-violet-dark-9);   /* adversary */
+  --entity-malware: var(--nx-plum-dark-9);      /* malicious artifact */
+  --entity-exploit: var(--nx-pink-dark-9);      /* malicious artifact */
+  --entity-url: var(--nx-cyan-dark-9);          /* web */
+  --entity-domain: var(--nx-sky-dark-9);        /* web */
+  --entity-ip: var(--nx-teal-dark-9);           /* host */
+  --entity-hostname: var(--nx-jade-dark-9);     /* host */
+  --entity-hash: var(--nx-bronze-dark-9);       /* identifier */
+  --entity-sid: var(--nx-gold-dark-9);          /* identifier */
+  --entity-filename: var(--nx-brown-dark-9);    /* file */
+  --entity-email: var(--nx-iris-dark-9);        /* comms */
+  --entity-message: var(--nx-mint-dark-9);      /* comms */
+  --entity-scan: var(--nx-mauve-dark-9);        /* meta */
 }
 
 /* ============================================================ L1 — SEMANTICS · LIGHT
@@ -200,30 +212,37 @@
 
   --nx-node-fill: color-mix(in srgb, var(--nx-bg) 48%, transparent);
 
-  --alert-error: var(--nx-red-light-9);
-  --alert-warning: var(--nx-amber-light-9);
-  --alert-success: var(--nx-grass-light-9);
-  --alert-info: var(--nx-blue-light-9);
+  --intent-danger: var(--nx-red-light-9);
+  --intent-caution: var(--nx-orange-light-9);
+  --intent-warning: var(--nx-amber-light-9);
+  --intent-success: var(--nx-grass-light-9);
+  --intent-info: var(--nx-blue-light-9);
+  --intent-neutral: var(--nx-gray-light-9);
 
-  --severity-malicious: var(--nx-red-light-9);
-  --severity-phishing: var(--nx-pink-light-9);
-  --severity-suspicious: var(--nx-orange-light-9);
-  --severity-medium: var(--nx-amber-light-9);
-  --severity-benign: var(--nx-grass-light-9);
-  --severity-unknown: var(--nx-gray-light-9);
+  --alert-error: var(--intent-danger);
+  --alert-warning: var(--intent-warning);
+  --alert-success: var(--intent-success);
+  --alert-info: var(--intent-info);
 
-  --entity-actor: var(--nx-red-light-9);
-  --entity-campaign: var(--nx-orange-light-9);
-  --entity-malware: var(--nx-crimson-light-9);
-  --entity-exploit: var(--nx-plum-light-9);
-  --entity-sid: var(--nx-purple-light-9);
-  --entity-hash: var(--nx-blue-light-9);
+  --severity-malicious: var(--intent-danger);
+  --severity-phishing: var(--nx-crimson-light-9);
+  --severity-suspicious: var(--intent-caution);
+  --severity-medium: var(--intent-warning);
+  --severity-benign: var(--intent-success);
+  --severity-unknown: var(--intent-neutral);
+
+  --entity-actor: var(--nx-purple-light-9);
+  --entity-campaign: var(--nx-violet-light-9);
+  --entity-malware: var(--nx-plum-light-9);
+  --entity-exploit: var(--nx-pink-light-9);
   --entity-url: var(--nx-cyan-light-9);
-  --entity-domain: var(--nx-teal-light-9);
-  --entity-ip: var(--nx-jade-light-9);
-  --entity-hostname: var(--nx-grass-light-9);
-  --entity-filename: var(--nx-slate-light-9);
-  --entity-email: var(--nx-amber-light-9);
-  --entity-message: var(--nx-yellow-light-9);
-  --entity-scan: var(--nx-sage-light-9);
+  --entity-domain: var(--nx-sky-light-9);
+  --entity-ip: var(--nx-teal-light-9);
+  --entity-hostname: var(--nx-jade-light-9);
+  --entity-hash: var(--nx-bronze-light-9);
+  --entity-sid: var(--nx-gold-light-9);
+  --entity-filename: var(--nx-brown-light-9);
+  --entity-email: var(--nx-iris-light-9);
+  --entity-message: var(--nx-mint-light-9);
+  --entity-scan: var(--nx-mauve-light-9);
 }

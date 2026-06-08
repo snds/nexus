@@ -80,3 +80,28 @@ stable ID for cross-tool reference.
 - **Tradeoffs:** ~770 lines of generated primitives (isolated in `radix-scales.css`); the palette
   is intentionally complete even though the product uses a subset — a design system documents the
   whole range.
+
+## DS-2026-006 — Color-as-identifier strategy: reserved zones + shared intent axis
+
+- **Status:** Active · **Severity:** High · **Date:** 2026-06-08
+- **Context:** Channels were assigned hues ad hoc, conflating two encoding jobs. Hue is a
+  **nominal-only** channel (Bertin; Cleveland & McGill), yet verdict severity (ordinal) was a hue
+  rainbow, and entity *type* (nominal) borrowed the semantic danger hues (`actor→red`,
+  `malware→crimson`) — so a node's color falsely signaled danger and risked red/green CVD confusion.
+- **Decision:** Split color-as-identifier into two systems in **disjoint hue zones**:
+  - **Intent / outcome** (ordinal + semantic): one shared `--intent-*` ramp — danger (red),
+    caution (orange), warning (amber), success (grass), info (blue), neutral (gray). **Verdict
+    severity and status alerts both alias it.** Verdict is a **diverging** ramp (worst→best) read by
+    the warm→cool progression, not a rainbow.
+  - **Identity** (nominal): entity *type* drawn **only** from non-reserved hues (purples, teals,
+    metals), grouped into families (adversary · artifact · web · host · identifier · file · comms ·
+    meta), disambiguated within a family by shape + icon.
+- **Rationale:** Matches the encoding-theory contract (`uid-color-for-ui`, `infod-encoding-theory`):
+  hue=nominal → identity; ordinal severity → diverging ramp; reserve semantic hues for status only;
+  ≥8 categories require redundant shape/icon encoding (already present). Identity skews cool so the
+  warm severity pips pop ("make the exception visible, not the rule").
+- **Tradeoffs:** (1) Identity is cool-biased (the warm arc is reserved) and adversary-heavy graphs
+  read purple-ish — acceptable, and shape/icon carry within-family distinction. (2) Some channels
+  share a hue's *family* but differ by step/shape rather than a wholly unique hue (14 types exceed
+  the ~8 reliable-color budget). (3) `phishing` sits in the danger band (crimson) rather than as a
+  unique verdict, preserving the ramp's monotonic order.

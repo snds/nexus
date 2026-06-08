@@ -21,26 +21,46 @@ The semantic aliases are the contract:
 Full ramps live in **[Tokens → Primitives](/docs/tokens/primitives)**; the aliases in
 **[Tokens → Semantics](/docs/tokens/semantics)**.
 
-## Channel 1 — entity type
+## Two systems for color-as-identifier
 
-Each entity type owns a hue (`--entity-*`). A node's color answers "what kind of thing is this?"
-— actor, malware, domain, email — and nothing else.
+Color carries two kinds of meaning that follow **opposite encoding rules**, so the system keeps
+them in **disjoint hue zones** that never cross-talk.
 
-<SwatchGrid tokens={[['--entity-actor','actor'],['--entity-malware','malware'],['--entity-domain','domain'],['--entity-email','email'],['--entity-url','url'],['--entity-campaign','campaign']]} />
+| System | Data type | Rule | Hue zone |
+|---|---|---|---|
+| **Identity** — entity *type* | Nominal (no order) | Hue only; perceptually distinct; grouped into families; **+ shape + icon** | purples · teals · metals (the **non-reserved** hues) |
+| **Intent** — verdict severity, status/alerts | Ordinal + semantic | A **diverging ramp** (worst→best) + conventional status; **+ icon + label** | **reserved**: red · orange · amber · grass · blue · gray |
 
-## Channel 2 — verdict severity
+The reason this matters: hue is a **nominal-only** channel (it can say "different," never
+"worse"). So entity type → hue is right, but verdict severity → a *diverging ramp* (read by the
+warm→cool progression), not a hue rainbow. And because the warm "danger" hues are **reserved** for
+intent, an entity's color can never be red/amber/green — so a node's color can't be mistaken for a
+danger signal. Identity skews cool by design, which makes the warm severity **pips** pop.
 
-Verdict has its **own** palette (`--severity-*`) and its own form (the
-[VerdictPip](/docs/components/data-display/verdict-pip) / [VerdictBadge](/docs/components/data-display/verdict-badge)).
-It never borrows entity hues.
+## Channel 1 — entity type (identity zone)
 
-<SwatchGrid tokens={[['--severity-malicious','malicious'],['--severity-suspicious','suspicious'],['--severity-medium','medium'],['--severity-benign','benign']]} />
+A node's color answers "what kind of thing is this?" — never how dangerous. Drawn only from the
+non-reserved hues, grouped into families (adversary · artifact · web · host · identifier · file ·
+comms · meta), with shape + icon disambiguating within a family.
+
+<SwatchGrid tokens={[['--entity-actor','actor · purple'],['--entity-malware','malware · plum'],['--entity-domain','domain · sky'],['--entity-email','email · iris'],['--entity-ip','ip · teal'],['--entity-hash','hash · bronze']]} />
+
+## Channel 2 — verdict severity (intent zone)
+
+Verdict is an **ordinal diverging ramp** on the shared [intent axis](/docs/tokens/semantics),
+shown via the [VerdictPip](/docs/components/data-display/verdict-pip) /
+[VerdictBadge](/docs/components/data-display/verdict-badge) — never borrowing entity hues.
+
+<SwatchGrid tokens={[['--severity-malicious','malicious · danger'],['--severity-suspicious','suspicious · caution'],['--severity-medium','medium · warning'],['--severity-benign','benign · success']]} />
 
 ## Rules
 
-- **Don't cross the channels.** Entity color answers *type*; severity color answers *verdict*. A
-  malicious actor is an actor-colored node with a malicious pip — not a red node.
-- **Color is redundant, never sole.** Every colored element carries a label or shape too —
+- **Reserve the intent hues.** Red/orange/amber/grass/blue/gray mean *outcome* (status, severity) —
+  never identity, never decoration. Entity color comes only from the identity zone.
+- **Don't cross the channels.** A malicious actor is a *purple* (actor) node with a *red* (malicious)
+  pip — never a red node.
+- **Color is redundant, never sole.** Type also carries shape + icon + label; status also carries
+  icon + label. This is what licenses a 14-type palette and keeps it colorblind-safe —
   see [Accessibility](/docs/foundations/accessibility).
-- **Two background contexts.** The canvas (`--nx-bg`) sits a step below the chrome surfaces so the
-  graph reads as its own plane.
+- **Two background contexts.** The canvas (`--nx-bg`) sits a step below the chrome so the graph
+  reads as its own plane.

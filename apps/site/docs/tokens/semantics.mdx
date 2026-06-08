@@ -21,26 +21,39 @@ Two stacked contexts keep the canvas and the chrome distinct.
 <SwatchGrid kind="border" tokens={[['--nx-border','Border → neutral-6'],['--nx-border-strong','Strong → neutral-7'],['--nx-accent','Accent → accent-9'],['--nx-ring','Ring → accent-9']]} />
 <SwatchGrid kind="text" tokens={[['--nx-fg','Primary → neutral-12'],['--nx-fg-muted','Muted → neutral-10'],['--nx-fg-subtle','Subtle → neutral-9 · AA']]} />
 
-## Channels map to Radix hue stacks
+## Two color systems, two rule sets
 
-Entity, severity, and context are **semantic channels**, each assigned a full **Radix hue stack** —
-not a one-off color. The single token (e.g. `--severity-malicious`) resolves to its hue's solid
-**step 9**; the rest of that hue's stack is reachable via `--nx-<hue>-<light|dark>-<step>` for bg
-(step 3), border (6), or text (11) variants. Because they're semantics, they flip with the theme.
+Color-as-identifier splits into two orthogonal systems drawn from **disjoint hue zones**, so they
+never cross-talk (see [Foundations → Color](/docs/foundations/color)):
 
-## Context / status (`--alert-*`)
+- **Intent / outcome** (ordinal + semantic) — verdict severity and status alerts both alias one
+  shared ramp. Reserved hues: red · orange · amber · grass · blue · gray. Always with an icon + label.
+- **Identity** (nominal) — entity *type*, drawn only from the **non-reserved** hues (purples,
+  teals, metals…), grouped into families, paired with shape + icon. A type color **never** uses a
+  reserved intent hue, so a node's color can't falsely signal danger.
 
-<SwatchGrid tokens={[['--alert-error','error → red'],['--alert-warning','warning → amber'],['--alert-success','success → grass'],['--alert-info','info → blue']]} />
+Each channel maps to a full Radix **hue stack**: the token resolves to step 9, and bg (step 3),
+border (6), and text (11) of that hue are reachable via `--nx-<hue>-<light|dark>-<step>`.
 
-## Severity palette (verdict — its own channel)
+## Intent / outcome (`--intent-*`) — the shared axis
 
-Verdict lives on its own channel — never mixed with entity colors.
+<SwatchGrid tokens={[['--intent-danger','danger → red'],['--intent-caution','caution → orange'],['--intent-warning','warning → amber'],['--intent-success','success → grass'],['--intent-info','info → blue'],['--intent-neutral','neutral → gray']]} />
 
-<SwatchGrid tokens={[['--severity-malicious','malicious → red'],['--severity-phishing','phishing → pink'],['--severity-suspicious','suspicious → orange'],['--severity-medium','medium → amber'],['--severity-benign','benign → grass'],['--severity-unknown','unknown → gray']]} />
+Status alerts alias it directly: `--alert-error → danger` · `--alert-warning → warning` ·
+`--alert-success → success` · `--alert-info → info`.
 
-## Entity palette (color = type)
+## Severity (verdict) — a diverging ramp on the intent axis
 
-<SwatchGrid tokens={[['--entity-actor','actor → red'],['--entity-campaign','campaign → orange'],['--entity-malware','malware → crimson'],['--entity-exploit','exploit → plum'],['--entity-sid','sid → purple'],['--entity-hash','hash → blue'],['--entity-url','url → cyan'],['--entity-domain','domain → teal'],['--entity-ip','ip → jade'],['--entity-hostname','hostname → grass'],['--entity-filename','filename → slate'],['--entity-email','email → amber'],['--entity-message','message → yellow'],['--entity-scan','scan → sage']]} />
+Ordinal, worst → best, read by the warm→cool progression (not a rainbow):
+
+<SwatchGrid tokens={[['--severity-malicious','malicious → danger (red)'],['--severity-phishing','phishing → crimson (danger band)'],['--severity-suspicious','suspicious → caution (orange)'],['--severity-medium','medium → warning (amber)'],['--severity-benign','benign → success (grass)'],['--severity-unknown','unknown → neutral (gray)']]} />
+
+## Entity (color = type) — identity zone only
+
+Nominal categories, grouped into hue families (adversary · artifact · web · host · identifier ·
+file · comms · meta), disambiguated within a family by shape + icon:
+
+<SwatchGrid tokens={[['--entity-actor','actor → purple'],['--entity-campaign','campaign → violet'],['--entity-malware','malware → plum'],['--entity-exploit','exploit → pink'],['--entity-url','url → cyan'],['--entity-domain','domain → sky'],['--entity-ip','ip → teal'],['--entity-hostname','hostname → jade'],['--entity-hash','hash → bronze'],['--entity-sid','sid → gold'],['--entity-filename','filename → brown'],['--entity-email','email → iris'],['--entity-message','message → mint'],['--entity-scan','scan → mauve']]} />
 
 ## Radius & motion
 
