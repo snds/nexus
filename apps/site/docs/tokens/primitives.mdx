@@ -5,6 +5,8 @@ title: Primitives
 
 import { Ramp } from '@site/src/components/ds';
 
+export const RADIX_SCALES = ['gray','mauve','slate','sage','olive','sand','tomato','red','ruby','crimson','pink','plum','purple','violet','iris','indigo','blue','cyan','teal','jade','green','grass','lime','mint','sky','yellow','amber','orange','brown','bronze','gold'];
+
 # Primitives (L0)
 
 The raw scales every semantic token aliases. These are documented in full — not just the values
@@ -24,6 +26,21 @@ light and dark values (`--nx-neutral-light-*` / `--nx-neutral-dark-*`); the dark
 **Accent · Indigo** — `--nx-accent-dark-1 … 12` (9 = solid · 11 = accent text)
 
 <Ramp prefix="--nx-accent-dark" />
+
+## The full Radix palette
+
+Every Radix scale (25 colors + 6 grays) ships in the system as `--nx-<scale>-<light|dark>-<1…12>`,
+so any hue stack is readily available across the UI — and every entity, severity, and context
+channel maps onto one of these (see [Semantics](/docs/tokens/semantics)). Dark steps shown.
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 14, margin: '16px 0' }}>
+  {RADIX_SCALES.map((s) => (
+    <div key={s}>
+      <code style={{ fontSize: 11, color: 'var(--nx-fg-subtle)' }}>--nx-{s}-dark-1 … 12</code>
+      <Ramp prefix={`--nx-${s}-dark`} />
+    </div>
+  ))}
+</div>
 
 ## Type scale
 

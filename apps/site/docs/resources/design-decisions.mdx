@@ -62,4 +62,21 @@ stable ID for cross-tool reference.
   / APCA / 3:1), the single documented exception. Strict-AA alternative = the "soft" recipe
   (red-3 bg + red-11 text). (2) Three text tiers collapse to two AA-safe steps (11/12); finer
   hierarchy is by weight/size, not a sub-AA color. (3) Entity/severity remain single-tone primitives
-  (full Radix-scale mapping is a tracked fast-follow).
+  (full Radix-scale mapping is a tracked fast-follow — done in DS-2026-005).
+
+## DS-2026-005 — Full Radix palette + channels map to hue stacks
+
+- **Status:** Active · **Severity:** Medium · **Date:** 2026-06-08
+- **Context:** Entity/severity/context were single-tone hex values, so a channel had a fill color but
+  no usable bg/border/text steps; and only the in-use hues existed.
+- **Decision:** Ship **all 31 Radix scales** (25 colors + 6 grays, light + dark) as flat L0
+  primitives (`--nx-<scale>-<light|dark>-<1…12>`, in `radix-scales.css`). Map every entity (14),
+  severity (6), and context/alert (4) channel onto a **Radix hue stack** (documented assignment);
+  each channel's token resolves to its hue's solid step 9, with the full stack reachable for
+  bg/border/text variants. Resolves the DS-2026-004 fast-follow.
+- **Rationale:** Any hue stack is now readily usable across the UI, and channels inherit Radix's
+  per-step contrast guarantees instead of hand-tuned one-offs (Radix step 9 is consistent enough
+  across light/dark to drop the old manual light-mode darkening).
+- **Tradeoffs:** ~770 lines of generated primitives (isolated in `radix-scales.css`); the palette
+  is intentionally complete even though the product uses a subset — a design system documents the
+  whole range.

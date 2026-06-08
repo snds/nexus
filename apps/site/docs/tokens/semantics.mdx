@@ -21,17 +21,26 @@ Two stacked contexts keep the canvas and the chrome distinct.
 <SwatchGrid kind="border" tokens={[['--nx-border','Border → neutral-6'],['--nx-border-strong','Strong → neutral-7'],['--nx-accent','Accent → accent-9'],['--nx-ring','Ring → accent-9']]} />
 <SwatchGrid kind="text" tokens={[['--nx-fg','Primary → neutral-12'],['--nx-fg-muted','Muted → neutral-10'],['--nx-fg-subtle','Subtle → neutral-9 · AA']]} />
 
-## Entity palette (channel — type)
+## Channels map to Radix hue stacks
 
-Color encodes entity *type*. One swatch per supported entity.
+Entity, severity, and context are **semantic channels**, each assigned a full **Radix hue stack** —
+not a one-off color. The single token (e.g. `--severity-malicious`) resolves to its hue's solid
+**step 9**; the rest of that hue's stack is reachable via `--nx-<hue>-<light|dark>-<step>` for bg
+(step 3), border (6), or text (11) variants. Because they're semantics, they flip with the theme.
 
-<SwatchGrid tokens={[['--entity-actor','actor'],['--entity-campaign','campaign'],['--entity-malware','malware'],['--entity-exploit','exploit'],['--entity-sid','sid'],['--entity-hash','hash'],['--entity-url','url'],['--entity-domain','domain'],['--entity-ip','ip'],['--entity-hostname','hostname'],['--entity-filename','filename'],['--entity-email','email'],['--entity-message','message'],['--entity-scan','scan']]} />
+## Context / status (`--alert-*`)
 
-## Severity palette (own channel — verdict)
+<SwatchGrid tokens={[['--alert-error','error → red'],['--alert-warning','warning → amber'],['--alert-success','success → grass'],['--alert-info','info → blue']]} />
+
+## Severity palette (verdict — its own channel)
 
 Verdict lives on its own channel — never mixed with entity colors.
 
-<SwatchGrid tokens={[['--severity-malicious','malicious'],['--severity-phishing','phishing'],['--severity-suspicious','suspicious'],['--severity-medium','medium'],['--severity-benign','benign'],['--severity-unknown','unknown']]} />
+<SwatchGrid tokens={[['--severity-malicious','malicious → red'],['--severity-phishing','phishing → pink'],['--severity-suspicious','suspicious → orange'],['--severity-medium','medium → amber'],['--severity-benign','benign → grass'],['--severity-unknown','unknown → gray']]} />
+
+## Entity palette (color = type)
+
+<SwatchGrid tokens={[['--entity-actor','actor → red'],['--entity-campaign','campaign → orange'],['--entity-malware','malware → crimson'],['--entity-exploit','exploit → plum'],['--entity-sid','sid → purple'],['--entity-hash','hash → blue'],['--entity-url','url → cyan'],['--entity-domain','domain → teal'],['--entity-ip','ip → jade'],['--entity-hostname','hostname → grass'],['--entity-filename','filename → slate'],['--entity-email','email → amber'],['--entity-message','message → yellow'],['--entity-scan','scan → sage']]} />
 
 ## Radius & motion
 

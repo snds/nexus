@@ -11,26 +11,29 @@ import { readFileSync, existsSync } from "node:fs";
 import { resolve as resolvePath } from "node:path";
 import { describe, it, expect } from "vitest";
 
-function readTokens(): string {
-  for (const p of [
-    resolvePath(process.cwd(), "../tokens/src/tokens.css"), // run from packages/ui
-    resolvePath(process.cwd(), "packages/tokens/src/tokens.css"), // run from repo root
-    resolvePath(process.cwd(), "../../packages/tokens/src/tokens.css"),
+function readToken(file: string): string {
+  for (const base of [
+    resolvePath(process.cwd(), "../tokens/src"), // run from packages/ui
+    resolvePath(process.cwd(), "packages/tokens/src"), // run from repo root
+    resolvePath(process.cwd(), "../../packages/tokens/src"),
   ]) {
+    const p = resolvePath(base, file);
     if (existsSync(p)) return readFileSync(p, "utf8");
   }
-  throw new Error("tokens.css not found from " + process.cwd());
+  throw new Error(`${file} not found from ${process.cwd()}`);
 }
-const tokensCss = readTokens();
+// Concatenate the raw Radix palette + the alias/semantic layer so var() chains resolve end to end.
+const tokensCss = readToken("radix-scales.css") + "\n" + readToken("tokens.css");
 
 function block(selector: string): Record<string, string> {
-  // grab the FIRST `selector { ... }` block, parse `--name: value;`
-  const re = new RegExp(selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s*\\{([\\s\\S]*?)\\n\\}", "m");
-  const body = tokensCss.match(re)?.[1] ?? "";
+  // merge ALL `selector { ... }` blocks (palette + alias/semantic layers), parse `--name: value;`
+  const re = new RegExp(selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s*\\{([\\s\\S]*?)\\n\\}", "g");
   const out: Record<string, string> = {};
-  for (const m of body.matchAll(/(--[a-z0-9-]+):\s*([^;]+);/gi)) {
-    const name = m[1], value = m[2];
-    if (name && value) out[name] = value.trim();
+  for (const blk of tokensCss.matchAll(re)) {
+    for (const m of (blk[1] ?? "").matchAll(/(--[a-z0-9-]+):\s*([^;]+);/gi)) {
+      const name = m[1], value = m[2];
+      if (name && value) out[name] = value.trim();
+    }
   }
   return out;
 }
