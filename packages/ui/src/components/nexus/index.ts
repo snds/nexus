@@ -24,6 +24,7 @@ export {
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu.js";
 export { Popover, PopoverTrigger, PopoverAnchor, PopoverContent } from "../ui/popover.js";
+export { Button, buttonVariants, type ButtonProps } from "../ui/button.js";
 export { EntityIcon, ENTITY_SYMBOL, type EntityIconProps } from "./EntityIcon.js";
 export { ShapeIcon, type ShapeIconProps } from "./ShapeIcon.js";
 

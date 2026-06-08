@@ -58,7 +58,7 @@ const config = {
       ({
         docs: {
           path: "docs",
-          routeBasePath: "/",
+          routeBasePath: "/docs",
           sidebarPath: require.resolve("./sidebars.js"),
         },
         blog: false,

@@ -1,37 +1,99 @@
-/* Dogfood: load the DS tokens + Tailwind utilities so live @nexus/ui components render fully
-   styled inside the docs. Tailwind preflight is disabled (tailwind.config.js) so it doesn't
-   reset Docusaurus/Infima. */
+/* DOGFOOD: the docs chrome is built from the design system. Load the DS tokens + Tailwind
+   (preflight off), then bind the ENTIRE Infima variable surface to DS tokens so every chrome
+   element — navbar, sidebar, TOC, footer, code, tables, cards, buttons, admonitions — renders
+   in the DS's own surfaces, borders, text, accent, fonts and radius. Not a recolor: every
+   framework variable points at a `--nx-*` token. */
 @import "../../../../packages/tokens/src/index.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Infima brand alignment — dark is the only mode for this dark-first system. */
 :root {
-  --ifm-color-primary: #1f8fe0;
-  --ifm-color-primary-dark: #1c81ca;
-  --ifm-color-primary-darker: #1a7abf;
-  --ifm-color-primary-darkest: #15649d;
-  --ifm-color-primary-light: #36a0ef;
-  --ifm-color-primary-lighter: #46a8f1;
-  --ifm-color-primary-lightest: #6dbbf4;
+  --ifm-color-primary: hsl(var(--nx-accent));
+  --ifm-font-family-base: var(--nx-font-sans);
+  --ifm-font-family-monospace: var(--nx-font-mono);
+  --ifm-global-radius: var(--nx-radius);
   --ifm-code-font-size: 90%;
 }
 
+/* Dark-only system. Bind Infima → DS tokens. */
 [data-theme="dark"] {
-  --ifm-color-primary: #4cb0f6;
-  --ifm-color-primary-dark: #2aa0f4;
-  --ifm-color-primary-darker: #1897f3;
-  --ifm-color-primary-darkest: #0b78cb;
-  --ifm-color-primary-light: #6ec0f8;
-  --ifm-color-primary-lighter: #80c8f9;
-  --ifm-color-primary-lightest: #b5e0fc;
+  /* accent ramp */
+  --ifm-color-primary: hsl(var(--nx-accent));
+  --ifm-color-primary-dark: hsl(var(--nx-accent));
+  --ifm-color-primary-darker: hsl(var(--nx-accent));
+  --ifm-color-primary-darkest: hsl(var(--nx-accent));
+  --ifm-color-primary-light: hsl(var(--nx-accent));
+  --ifm-color-primary-lighter: hsl(var(--nx-accent));
+  --ifm-color-primary-lightest: hsl(var(--nx-accent));
+  --ifm-link-color: hsl(var(--nx-accent));
+
+  /* surfaces */
   --ifm-background-color: hsl(var(--nx-bg));
   --ifm-background-surface-color: hsl(var(--nx-surface-1));
+  --ifm-card-background-color: hsl(var(--nx-surface-1));
+  --ifm-hover-overlay: hsl(var(--nx-surface-2));
+
+  /* emphasis ramp (used for borders/dividers/muted bg across the chrome) */
+  --ifm-color-emphasis-0: hsl(var(--nx-bg));
+  --ifm-color-emphasis-100: hsl(var(--nx-surface-1));
+  --ifm-color-emphasis-200: hsl(var(--nx-surface-2));
+  --ifm-color-emphasis-300: hsl(var(--nx-surface-3));
+  --ifm-color-emphasis-400: hsl(var(--nx-border));
+  --ifm-color-emphasis-500: hsl(var(--nx-border-strong));
+  --ifm-color-emphasis-600: hsl(var(--nx-fg-subtle));
+  --ifm-color-emphasis-700: hsl(var(--nx-fg-muted));
+  --ifm-color-emphasis-800: hsl(var(--nx-fg-muted));
+  --ifm-color-emphasis-900: hsl(var(--nx-fg));
+
+  /* text */
+  --ifm-color-content: hsl(var(--nx-fg));
+  --ifm-color-content-secondary: hsl(var(--nx-fg-muted));
+  --ifm-heading-color: hsl(var(--nx-fg));
+
+  /* navbar */
+  --ifm-navbar-background-color: hsl(var(--nx-surface-1));
+  --ifm-navbar-link-color: hsl(var(--nx-fg-muted));
+  --ifm-navbar-link-hover-color: hsl(var(--nx-fg));
+  --ifm-navbar-shadow: 0 1px 0 0 hsl(var(--nx-border));
+
+  /* sidebar / menu */
+  --ifm-menu-color: hsl(var(--nx-fg-muted));
+  --ifm-menu-color-active: hsl(var(--nx-accent));
+  --ifm-menu-color-background-active: hsl(var(--nx-accent) / 0.14);
+  --ifm-menu-color-background-hover: hsl(var(--nx-surface-2));
+
+  /* TOC + breadcrumbs + tables + rules */
+  --ifm-toc-border-color: hsl(var(--nx-border));
+  --ifm-table-border-color: hsl(var(--nx-border));
+  --ifm-table-stripe-background: hsl(var(--nx-surface-1));
+  --ifm-hr-background-color: hsl(var(--nx-border));
+  --ifm-breadcrumb-color-active: hsl(var(--nx-accent));
+  --ifm-breadcrumb-item-background-active: hsl(var(--nx-surface-2));
+
+  /* code */
+  --ifm-code-background: hsl(var(--nx-surface-2));
+  --ifm-pre-background: hsl(var(--nx-surface-1));
+  --docusaurus-highlighted-code-line-bg: hsl(var(--nx-surface-3));
+
+  /* blockquote / admonitions */
+  --ifm-blockquote-color: hsl(var(--nx-fg-muted));
+  --ifm-blockquote-border-color: hsl(var(--nx-border-strong));
+
+  /* footer */
+  --ifm-footer-background-color: hsl(var(--nx-surface-1));
+  --ifm-footer-color: hsl(var(--nx-fg-muted));
+  --ifm-footer-link-color: hsl(var(--nx-fg-muted));
+  --ifm-footer-title-color: hsl(var(--nx-fg));
 }
 
-/* Material Symbols base class (the font itself is loaded via config `stylesheets`). */
+/* Navbar bottom hairline uses the DS border. */
+.navbar {
+  border-bottom: 1px solid hsl(var(--nx-border));
+}
+
+/* Material Symbols base class (font loaded via config `stylesheets`). */
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
