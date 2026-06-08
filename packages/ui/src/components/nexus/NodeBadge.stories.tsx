@@ -5,7 +5,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { NodeBadge } from "./NodeBadge.js";
 
-const meta: Meta<typeof NodeBadge> = { title: "Nexus/NodeBadge", component: NodeBadge };
+const meta: Meta<typeof NodeBadge> = { title: "Components/Graph/NodeBadge", component: NodeBadge , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof NodeBadge>;
 

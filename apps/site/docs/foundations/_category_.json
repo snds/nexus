@@ -1,0 +1,10 @@
+{
+  "label": "Foundations",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "title": "Foundations",
+    "description": "The design decisions every component inherits: principles, accessibility, color, typography, spacing, elevation, iconography, motion, shape, and content & voice.",
+    "slug": "/foundations"
+  }
+}

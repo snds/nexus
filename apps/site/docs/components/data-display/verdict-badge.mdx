@@ -1,0 +1,51 @@
+---
+sidebar_position: 2
+title: VerdictBadge
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { VerdictBadge } from '@nexus/ui/nexus';
+
+# VerdictBadge
+
+<ComponentMeta
+  status="stable"
+  summary="A labelled threat verdict on its own semantic color channel — malicious, suspicious, benign, and more."
+  storybook="?path=/docs/components-data-display-verdictbadge--docs"
+/>
+
+## Usage
+
+Use a verdict badge wherever a threat **verdict** needs a label — detail panels, table cells,
+legends. Verdict is one of the system's three orthogonal channels and uses the dedicated
+`--severity-*` palette, never the entity colors.
+
+**When not to use:** on a graph node, the verdict is shown as a
+**[VerdictPip](/docs/components/data-display/verdict-pip)** to stay compact.
+
+## Verdicts
+
+<Specimen>
+  <VerdictBadge verdict="malicious" />
+  <VerdictBadge verdict="phishing" />
+  <VerdictBadge verdict="suspicious" />
+  <VerdictBadge verdict="medium" />
+  <VerdictBadge verdict="benign" />
+  <VerdictBadge verdict="unknown" />
+</Specimen>
+
+## Accessibility
+
+- The verdict text is the label — color is never the sole carrier of meaning.
+- All severity colors meet AA against the badge surface in both themes.
+
+## API
+
+<PropsTable rows={[
+  { name: 'verdict', type: "'malicious' | 'phishing' | 'suspicious' | 'medium' | 'benign' | 'unknown'", description: 'The severity to render.' },
+]} />
+
+## Related
+
+- **[VerdictPip](/docs/components/data-display/verdict-pip)** — the compact node form.
+- **[Foundations → Color](/docs/foundations/color)** — the severity channel.

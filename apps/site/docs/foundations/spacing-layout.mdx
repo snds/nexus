@@ -1,0 +1,34 @@
+---
+sidebar_position: 5
+title: Spacing & layout
+---
+
+# Spacing & layout
+
+## Spacing scale
+
+Spacing follows a 4 px base step (4 · 8 · 12 · 16 · 24 · 32 · 48…). Consistent steps keep rhythm
+across panels, toolbars, and cards. Prefer the scale over arbitrary pixel values — a one-off gap
+is a small debt that compounds.
+
+## The app shell
+
+The demo composes a fixed regional layout that downstream apps can reuse:
+
+- **TopBar** — full-width, spanning the whole viewport. Search and the date control share a matched
+  min-height; the search field does not grow on focus.
+- **NavRail** — docked below the TopBar on the left. Primary items at top, **Settings pinned to the
+  bottom** (`mt-auto`).
+- **Canvas** — the remaining region, its own background context (`--nx-bg`), one step below the chrome.
+
+## Density
+
+Threat analysis is information-dense. Panels and tables lean compact, but never below the **20 px
+minimum legible icon size** and never below AA text sizes. Density is achieved with the spacing
+scale and tight `Text` variants, not by shrinking type past legibility.
+
+## Surfaces & stacking
+
+Layered surfaces (`--nx-surface-1 … 3`) signal elevation within the chrome — see
+**[Elevation & surface](/docs/foundations/elevation)**. The canvas deliberately sits below them so
+the graph reads as a distinct plane.

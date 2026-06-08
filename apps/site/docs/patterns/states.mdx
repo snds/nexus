@@ -1,0 +1,35 @@
+---
+sidebar_position: 2
+title: Empty, error & loading
+---
+
+import { Specimen } from '@site/src/components/ds';
+import { StateBlock } from '@nexus/ui/nexus';
+
+# Pattern · Empty, error & loading
+
+Every region that can be without data, fail, or wait uses the **same**
+[StateBlock](/docs/components/feedback/state-block) — so non-happy paths are consistent across the
+dashboard, canvas, panels, and dialogs.
+
+## The three states
+
+<Specimen padded={false}>
+  <div style={{ width: 260 }}><StateBlock kind="empty" title="No saved graphs" message="Saved graphs will appear here." /></div>
+  <div style={{ width: 260 }}><StateBlock kind="error" title="Couldn't load" message="The request failed." /></div>
+  <div style={{ width: 260 }}><StateBlock kind="loading" title="Loading…" /></div>
+</Specimen>
+
+## Rules
+
+- **Empty** explains what *will* be here and, where useful, offers the action to create it (e.g. a
+  "New saved graph" card).
+- **Error** states what failed in plain language and offers recovery (a Retry
+  [Button](/docs/components/actions/button)) — never a raw stack trace.
+- **Loading** uses a determinate or skeleton cue immediately; long waits expose a live-region
+  status for screen readers.
+
+## Anti-pattern
+
+A blank panel, a spinner with no context, or an ad-hoc inline error. If a region can be empty,
+it has a `StateBlock`.

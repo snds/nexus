@@ -1,0 +1,48 @@
+---
+sidebar_position: 2
+title: Primitives
+---
+
+import { Ramp } from '@site/src/components/ds';
+
+# Primitives (L0)
+
+The raw scales every semantic token aliases. These are documented in full — not just the values
+in use — so the whole range is visible. Values are read **live** from `:root`.
+
+## Color ramps
+
+Neutral drives surfaces, borders, and text; accent drives everything interactive. Each is a
+12-step scale (1 = app background → 12 = primary text / solid accent).
+
+**Neutral** — `--nx-neutral-1 … 12`
+
+<Ramp prefix="--nx-neutral" />
+
+**Accent** — `--nx-accent-1 … 12` (9 = solid interactive)
+
+<Ramp prefix="--nx-accent" />
+
+## Type scale
+
+The raw sizes, composed into the semantic [text variants](/docs/foundations/typography) — never
+used as raw values in product.
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 10, margin: '16px 0' }}>
+  {['2xs','xs','sm','base','md','lg','xl','2xl','3xl','4xl','5xl'].map((s) => (
+    <div key={s} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
+      <code style={{ width: 120, color: 'hsl(var(--nx-fg-subtle))', fontSize: 11 }}>--nx-text-{s}</code>
+      <span style={{ fontSize: `var(--nx-text-${s})`, color: 'hsl(var(--nx-fg))' }}>The quick brown fox</span>
+    </div>
+  ))}
+</div>
+
+- **Weights** — `--nx-weight-regular | medium | semibold | bold` (400 / 500 / 600 / 700)
+- **Line height** — `--nx-leading-none | tight | snug | normal | relaxed`
+- **Tracking** — `--nx-tracking-tight | normal | wide | wider`
+
+## Domain palettes
+
+Two product-specific scales that sit alongside neutral/accent: the **entity** channel
+(`--entity-*`) and the **severity** channel (`--severity-*`). They're documented on
+**[Semantics](/docs/tokens/semantics)** with their swatches.

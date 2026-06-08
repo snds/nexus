@@ -1,0 +1,41 @@
+---
+sidebar_position: 9
+title: Shape & radius
+---
+
+import { Specimen } from '@site/src/components/ds';
+import { ShapeIcon } from '@nexus/ui/nexus';
+
+# Shape & radius
+
+Shape carries meaning in two places: the **corner radius** of chrome, and the **node family**
+silhouette on the canvas.
+
+## Radius
+
+Three tokens cover the UI:
+
+- `--nx-radius-sm` — tight controls (chips, small inputs).
+- `--nx-radius` — the default for buttons, cards, surfaces.
+- `--nx-radius-lg` — large containers (modals, panels).
+
+Never hardcode a corner value — pick the token that matches the element's weight.
+
+## Node families (the shape channel)
+
+On the graph, **shape encodes family** — one of the three orthogonal channels alongside color
+(type) and verdict (pip). The four silhouettes:
+
+<Specimen>
+  <ShapeIcon shape="circle" size={32} />
+  <ShapeIcon shape="square" size={32} />
+  <ShapeIcon shape="diamond" size={32} />
+  <ShapeIcon shape="hexagon" size={32} />
+</Specimen>
+
+The hexagon is a **regular, flat-top** hexagon — explicitly corrected so it never reads as
+optically stretched (a bug fixed during QA). All node silhouettes share uniform stroke weights so
+no family looks heavier than another.
+
+See **[NodeBadge](/docs/components/graph/node-badge)** for how shape composes with the other
+channels.

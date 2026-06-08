@@ -1,0 +1,47 @@
+---
+sidebar_position: 7
+title: Iconography
+---
+
+import { Specimen } from '@site/src/components/ds';
+import { Icon, EntityIcon } from '@nexus/ui/nexus';
+
+# Iconography
+
+The system uses **Material Symbols**, exposed through the [Icon](/docs/components/iconography/icon)
+primitive with the variable-font axes (FILL, weight, grade) available as props.
+
+## Outlined by default; fill for active only
+
+Symbols are **outlined** at rest. The FILL axis flips to 1 **only** for active / selected / hub
+states — never for decoration. This is the system's clearest single rule for iconography.
+
+<Specimen>
+  <Icon name="shield_person" size={28} />
+  <Icon name="shield_person" size={28} filled />
+</Specimen>
+
+<span style={{ color: 'hsl(var(--nx-fg-subtle))', fontSize: 13 }}>Rest (outlined) → Active (filled)</span>
+
+## Entity glyphs carry the color channel
+
+For threat entities, use [EntityIcon](/docs/components/iconography/entity-icon) — it pairs the
+canonical glyph with the entity's `--entity-*` color, so "color = type" is enforced.
+
+<Specimen>
+  <EntityIcon type="actor" size={28} />
+  <EntityIcon type="malware" size={28} />
+  <EntityIcon type="domain" size={28} />
+  <EntityIcon type="email" size={28} />
+</Specimen>
+
+## Sizing
+
+- **Minimum 20 px.** Below that, Material Symbols lose legibility — never ship smaller.
+- Size in even steps that match the surrounding text and controls.
+
+## Accessibility
+
+- Decorative icons are hidden from assistive tech; meaningful standalone icons get a `title`.
+- Icon-only controls take their accessible name from the **control** (`ToolButton` label), not the
+  glyph. See [Accessibility](/docs/foundations/accessibility).

@@ -1,0 +1,76 @@
+---
+sidebar_position: 1
+title: Button
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { Button } from '@nexus/ui/nexus';
+
+# Button
+
+<ComponentMeta
+  status="stable"
+  summary="The shadcn/Radix button base, themed entirely through the token bridge. The primary action control."
+  storybook="?path=/docs/components-actions-button--docs"
+/>
+
+## Usage
+
+Use a button to trigger an action — submit, save, open a dialog. Use exactly **one** primary
+(`default`) button per view to keep the action hierarchy legible; everything else is `secondary`,
+`outline`, or `ghost`.
+
+**When not to use:** for navigation between pages, use a link. For a square icon-only control in a
+toolbar, use **[ToolButton](/docs/components/actions/tool-button)**.
+
+## Variants
+
+<Specimen>
+  <Button>Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="link">Link</Button>
+</Specimen>
+
+## Sizes
+
+<Specimen>
+  <Button size="sm">Small</Button>
+  <Button size="default">Default</Button>
+  <Button size="lg">Large</Button>
+</Specimen>
+
+## States
+
+<Specimen>
+  <Button>Default</Button>
+  <Button disabled>Disabled</Button>
+</Specimen>
+
+Hover, focus-visible, and active states are token-driven and identical to the shadcn base — real
+keyboard focus rings via `--nx-ring`.
+
+## Accessibility
+
+- Renders a native `<button>`; fully keyboard operable (Enter / Space).
+- `focus-visible` ring uses `--nx-ring` (accent-9) for AA contrast against every surface.
+- Pass `asChild` to render as a link while keeping button semantics where appropriate.
+- Disabled buttons are removed from the tab order — pair with a tooltip if the reason isn't obvious.
+
+## API
+
+<PropsTable rows={[
+  { name: 'variant', type: "'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'", default: "'default'", description: 'Visual emphasis.' },
+  { name: 'size', type: "'default' | 'sm' | 'lg' | 'icon'", default: "'default'", description: 'Control size.' },
+  { name: 'asChild', type: 'boolean', default: 'false', description: 'Render the child element with button styling (Radix Slot).' },
+  { name: '...props', type: "React.ButtonHTMLAttributes", description: 'All native button attributes (onClick, disabled, type…).' },
+]} />
+
+The full generated prop table lives in **[Storybook autodocs](/nexus/storybook/?path=/docs/components-actions-button--docs)**.
+
+## Related
+
+- **[ToolButton](/docs/components/actions/tool-button)** — square icon control for toolbars.
+- **[Tooltip](/docs/components/overlays/tooltip)** — pair with icon-only actions.

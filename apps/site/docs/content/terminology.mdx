@@ -1,0 +1,33 @@
+---
+sidebar_position: 3
+title: Terminology
+---
+
+# Terminology
+
+One term, one meaning. These are the canonical words across the UI, docs, and code — don't
+introduce synonyms.
+
+| Term | Means | Not |
+|---|---|---|
+| **Entity** | Any node in the graph — actor, malware, domain, email, etc. | "object", "item", "thing" |
+| **Type** | The entity's kind, carried by the **color** channel. | "category", "kind" (in UI) |
+| **Family** | The node's shape silhouette (circle / square / diamond / hexagon). | "shape" (in UI copy) |
+| **Verdict** | The threat severity, on its own channel (malicious…unknown). | "status", "result", "score" |
+| **Hub** | The root node a graph is expanded from. | "center", "origin" |
+| **Neighbor** | A node connected to the hub or another node. | "child", "leaf" |
+| **Expand** | Reveal an entity's connected nodes. | "open", "grow" |
+| **Aggregate** | A node standing in for collapsed children (`+N`). | "group" (that's the action) |
+| **Highlight path** | The mode that accents the route between two nodes. | "trace", "focus mode" |
+| **Saved graph** | A persisted canvas state. | "investigation", "board" |
+| **Campaign** | A grouped threat activity entity. | — |
+
+## Status vs verdict
+
+"Status" is reserved for operational flags on a node (e.g. **impacted**, **VIP**). The threat
+assessment is always **verdict**. Keep them distinct.
+
+## Product names
+
+Nexus (the design system + Threat Explorer), TAP (the pivot source), Splunk (the integration).
+Always as written.

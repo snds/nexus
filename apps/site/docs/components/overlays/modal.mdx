@@ -1,0 +1,60 @@
+---
+sidebar_position: 2
+title: Modal
+---
+
+import { ComponentMeta, PropsTable } from '@site/src/components/ds';
+
+# Modal
+
+<ComponentMeta
+  status="stable"
+  summary="A focus-trapping dialog composing the Radix Dialog base. Used for save, confirm, login, and product-update flows."
+  storybook="?path=/docs/components-overlays-base-overlays--docs"
+/>
+
+## Usage
+
+Use a modal for a focused, interrupting task the user must complete or dismiss — confirming a
+destructive action, saving a graph, an auth step. Keep it to a single job; multi-step flows use a
+**[Stepper](/docs/components/navigation/stepper)** inside.
+
+**When not to use:** for non-blocking, contextual content anchored to a control, use a
+**[Popover](/docs/components/overlays/popover)**. For passive notices, use an inline
+**[StateBlock](/docs/components/feedback/state-block)**.
+
+## Anatomy
+
+A `Modal` renders a dimmed overlay + a centered surface containing a (visually-hidden or visible)
+title, body content, and actions. It composes Radix `Dialog`, so focus trap, scroll lock, Escape,
+and `aria-modal` come for free.
+
+```tsx
+import { Modal } from "@nexus/ui/nexus";
+
+<Modal label="Save graph" open={open} onClose={() => setOpen(false)}>
+  <SaveGraphForm />
+</Modal>
+```
+
+## Accessibility
+
+- Focus is trapped while open and restored to the trigger on close.
+- Escape and overlay-click both call `onClose`.
+- `label` becomes the dialog's accessible name (a `DialogTitle`, visually hidden if not rendered).
+- Background content is inert (`aria-modal`).
+
+## API
+
+<PropsTable rows={[
+  { name: 'label', type: 'string', description: 'Accessible dialog title.' },
+  { name: 'open', type: 'boolean', default: 'true', description: 'Controlled open state.' },
+  { name: 'onClose', type: '() => void', description: 'Called on Escape, overlay click, or close control.' },
+  { name: 'className', type: 'string', description: 'Applied to the dialog surface.' },
+  { name: 'children', type: 'ReactNode', description: 'Dialog body.' },
+]} />
+
+## Related
+
+- **[Popover](/docs/components/overlays/popover)** — non-blocking anchored overlay.
+- **[Stepper](/docs/components/navigation/stepper)** — multi-step flows inside a modal.

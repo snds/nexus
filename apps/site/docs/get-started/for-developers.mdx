@@ -1,0 +1,51 @@
+---
+sidebar_position: 1
+title: For developers
+---
+
+# For developers
+
+The Nexus Design System ships as a small set of workspace packages. Everything downstream —
+the demo app, this docs site, and Storybook — **consumes and dogfoods** them.
+
+## Packages
+
+| Package | Import | Owns |
+|---|---|---|
+| `@nexus/tokens` | `@nexus/tokens/tokens.css` | The `--nx-*` / `--entity-*` / `--severity-*` custom properties + a shadcn variable bridge. |
+| `@nexus/ui` | `@nexus/ui/nexus` | L1 shadcn/Radix bases + L3 product primitives (Button, Tooltip, NodeBadge…). |
+
+## Install (inside the monorepo)
+
+```bash
+pnpm install
+pnpm --filter @nexus/web dev      # the demo app
+pnpm --filter @nexus/ui storybook # the component explorer
+pnpm --filter @nexus/site start   # these docs
+```
+
+## Use it
+
+Pull the tokens once at your app root, then import primitives. **Never** hardcode a hue, radius,
+or duration — every value comes from a token.
+
+```tsx
+import "@nexus/tokens/tokens.css";
+import { Button, Tooltip, NodeBadge } from "@nexus/ui/nexus";
+
+export function Example() {
+  return (
+    <Tooltip label="Save graph" side="bottom">
+      <Button>Save</Button>
+    </Tooltip>
+  );
+}
+```
+
+## The three tiers
+
+1. **L0 Tokens** (`@nexus/tokens`) — appearance, the single source of truth.
+2. **L1 Base** (`components/ui`) — pristine shadcn/Radix primitives, themed only through the bridge.
+3. **L3 Wrapper** (`components/nexus`) — product primitives that compose L1 + tokens. This is what you import.
+
+See **[Tokens](/docs/tokens/)** for the model and **[Components](/docs/components/)** for the per-component API.

@@ -1,0 +1,39 @@
+---
+sidebar_position: 3
+title: Dialogs & flows
+---
+
+# Pattern · Dialogs & flows
+
+Interrupting tasks — save, confirm, authenticate, set up an integration — share one composition so
+they feel like one product.
+
+## Single-step dialogs
+
+A [Modal](/docs/components/overlays/modal) with a clear title, a focused body, and a right-aligned
+action row: a primary [Button](/docs/components/actions/button) and a secondary/cancel. Examples in
+the demo: **Save graph**, **Confirm delete**, **Splunk login**, **Product updates**.
+
+```tsx
+<Modal label="Delete graph?" open={open} onClose={close}>
+  <p>This can't be undone.</p>
+  <div className="actions">
+    <Button variant="ghost" onClick={close}>Cancel</Button>
+    <Button variant="destructive" onClick={confirm}>Delete</Button>
+  </div>
+</Modal>
+```
+
+## Multi-step flows
+
+For an ordered setup (the **Splunk admin wizard**), put a
+[Stepper](/docs/components/navigation/stepper) at the top of the modal and advance the body per
+step. Keep it to 3–5 steps; show progress, allow back.
+
+## Rules
+
+- **One job per dialog.** If it grows past one decision, it's a flow (stepper) or a page.
+- **Destructive actions** use the `destructive` button variant and name the consequence.
+- **Focus & escape** are handled by the Radix Dialog base — don't reimplement.
+- Never block with a dialog where an inline [StateBlock](/docs/components/feedback/state-block) or
+  toast would do.

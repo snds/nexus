@@ -1,0 +1,61 @@
+---
+sidebar_position: 3
+title: DropdownMenu
+---
+
+import { ComponentMeta, PropsTable } from '@site/src/components/ds';
+
+# DropdownMenu
+
+<ComponentMeta
+  status="stable"
+  summary="The Radix DropdownMenu base, token-themed. A list of actions or options triggered by a control."
+  storybook="?path=/docs/components-overlays-base-overlays--docs"
+/>
+
+## Usage
+
+Use a dropdown menu for a list of **actions** or single-select options anchored to a trigger — a
+row's overflow menu, a date-range selector, a node's right-click operations. The whole menu is
+keyboard-navigable.
+
+**When not to use:** for free-form content or forms, use a **[Popover](/docs/components/overlays/popover)**.
+For a few always-visible options, use inline buttons.
+
+## Anatomy
+
+Re-exported compound parts mirror Radix:
+
+```tsx
+import {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+  DropdownMenuItem, DropdownMenuSeparator,
+} from "@nexus/ui/nexus";
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild><ToolButton icon="more_vert" label="More" /></DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem onSelect={open}>Open</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem onSelect={remove}>Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Accessibility
+
+- Full keyboard support: arrows to move, Enter/Space to select, Escape to close, type-ahead.
+- Roving `tabindex`, `role="menu"` / `menuitem`, and focus return are handled by Radix.
+- Content is portalled with collision-aware placement.
+- Outside-click and Escape dismiss.
+
+## API
+
+The component is a thin re-export of Radix `DropdownMenu` — see the
+[Radix DropdownMenu API](https://www.radix-ui.com/primitives/docs/components/dropdown-menu). The
+parts are themed via the token bridge (`--popover`, `--border`, `--radius`).
+
+## Related
+
+- **[Popover](/docs/components/overlays/popover)** — for non-action content.
+- **[ToolButton](/docs/components/actions/tool-button)** — common trigger.

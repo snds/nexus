@@ -1,0 +1,49 @@
+---
+sidebar_position: 4
+title: Theming & modes
+---
+
+import { SwatchGrid } from '@site/src/components/ds';
+
+# Theming & modes
+
+The system is **dark-first**: `:root` defines the dark theme, and a single `:root.light` class
+**re-points the primitive ramps** (and a few entity/severity overrides). Because every component
+reads [semantics](/docs/tokens/semantics) — which alias primitives — nothing else changes.
+
+## How a mode switch works
+
+```css
+:root {                      /* dark — the default */
+  --nx-neutral-1: 222 38% 5%;
+  --nx-neutral-12: 210 30% 96%;
+  --nx-accent-9: 205 90% 56%;
+}
+:root.light {                /* light — re-point primitives only */
+  --nx-neutral-1: 210 30% 99%;
+  --nx-neutral-12: 222 40% 11%;
+  /* …accent + a few domain overrides */
+}
+```
+
+Semantics (`--nx-bg: var(--nx-neutral-1)`) and components never change — they follow the ramp.
+This is the payoff of the [tier model](/docs/tokens/token-model): theming is a one-layer edit.
+
+## HSL triplets
+
+Values are stored as bare HSL triplets (`222 38% 5%`) and consumed as `hsl(var(--token))`. That
+lets any consumer add an alpha channel inline — e.g. the translucent node fill is
+`hsl(var(--nx-bg) / 0.48)`.
+
+## Live preview
+
+The swatches across these docs read their values from the **current** theme. Toggle the theme and
+they update live — proof the cascade, not a snapshot, is the source of truth.
+
+<SwatchGrid tokens={[['--nx-bg','App background'],['--nx-surface-2','Raised surface'],['--nx-fg','Primary text'],['--nx-accent','Accent']]} />
+
+## Contrast across modes
+
+Light mode was validated to keep the canvas legible (the demo canvas binds to `--nx-bg`, which
+flips with the theme — 16.8:1, not the pinned-black it once was). See
+**[Foundations → Accessibility](/docs/foundations/accessibility)**.

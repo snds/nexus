@@ -1,0 +1,48 @@
+---
+sidebar_position: 5
+title: StatCircle
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { StatCircle } from '@nexus/ui/nexus';
+
+# StatCircle
+
+<ComponentMeta
+  status="stable"
+  summary="A labelled circular metric for at-a-glance counts in detail panels and the TAP pivot."
+  storybook="?path=/docs/components-data-display-statcircle--docs"
+/>
+
+## Usage
+
+Use a stat circle for a single key metric with a short label — DLP events, login counts, clean
+rate. Tone the circle to carry severity where relevant.
+
+**When not to use:** for a plain inline number, use **[CountChip](/docs/components/data-display/count-chip)**.
+For multiple related metrics, lay several stat circles in a row.
+
+## Tones
+
+<Specimen>
+  <StatCircle label="DLP" value={42} tone="malicious" />
+  <StatCircle label="Logins" value={1280} tone="neutral" />
+  <StatCircle label="Clean" value={98} tone="benign" />
+</Specimen>
+
+## Accessibility
+
+- The label and value are both text; tone color is reinforcement, not the sole signal.
+
+## API
+
+<PropsTable rows={[
+  { name: 'value', type: 'number | string', description: 'The metric.' },
+  { name: 'label', type: 'string', description: 'Short caption beneath the value.' },
+  { name: 'tone', type: "'neutral' | 'malicious' | 'benign' | string", default: "'neutral'", description: 'Severity coloring.' },
+  { name: 'size', type: 'number', description: 'Diameter in px.' },
+]} />
+
+## Related
+
+- **[CountChip](/docs/components/data-display/count-chip)** · **[Patterns → Graph canvas](/docs/patterns/graph-canvas)**

@@ -1,0 +1,45 @@
+---
+sidebar_position: 4
+title: CountChip
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { CountChip } from '@nexus/ui/nexus';
+
+# CountChip
+
+<ComponentMeta
+  status="stable"
+  summary="A compact numeric chip for hidden-child counts and overflow totals — the '+N' on an aggregate node."
+  storybook="?path=/docs/components-data-display-countchip--docs"
+/>
+
+## Usage
+
+Use a count chip to surface a number that represents more — collapsed children on a node, items
+beyond a visible limit. Optionally prefix it (e.g. `+`).
+
+**When not to use:** for a labelled metric, use **[StatCircle](/docs/components/data-display/stat-circle)**.
+
+## Examples
+
+<Specimen>
+  <CountChip count={3} />
+  <CountChip count={12} prefix="+" />
+  <CountChip count={148} prefix="+" />
+</Specimen>
+
+## Accessibility
+
+- Numeric content reads naturally; pair with context (the node label) so the number's meaning is clear.
+
+## API
+
+<PropsTable rows={[
+  { name: 'count', type: 'number', description: 'The value to display.' },
+  { name: 'prefix', type: 'string', description: "Optional leading symbol, e.g. '+'." },
+]} />
+
+## Related
+
+- **[NodeBadge](/docs/components/graph/node-badge)** — uses it for the `+N` cluster.

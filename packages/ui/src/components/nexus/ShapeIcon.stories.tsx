@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { ShapeIcon } from "./ShapeIcon.js";
 
-const meta: Meta<typeof ShapeIcon> = { title: "Nexus/ShapeIcon", component: ShapeIcon };
+const meta: Meta<typeof ShapeIcon> = { title: "Components/Iconography/ShapeIcon", component: ShapeIcon , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof ShapeIcon>;
 

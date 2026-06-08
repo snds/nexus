@@ -1,0 +1,41 @@
+---
+sidebar_position: 8
+title: Motion
+---
+
+# Motion
+
+Motion in Nexus **informs** — it shows where a node came from and how the graph relates — and is
+never decorative. It is tokenized, fast, and always respects user preference.
+
+## Tokens
+
+- **Duration** — `--nx-motion-fast` (150 ms) · `--nx-motion-base` (220 ms) · `--nx-motion-slow` (300 ms).
+- **Easing** — `--nx-ease-out` `cubic-bezier(0.16, 1, 0.3, 1)` for entrances · `--nx-ease-standard`
+  for repositioning.
+
+## Principles
+
+- **Ease-out for entrances.** Elements arrive with velocity and decelerate — physically correct.
+  Exits ease-in. Repositioning eases in-out.
+- **Staging.** Only the primary element animates. When a node expands, *it* moves — the panel
+  around it doesn't.
+- **Timing reflects weight.** Micro-interactions are fast (150 ms); larger surfaces take longer,
+  but nothing exceeds ~300 ms. Slow ≠ premium.
+
+## Graph node motion
+
+The canvas implements a small preset system (the default is **floaty** — a touch of elasticity
+without overshooting into a bounce):
+
+- New nodes **expand out of their parent** rather than popping in.
+- **Labels and indicators fade in on landing**, after the node settles — not mid-flight.
+- **Edges are hidden until both endpoints have arrived**, then lock to the centers of parent and
+  child, so a line never draws ahead of its node.
+- **Hover scales the whole node** (icon included) a few percent; labels and indicators are
+  unaffected.
+
+## Reduced motion
+
+Everything honors `prefers-reduced-motion`: enters, expands, and edge reveals collapse to instant
+state changes. This is verified, not assumed — see [Accessibility](/docs/foundations/accessibility).

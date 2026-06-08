@@ -1,0 +1,52 @@
+---
+sidebar_position: 2
+title: EntityIcon
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { EntityIcon } from '@nexus/ui/nexus';
+
+# EntityIcon
+
+<ComponentMeta
+  status="stable"
+  summary="An Icon bound to the entity color channel — the right glyph and the right --entity-* color for a given type."
+  storybook="?path=/docs/components-iconography-entityicon--docs"
+/>
+
+## Usage
+
+Use `EntityIcon` to render a threat entity's glyph with its canonical type color applied — actor,
+campaign, malware, domain, email, and so on. This is how color = type is enforced consistently.
+
+**When not to use:** for a generic UI glyph with no entity meaning, use
+**[Icon](/docs/components/iconography/icon)**.
+
+## Types
+
+<Specimen>
+  <EntityIcon type="actor" size={28} />
+  <EntityIcon type="campaign" size={28} />
+  <EntityIcon type="malware" size={28} />
+  <EntityIcon type="domain" size={28} />
+  <EntityIcon type="email" size={28} />
+  <EntityIcon type="url" size={28} />
+</Specimen>
+
+## Accessibility
+
+- Color encodes type but is never the only signal — entity icons appear with a label in context
+  (node, legend, row).
+
+## API
+
+<PropsTable rows={[
+  { name: 'type', type: "EntityType", description: 'Entity type — selects glyph + --entity-* color.' },
+  { name: 'size', type: 'number', default: '24', description: 'Square size in px.' },
+  { name: 'color', type: 'string', description: 'Override the resolved entity color.' },
+  { name: 'filled', type: 'boolean', default: 'false', description: 'FILL axis.' },
+]} />
+
+## Related
+
+- **[Icon](/docs/components/iconography/icon)** · **[Foundations → Color](/docs/foundations/color)** (entity palette)

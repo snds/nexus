@@ -49,7 +49,20 @@ const config = {
     "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
   ],
 
-  plugins: [nexusDsPlugin],
+  plugins: [
+    nexusDsPlugin,
+    [
+      // Offline/local search — no Algolia account or API keys required.
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        indexDocs: true,
+        indexPages: true,
+        docsRouteBasePath: "/docs",
+        highlightSearchTermsOnTargetPage: true,
+      },
+    ],
+  ],
 
   presets: [
     [

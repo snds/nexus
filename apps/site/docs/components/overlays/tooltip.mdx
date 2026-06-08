@@ -1,0 +1,56 @@
+---
+sidebar_position: 1
+title: Tooltip
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { Tooltip } from '@nexus/ui/nexus';
+
+# Tooltip
+
+<ComponentMeta
+  status="stable"
+  summary="A thin wrapper over the Radix tooltip — real focus, Escape, portal, and shared delay. Names icon-only controls."
+  storybook="?path=/docs/components-overlays-tooltip--docs"
+/>
+
+## Usage
+
+Use a tooltip to name an unlabelled control or add a brief clarification. Keep content to a few
+words — it is **supplementary**, never the only place critical information lives.
+
+**When not to use:** don't put interactive content (links, buttons) inside a tooltip — use a
+**[Popover](/docs/components/overlays/popover)**. Don't use it for long help text.
+
+## Example
+
+<Specimen>
+  <Tooltip label="A real DOM tooltip" side="top">
+    <button style={{ height: 36, width: 36, borderRadius: 6, border: '1px solid hsl(var(--nx-border))', background: 'hsl(var(--nx-surface-2))', color: 'hsl(var(--nx-fg))' }}>★</button>
+  </Tooltip>
+  <Tooltip label="Opens on focus too" side="right">
+    <button style={{ height: 36, width: 36, borderRadius: 6, border: '1px solid hsl(var(--nx-border))', background: 'hsl(var(--nx-surface-2))', color: 'hsl(var(--nx-fg))' }}>?</button>
+  </Tooltip>
+</Specimen>
+
+Hover or **keyboard-focus** the trigger. A single `TooltipProvider` (200 ms delay) is shared so
+moving between controls doesn't re-wait.
+
+## Accessibility
+
+- Opens on hover **and** focus; dismisses on Escape and blur.
+- Content is portalled and wired to the trigger — no manual ARIA needed.
+- The trigger must be focusable (a real `<button>` / control). Don't wrap plain text.
+
+## API
+
+<PropsTable rows={[
+  { name: 'label', type: 'ReactNode', description: 'Tooltip content.' },
+  { name: 'side', type: "'top' | 'right' | 'bottom' | 'left'", default: "'top'", description: 'Placement relative to the trigger.' },
+  { name: 'children', type: 'ReactElement', description: 'The focusable trigger (rendered asChild).' },
+]} />
+
+## Related
+
+- **[ToolButton](/docs/components/actions/tool-button)** — has a tooltip built in.
+- **[Popover](/docs/components/overlays/popover)** — for interactive overlay content.

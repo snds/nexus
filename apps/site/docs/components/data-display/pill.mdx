@@ -1,0 +1,47 @@
+---
+sidebar_position: 1
+title: Pill
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { Pill } from '@nexus/ui/nexus';
+
+# Pill
+
+<ComponentMeta
+  status="stable"
+  summary="A small rounded label for metadata, tags, and counts. The lightest-weight status/identity element."
+  storybook="?path=/docs/components-data-display-pill--docs"
+/>
+
+## Usage
+
+Use a pill for a short, non-interactive label — an entity type, a tag, a category. Keep the text
+to one or two words.
+
+**When not to use:** for a threat verdict, use **[VerdictBadge](/docs/components/data-display/verdict-badge)**
+(its own semantic channel). For a numeric overflow count, use
+**[CountChip](/docs/components/data-display/count-chip)**.
+
+## Tones
+
+<Specimen>
+  <Pill tone="neutral">neutral</Pill>
+  <Pill tone="accent">accent</Pill>
+</Specimen>
+
+## Accessibility
+
+- Renders inline text — contrast meets AA in both themes via the semantic tokens.
+- Carries no interactive semantics; don't attach click handlers (use a Button).
+
+## API
+
+<PropsTable rows={[
+  { name: 'tone', type: "'neutral' | 'accent'", default: "'neutral'", description: 'Color treatment.' },
+  { name: 'children', type: 'ReactNode', description: 'Label content.' },
+]} />
+
+## Related
+
+- **[VerdictBadge](/docs/components/data-display/verdict-badge)** · **[CountChip](/docs/components/data-display/count-chip)**

@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { CountChip } from "./CountChip.js";
 
-const meta: Meta<typeof CountChip> = { title: "Nexus/CountChip", component: CountChip };
+const meta: Meta<typeof CountChip> = { title: "Components/Data Display/CountChip", component: CountChip , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof CountChip>;
 

@@ -1,0 +1,55 @@
+---
+sidebar_position: 1
+title: Icon
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { Icon } from '@nexus/ui/nexus';
+
+# Icon
+
+<ComponentMeta
+  status="stable"
+  summary="The Material Symbols glyph primitive — outlined by default, with the FILL/weight/grade axes exposed as props."
+  storybook="?path=/docs/components-iconography-icon--docs"
+/>
+
+## Usage
+
+Use `Icon` for any glyph. Symbols are **outlined by default**; flip `filled` only for active /
+selected / hub states (see the [fill principle](/docs/foundations/principles)). Never go below the
+20 px minimum legible size.
+
+**When not to use:** for an entity type glyph in the graph, use
+**[EntityIcon](/docs/components/iconography/entity-icon)** so the color channel is applied for you.
+
+## Examples
+
+<Specimen>
+  <Icon name="hub" size={28} />
+  <Icon name="campaign" size={28} />
+  <Icon name="shield_person" size={28} filled />
+  <Icon name="route" size={28} />
+  <Icon name="save" size={28} />
+</Specimen>
+
+## Accessibility
+
+- Decorative icons are hidden from assistive tech; pass `title` to give a meaningful icon an
+  accessible name.
+- Icon-only controls must carry a label via their control (e.g. `ToolButton`), not the icon alone.
+
+## API
+
+<PropsTable rows={[
+  { name: 'name', type: 'string', description: 'Material Symbols glyph name.' },
+  { name: 'size', type: 'number', default: '24', description: 'Square size in px (min 20).' },
+  { name: 'filled', type: 'boolean', default: 'false', description: 'FILL axis — active states only.' },
+  { name: 'weight', type: 'number', description: 'wght axis.' },
+  { name: 'grade', type: 'number', description: 'GRAD axis.' },
+  { name: 'title', type: 'string', description: 'Accessible name (omit for decorative).' },
+]} />
+
+## Related
+
+- **[EntityIcon](/docs/components/iconography/entity-icon)** · **[ShapeIcon](/docs/components/iconography/shape-icon)** · **[Foundations → Iconography](/docs/foundations/iconography)**

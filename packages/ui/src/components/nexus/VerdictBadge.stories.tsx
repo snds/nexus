@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { VerdictBadge } from "./VerdictBadge.js";
 
-const meta: Meta<typeof VerdictBadge> = { title: "Nexus/VerdictBadge", component: VerdictBadge };
+const meta: Meta<typeof VerdictBadge> = { title: "Components/Data Display/VerdictBadge", component: VerdictBadge , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof VerdictBadge>;
 

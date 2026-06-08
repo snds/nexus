@@ -1,0 +1,10 @@
+{
+  "label": "Components",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "title": "Components",
+    "description": "One page per component, to a fixed template. Interactive previews here; full playground + a11y in Storybook.",
+    "slug": "/components"
+  }
+}

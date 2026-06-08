@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { Tooltip } from "./Tooltip.js";
 
-const meta: Meta<typeof Tooltip> = { title: "Nexus/Tooltip", component: Tooltip };
+const meta: Meta<typeof Tooltip> = { title: "Components/Overlays/Tooltip", component: Tooltip , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof Tooltip>;
 

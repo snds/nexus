@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { VerdictPip } from "./VerdictPip.js";
 
-const meta: Meta<typeof VerdictPip> = { title: "Nexus/VerdictPip", component: VerdictPip };
+const meta: Meta<typeof VerdictPip> = { title: "Components/Data Display/VerdictPip", component: VerdictPip , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof VerdictPip>;
 

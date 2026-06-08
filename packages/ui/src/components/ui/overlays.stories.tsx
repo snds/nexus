@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Popover, PopoverTrigger, PopoverContent } from "./popover.js";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./tooltip.js";
 
-const meta: Meta = { title: "Base/Overlays" };
+const meta: Meta = { title: "Components/Overlays/Base Overlays" , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj;
 

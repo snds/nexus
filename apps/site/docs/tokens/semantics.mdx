@@ -1,0 +1,40 @@
+---
+sidebar_position: 3
+title: Semantics
+---
+
+import { SwatchGrid } from '@site/src/components/ds';
+
+# Semantics (L1)
+
+Purpose aliases that point at the [primitive ramps](/docs/tokens/primitives). Components consume
+**these**, never the raw scales — so re-pointing a primitive in one theme updates everything.
+
+## Background contexts
+
+Two stacked contexts keep the canvas and the chrome distinct.
+
+<SwatchGrid tokens={[['--nx-bg','App / canvas → neutral-1'],['--nx-surface-1','Panels → neutral-2'],['--nx-surface-2','Raised → neutral-3'],['--nx-surface-3','Hover → neutral-4']]} />
+
+## Borders, accent & text
+
+<SwatchGrid kind="border" tokens={[['--nx-border','Border → neutral-6'],['--nx-border-strong','Strong → neutral-7'],['--nx-accent','Accent → accent-9'],['--nx-ring','Ring → accent-9']]} />
+<SwatchGrid kind="text" tokens={[['--nx-fg','Primary → neutral-12'],['--nx-fg-muted','Muted → neutral-10'],['--nx-fg-subtle','Subtle → neutral-9 · AA']]} />
+
+## Entity palette (channel — type)
+
+Color encodes entity *type*. One swatch per supported entity.
+
+<SwatchGrid tokens={[['--entity-actor','actor'],['--entity-campaign','campaign'],['--entity-malware','malware'],['--entity-exploit','exploit'],['--entity-sid','sid'],['--entity-hash','hash'],['--entity-url','url'],['--entity-domain','domain'],['--entity-ip','ip'],['--entity-hostname','hostname'],['--entity-filename','filename'],['--entity-email','email'],['--entity-message','message'],['--entity-scan','scan']]} />
+
+## Severity palette (own channel — verdict)
+
+Verdict lives on its own channel — never mixed with entity colors.
+
+<SwatchGrid tokens={[['--severity-malicious','malicious'],['--severity-phishing','phishing'],['--severity-suspicious','suspicious'],['--severity-medium','medium'],['--severity-benign','benign'],['--severity-unknown','unknown']]} />
+
+## Radius & motion
+
+- **Radius** — `--nx-radius-sm` · `--nx-radius` · `--nx-radius-lg`.
+- **Motion** — `--nx-motion-fast | base | slow` + `--nx-ease-out | standard`. See
+  **[Foundations → Motion](/docs/foundations/motion)**.

@@ -1,0 +1,41 @@
+---
+sidebar_position: 3
+title: Design decisions
+---
+
+# Design decision records
+
+Significant decisions are captured as DDRs so the *why* survives the decision. Each carries a
+stable ID for cross-tool reference.
+
+## DS-2026-001 — Canvas background follows the theme token
+
+- **Status:** Active · **Severity:** Critical (a11y) · **Date:** 2026-06-05
+- **Context:** The React Flow canvas pane was pinned to near-black, so in **light** theme the graph
+  sat on a dark plane against light chrome — a 1.22:1 context mismatch and a jarring read.
+- **Decision:** Bind the canvas background to `--nx-bg` (the theme-flipping semantic) instead of a
+  fixed color.
+- **Rationale:** The token already flips correctly per theme; the canvas should obey the same
+  cascade as every other surface. Light-mode contrast became **16.8:1**.
+- **Tradeoffs:** None material — the dark theme is visually unchanged.
+
+## DS-2026-002 — Generic primitives compose Radix; only graph pieces are bespoke
+
+- **Status:** Active · **Severity:** High · **Date:** 2026-06-07
+- **Context:** Hand-rolled overlays/menus risked inconsistent focus, escape, and ARIA.
+- **Decision:** Build Button, Tooltip, Dialog, DropdownMenu, and Popover on **shadcn/Radix** bases
+  themed through the token bridge; wrap them in thin product primitives. Only genuinely
+  domain-specific graph pieces (NodeBadge, GraphLegend) are bespoke.
+- **Rationale:** Real focus management, portals, and keyboard nav for free; less surface to test
+  and maintain.
+- **Tradeoffs:** A Radix/shadcn dependency — accepted for the accessibility and maintenance win.
+
+## DS-2026-003 — Tokenize text & a primitive color layer
+
+- **Status:** Active · **Severity:** High · **Date:** 2026-06-07
+- **Context:** The system had font-family only — no type scale, weights, or primitive color ramps —
+  so type and color weren't truly tokenized or documented.
+- **Decision:** Add L0 primitive ramps (neutral + accent) and a full type scale, with a `Text`
+  component exposing semantic variants. Document **all** of it, not just values in use.
+- **Rationale:** A design system documents the whole range; consumers need the scale, not only the
+  subset the product happens to render today.

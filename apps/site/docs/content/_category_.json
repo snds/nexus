@@ -1,0 +1,10 @@
+{
+  "label": "Content & voice",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "title": "Content & voice",
+    "description": "How the system writes: voice & tone, grammar & mechanics, and the threat-domain terminology.",
+    "slug": "/content"
+  }
+}

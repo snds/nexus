@@ -1,0 +1,34 @@
+---
+sidebar_position: 1
+title: Graph canvas
+---
+
+# Pattern · Graph canvas
+
+The canvas is the product's center of gravity. The pattern composes several primitives into one
+coherent link-analysis surface.
+
+## Composition
+
+| Region | Primitive(s) | Notes |
+|---|---|---|
+| Nodes | [NodeBadge](/docs/components/graph/node-badge) via `Entity → NodeBadge` adapter | Color = type, shape = family, verdict = pip. |
+| Key | [GraphLegend](/docs/components/graph/graph-legend) | Collapsed by default; bare larger icons. |
+| Controls | [ToolButton](/docs/components/actions/tool-button) toolbar | Zoom / fit / save / highlight-path — same component top-right and on the canvas. |
+| Node ops | [DropdownMenu](/docs/components/overlays/dropdown-menu) | Collapse / group / ungroup / unhide. |
+| Empty / error / loading | [StateBlock](/docs/components/feedback/state-block) | Never a blank canvas. |
+
+## Behaviors
+
+- **Expand from parent.** New nodes animate out of the node they were expanded from; edges stay
+  locked to centers and never draw ahead of arrival (see [Motion](/docs/foundations/motion)).
+- **Highlight path.** A toggle dims the rest of the graph and accents the path between two nodes.
+- **Aggregate & hidden.** Collapsed children fold into an aggregate node with a `+N`
+  [CountChip](/docs/components/data-display/count-chip).
+- **Two-finger pan / scroll-zoom.** The canvas pans on two-finger swipe when focused.
+
+## Rules
+
+- The graph **consumes** the design system — it is not a walled garden. Every node is the same
+  `NodeBadge` you see in the component docs.
+- Canvas is its own background context (`--nx-bg`), one step below the chrome surfaces.

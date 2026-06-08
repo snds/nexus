@@ -1,0 +1,33 @@
+---
+sidebar_position: 6
+title: Elevation & surface
+---
+
+import { SwatchGrid } from '@site/src/components/ds';
+
+# Elevation & surface
+
+Nexus expresses depth primarily through **surface color**, not heavy shadow — appropriate for a
+dark-first UI where large drop shadows read as muddy.
+
+## Surface steps
+
+Each step up the stack is a lighter neutral:
+
+<SwatchGrid tokens={[['--nx-bg','Base / canvas — the lowest plane'],['--nx-surface-1','Panels — resting chrome'],['--nx-surface-2','Raised — popovers, menus, cards'],['--nx-surface-3','Hover — interactive raise']]} />
+
+- **Canvas (`--nx-bg`)** is the lowest plane and its own context, so the graph reads as separate.
+- **Panels (`surface-1`)** are the resting chrome — nav rail, side panels.
+- **Raised (`surface-2`)** is for overlays that float above the page — Popover, DropdownMenu, Modal.
+- **Hover (`surface-3`)** is the momentary raise on interaction.
+
+## Shadow & blur
+
+- Overlays add a subtle shadow only to separate from content beneath — never for decoration.
+- Graph nodes use a **backdrop blur** (`--nx-node-blur`) behind a translucent fill so edges recede
+  behind the node rather than colliding with the glyph.
+
+## Rule
+
+Move **up** the surface scale to signal "closer to the user." Don't stack more than one raised
+context at a time — a popover inside a popover is a sign the flow needs a Modal.

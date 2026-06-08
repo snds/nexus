@@ -1,0 +1,33 @@
+---
+sidebar_position: 2
+title: Packages & assets
+---
+
+# Packages & assets
+
+## Code packages
+
+| Package | Import | Contains |
+|---|---|---|
+| `@nexus/tokens` | `@nexus/tokens/tokens.css` | The `--nx-*` / `--entity-*` / `--severity-*` source of truth + the shadcn bridge. |
+| `@nexus/ui` | `@nexus/ui/nexus` | L1 shadcn/Radix bases + L3 product primitives. |
+
+Install and use them from **[Get started → For developers](/docs/get-started/for-developers)**.
+
+## The three surfaces
+
+- **Documentation** — this site (foundations, tokens, components, patterns, content).
+- **[Storybook](/nexus/storybook/)** — the interactive component explorer with autodocs + the
+  accessibility addon.
+- **[Live demo](/nexus/app/)** — the Threat Explorer, the system in real product use.
+
+## Figma kit
+
+The Figma library mirrors the package structure 1:1 — each Storybook story maps to one Figma
+variant, and component properties map to React props. *(Kit link placeholder — wire to the
+published library when available.)*
+
+## Source
+
+The monorepo is a pnpm + turbo workspace. See **[Contributing](/docs/resources/contributing)** for
+the layered architecture and how to add a component.

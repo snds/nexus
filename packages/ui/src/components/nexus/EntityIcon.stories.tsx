@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { EntityIcon } from "./EntityIcon.js";
 
-const meta: Meta<typeof EntityIcon> = { title: "Nexus/EntityIcon", component: EntityIcon };
+const meta: Meta<typeof EntityIcon> = { title: "Components/Iconography/EntityIcon", component: EntityIcon , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof EntityIcon>;
 

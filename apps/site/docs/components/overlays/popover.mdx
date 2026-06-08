@@ -1,0 +1,52 @@
+---
+sidebar_position: 4
+title: Popover
+---
+
+import { ComponentMeta } from '@site/src/components/ds';
+
+# Popover
+
+<ComponentMeta
+  status="stable"
+  summary="The Radix Popover base, token-themed. Non-blocking, anchored overlay for rich content — the app switcher, filters."
+  storybook="?path=/docs/components-overlays-base-overlays--docs"
+/>
+
+## Usage
+
+Use a popover for contextual content anchored to a trigger that the user can interact with without
+leaving the page — the app switcher, a filter panel, a small form. Unlike a tooltip, it can
+contain focusable content; unlike a modal, it doesn't block the page.
+
+**When not to use:** for a plain list of actions, use a
+**[DropdownMenu](/docs/components/overlays/dropdown-menu)**. For a blocking task, use a
+**[Modal](/docs/components/overlays/modal)**.
+
+## Anatomy
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent } from "@nexus/ui/nexus";
+
+<Popover>
+  <PopoverTrigger asChild><Button variant="ghost">Apps</Button></PopoverTrigger>
+  <PopoverContent>{/* rich content */}</PopoverContent>
+</Popover>
+```
+
+## Accessibility
+
+- Focus moves into the content on open and returns to the trigger on close.
+- Escape and outside-click dismiss; placement is collision-aware and portalled.
+- Wires `aria-expanded` / `aria-controls` on the trigger automatically.
+
+## API
+
+A thin re-export of Radix `Popover` — see the
+[Radix Popover API](https://www.radix-ui.com/primitives/docs/components/popover). Themed through
+the token bridge.
+
+## Related
+
+- **[DropdownMenu](/docs/components/overlays/dropdown-menu)** — for action lists.
+- **[Tooltip](/docs/components/overlays/tooltip)** — for non-interactive hints.

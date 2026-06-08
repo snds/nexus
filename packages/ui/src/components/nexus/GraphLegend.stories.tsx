@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { GraphLegend } from "./GraphLegend.js";
 
-const meta: Meta<typeof GraphLegend> = { title: "Nexus/GraphLegend", component: GraphLegend };
+const meta: Meta<typeof GraphLegend> = { title: "Components/Graph/GraphLegend", component: GraphLegend , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof GraphLegend>;
 

@@ -11,14 +11,24 @@
  */
 import type { ComponentProps, ElementType } from "react";
 
-export interface Meta<C extends ElementType> {
-  /** Hierarchy path, e.g. "Nexus/NodeBadge". Maps to the Figma page/section. */
+export interface Meta<C extends ElementType = ElementType> {
+  /** Hierarchy path, e.g. "Components/Graph/NodeBadge". Maps to the Figma page/section. */
   title: string;
-  component: C;
+  component?: C;
+  /** CSF tags, e.g. ['autodocs'] to generate a docs page + prop table from the component types. */
+  tags?: string[];
+  /** Per-arg control config for the Storybook playground. */
+  argTypes?: Record<string, unknown>;
+  /** Default args applied to every story in the file. */
+  args?: Partial<ComponentProps<C>>;
+  parameters?: Record<string, unknown>;
 }
 
-export interface StoryObj<C extends ElementType> {
+export interface StoryObj<C extends ElementType = ElementType> {
   name?: string;
+  tags?: string[];
+  parameters?: Record<string, unknown>;
+  argTypes?: Record<string, unknown>;
   /** Full props for this variant — also consumed by the a11y test harness. */
-  args: ComponentProps<C>;
+  args?: ComponentProps<C>;
 }

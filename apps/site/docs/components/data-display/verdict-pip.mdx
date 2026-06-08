@@ -1,0 +1,51 @@
+---
+sidebar_position: 3
+title: VerdictPip
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { VerdictPip } from '@nexus/ui/nexus';
+
+# VerdictPip
+
+<ComponentMeta
+  status="stable"
+  summary="The compact, label-free verdict dot for graph nodes and dense rows — the node-scale form of VerdictBadge."
+  storybook="?path=/docs/components-data-display-verdictpip--docs"
+/>
+
+## Usage
+
+Use a verdict pip where space won't allow a labelled badge — on a `NodeBadge`, in a tight table.
+It carries the same `--severity-*` channel as the badge.
+
+**When not to use:** standalone in prose or a panel where a reader needs the word — use
+**[VerdictBadge](/docs/components/data-display/verdict-badge)**.
+
+## Verdicts & sizes
+
+<Specimen>
+  <VerdictPip verdict="malicious" />
+  <VerdictPip verdict="suspicious" />
+  <VerdictPip verdict="medium" />
+  <VerdictPip verdict="benign" />
+  <VerdictPip verdict="unknown" />
+</Specimen>
+
+## Accessibility
+
+- Because the pip has no visible label, always pair it with text nearby (the node label, a row
+  cell) or an accessible name so meaning isn't color-only.
+- `ringColor` lets the pip sit legibly on any node fill.
+
+## API
+
+<PropsTable rows={[
+  { name: 'verdict', type: "'malicious' | 'phishing' | 'suspicious' | 'medium' | 'benign' | 'unknown'", description: 'Severity to render.' },
+  { name: 'size', type: 'number', description: 'Diameter in px.' },
+  { name: 'ringColor', type: 'string', description: 'Outline color for contrast on a node fill.' },
+]} />
+
+## Related
+
+- **[VerdictBadge](/docs/components/data-display/verdict-badge)** · **[NodeBadge](/docs/components/graph/node-badge)**

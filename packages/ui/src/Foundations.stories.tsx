@@ -3,7 +3,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Text, type TextVariant } from "./components/nexus/Text.js";
 
-const meta: Meta = { title: "Foundations/Tokens" };
+const meta: Meta = { title: "Foundations/Tokens" , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj;
 

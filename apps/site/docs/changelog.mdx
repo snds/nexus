@@ -1,0 +1,41 @@
+---
+sidebar_position: 9
+title: Changelog
+---
+
+# Changelog
+
+The system is versioned as a whole — see **[Versioning & releases](/docs/get-started/versioning)**
+for the bump rules and maturity labels.
+
+## Unreleased
+
+- **Docs:** Restructured to the canonical IA — Get started, Foundations, a dedicated Tokens area,
+  per-component pages, Patterns, Content & voice, Resources, and this Changelog.
+- **Storybook:** `autodocs` on every story (generated prop tables); sidebar recategorized to the
+  component taxonomy.
+
+## 0.4.0 — Type system & primitive color tiers
+
+- **Added** L0 primitive ramps (`--nx-neutral-1…12`, `--nx-accent-1…12`) and a full type scale
+  (`--nx-text-*`, weights, leading, tracking).
+- **Added** the `Text` component with 11 semantic variants and tones.
+- **Docs** now document the whole range, not just values in use ([DDR DS-2026-003](/docs/resources/design-decisions)).
+
+## 0.3.0 — Dogfood the chrome
+
+- The docs site and Storybook chrome are **built from the design system** — swizzled navigation,
+  token-bound theming, DS-composed landing.
+
+## 0.2.0 — shadcn/Radix + Storybook + Docusaurus
+
+- **Changed** generic primitives (Button, Tooltip, Dialog, DropdownMenu, Popover) to compose
+  **shadcn/Radix** bases via the token bridge ([DDR DS-2026-002](/docs/resources/design-decisions)).
+- **Added** Storybook 8 with the accessibility addon; Docusaurus docs site.
+
+## 0.1.0 — Nexus Threat Explorer + design system
+
+- Initial system: tokens, the `NodeBadge` graph node and product primitives, the dogfooded demo,
+  and the axe-in-CI accessibility gate.
+- **Fixed** light-theme canvas contrast by binding the canvas to `--nx-bg`
+  ([DDR DS-2026-001](/docs/resources/design-decisions)).

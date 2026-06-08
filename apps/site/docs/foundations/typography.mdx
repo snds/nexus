@@ -1,0 +1,47 @@
+---
+sidebar_position: 4
+title: Typography
+---
+
+import { Text } from '@nexus/ui/nexus';
+
+# Typography
+
+Type is tokenized end-to-end: a raw [type scale](/docs/tokens/primitives) (L0) composed into
+semantic **variants** exposed by the `Text` component. Product code selects a variant — it never
+sets a raw `font-size`.
+
+## Text variants
+
+The `Text` component picks a semantic style (size + weight + leading + tracking) composed from the
+primitives. This is how text is used in product.
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 12, margin: '16px 0' }}>
+  {['display','h1','h2','h3','title','body','body-sm','label','caption','overline','code'].map((v) => (
+    <div key={v} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
+      <code style={{ width: 84, flexShrink: 0, color: 'hsl(var(--nx-fg-subtle))', fontSize: 11 }}>{v}</code>
+      <Text variant={v}>The quick brown fox</Text>
+    </div>
+  ))}
+</div>
+
+## Tones
+
+Each variant accepts a semantic tone so emphasis stays token-driven:
+
+<p>
+  <Text as="span" tone="default">default</Text> · <Text as="span" tone="muted">muted</Text> ·{' '}
+  <Text as="span" tone="subtle">subtle</Text> · <Text as="span" tone="accent">accent</Text>
+</p>
+
+## Families
+
+- **Sans** — `--nx-font-sans` for all UI text.
+- **Mono** — `--nx-font-mono` for tokens, IDs, hashes, and code.
+
+## Rules
+
+- **Never raw `font-size`.** Use a `Text` variant; if none fits, that's a variant to add, not an
+  inline value.
+- **Hierarchy by variant, emphasis by tone.** Don't recolor text by hand.
+- See the raw scale, weights, leading, and tracking on **[Tokens → Primitives](/docs/tokens/primitives)**.

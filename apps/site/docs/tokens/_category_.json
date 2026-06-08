@@ -1,0 +1,10 @@
+{
+  "label": "Tokens",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "title": "Tokens",
+    "description": "The single source of truth for appearance \u2014 the tier model, primitive ramps and type scale, semantic aliases, and theming across light/dark.",
+    "slug": "/tokens"
+  }
+}

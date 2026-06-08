@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Text, type TextVariant } from "./Text.js";
 
-const meta: Meta<typeof Text> = { title: "Nexus/Text", component: Text };
+const meta: Meta<typeof Text> = { title: "Components/Typography/Text", component: Text , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof Text>;
 

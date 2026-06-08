@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { StateBlock } from "./StateBlock.js";
 
-const meta: Meta<typeof StateBlock> = { title: "Nexus/StateBlock", component: StateBlock };
+const meta: Meta<typeof StateBlock> = { title: "Components/Feedback/StateBlock", component: StateBlock , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof StateBlock>;
 

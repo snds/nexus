@@ -7,6 +7,7 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import { useNavbarMobileSidebar } from "@docusaurus/theme-common/internal";
 import NavbarMobileSidebarToggle from "@theme/Navbar/MobileSidebar/Toggle";
+import SearchBar from "@theme/SearchBar";
 import { Icon, Tooltip } from "@nexus/ui/nexus";
 
 function Brand() {
@@ -51,6 +52,7 @@ export default function NavbarContent(): React.JSX.Element {
         </div>
       </div>
       <div className="navbar__items navbar__items--right" style={{ display: "flex", alignItems: "center", gap: 4 }}>
+        <SearchBar />
         <IconLink href="/nexus/storybook/" icon="deployed_code" label="Storybook" />
         <IconLink href="/nexus/app/" icon="play_circle" label="Live demo" />
         <IconLink href="https://github.com/snds/nexus" icon="code" label="GitHub" />

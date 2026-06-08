@@ -1,0 +1,52 @@
+---
+sidebar_position: 1
+title: StateBlock
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { StateBlock } from '@nexus/ui/nexus';
+
+# StateBlock
+
+<ComponentMeta
+  status="stable"
+  summary="The reusable empty / error / loading state — one component wired across every surface so non-happy paths stay consistent."
+  storybook="?path=/docs/components-feedback-stateblock--docs"
+/>
+
+## Usage
+
+Use a state block whenever a region has no data, failed to load, or is loading. It gives every
+such moment the same icon + title + message + optional action, so the product never shows a blank
+or an ad-hoc error.
+
+**When not to use:** for a transient confirmation, use a toast/notification. For a blocking
+decision, use a **[Modal](/docs/components/overlays/modal)**.
+
+## Kinds
+
+<Specimen padded={false}>
+  <div style={{ width: 280 }}><StateBlock kind="empty" title="No saved graphs" message="Saved graphs will appear here." /></div>
+  <div style={{ width: 280 }}><StateBlock kind="error" title="Couldn't load" message="The request failed. Try again." /></div>
+  <div style={{ width: 280 }}><StateBlock kind="loading" title="Loading graph…" /></div>
+</Specimen>
+
+## Accessibility
+
+- The title is a heading; the message is descriptive text — screen readers get the full context.
+- Loading states should also expose a live-region status where the wait is non-trivial.
+- The optional `action` is a real focusable control.
+
+## API
+
+<PropsTable rows={[
+  { name: 'kind', type: "'empty' | 'error' | 'loading'", description: 'Which state.' },
+  { name: 'title', type: 'string', description: 'Primary line.' },
+  { name: 'message', type: 'string', description: 'Supporting detail.' },
+  { name: 'icon', type: 'string', description: 'Override the default Material Symbols glyph.' },
+  { name: 'action', type: 'ReactNode', description: 'Optional recovery control (e.g. Retry button).' },
+]} />
+
+## Related
+
+- **[Patterns → Empty, error & loading](/docs/patterns/states)**

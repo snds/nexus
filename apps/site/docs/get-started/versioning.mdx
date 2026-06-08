@@ -1,0 +1,34 @@
+---
+sidebar_position: 3
+title: Versioning & releases
+---
+
+# Versioning & releases
+
+The system is versioned as a whole — tokens and components move together so a given app pins one
+coherent set. See the **[Changelog](/docs/changelog)** for the running history.
+
+## Semantic versioning
+
+| Bump | Means | Examples |
+|---|---|---|
+| **Major** | Breaking change to a token name, a component API, or removed surface. | Renamed `--nx-fg-subtle`; removed a prop. |
+| **Minor** | Additive — new component, new token, new variant. | Added `Text`; added the primitive ramps. |
+| **Patch** | Fixes with no API change. | Contrast fix; motion timing tweak. |
+
+## Maturity labels
+
+Every component carries a status so consumers know what to depend on:
+
+- **Stable** — production-ready, API frozen within the major.
+- **Beta** — usable, API may still shift.
+- **Deprecated** — slated for removal; a replacement is named on the page.
+
+## Release gate
+
+```bash
+pnpm turbo run typecheck test lint   # the CI gate
+```
+
+Nothing ships unless typecheck, tests, and the axe a11y suite are green. The same gate runs on
+every push to `main` before the docs, Storybook, and demo deploy.

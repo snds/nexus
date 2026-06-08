@@ -1,0 +1,46 @@
+---
+sidebar_position: 2
+title: Accessibility
+---
+
+# Accessibility
+
+Accessibility is **enforced, not aspirational**. Every Storybook story is rendered through axe in
+CI; structural and ARIA failures break the build before anything ships.
+
+## Targets
+
+- **WCAG 2.2 AA** for contrast, focus, and keyboard operability.
+- Color is **never the sole carrier of meaning** — the three channels (type, family, verdict) are
+  redundant, and every verdict/entity color appears with a text label.
+
+## Contrast
+
+- Body and UI text meet **AA (4.5:1)**; large text and non-text UI meet their thresholds.
+- `--nx-fg-subtle` was tuned to clear AA (the lightest text token still passes).
+- Both themes are validated. The canvas binds to `--nx-bg` (which flips with the theme), so light
+  mode reads **16.8:1** rather than the 1.22:1 a pinned-black pane once produced
+  (see [DDR DS-2026-001](/docs/resources/design-decisions)).
+
+## Keyboard & focus
+
+- All interactive primitives are real, focusable controls. Overlays (Tooltip, DropdownMenu,
+  Popover, Modal) compose Radix bases — focus trap/return, Escape, roving tabindex, and type-ahead
+  come built in.
+- `focus-visible` rings use `--nx-ring` (accent-9) for AA contrast on every surface.
+
+## Naming icon-only controls
+
+Icon-only controls (`ToolButton`) require a `label` that becomes both the accessible name and the
+tooltip. An unlabelled icon button is a bug the review will reject.
+
+## Motion
+
+All motion honors `prefers-reduced-motion`: node enter/expand and edge reveals collapse to instant
+state changes when the user has reduced motion set. See **[Motion](/docs/foundations/motion)**.
+
+## How it's verified
+
+```bash
+pnpm turbo run typecheck test lint   # includes the axe a11y suite over every story
+```

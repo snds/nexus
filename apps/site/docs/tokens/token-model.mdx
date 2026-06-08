@@ -1,0 +1,44 @@
+---
+sidebar_position: 1
+title: Token model
+---
+
+# Token model
+
+Tokens are the single source of truth for appearance. Every value an app or component renders —
+a color, a type size, a radius, a duration — traces back to a token. **No component hardcodes a
+hue, size, or duration.** They live in `@nexus/tokens` (`tokens.css`) and are consumed as CSS
+custom properties (`hsl(var(--nx-...))`).
+
+## Three tiers
+
+```
+L0  Primitives   raw scales — --nx-neutral-1…12, --nx-accent-1…12, the type scale
+      ↓ aliased by
+L1  Semantics    purpose names — --nx-bg, --nx-surface-2, --nx-border, --nx-accent, --nx-fg
+      ↓ consumed by
+L3  Component     scoped values composed from semantics (e.g. --nx-node-fill, --nx-node-blur)
+```
+
+| Tier | Example | Rule |
+|---|---|---|
+| **L0 Primitive** | `--nx-neutral-1`, `--nx-text-lg`, `--nx-accent-9` | Raw scales. Never referenced directly by a component. |
+| **L1 Semantic** | `--nx-bg`, `--nx-fg-muted`, `--nx-accent`, `--nx-ring` | Purpose aliases that point at primitives. This is what components consume. |
+| **L3 Component** | `--nx-node-fill`, `--nx-node-blur` | Component-scoped values composed from semantics. |
+
+The discipline of the tiers is what makes theming a one-layer change: light/dark re-points the
+**primitive** ramps, and every semantic (and therefore every component) follows automatically.
+
+## Naming
+
+- `--nx-*` — the design system's own properties (the source of truth).
+- `--entity-*` — the entity-type color channel (actor, malware, domain…).
+- `--severity-*` — the verdict channel (malicious, suspicious, benign…).
+- A **shadcn bridge** (`shadcn-bridge.css`) maps shadcn names (`--background`, `--popover`,
+  `--ring`, `--radius`) onto the `--nx-*` semantics, so the L1 shadcn/Radix bases theme for free.
+
+## Where to go next
+
+- **[Primitives](/docs/tokens/primitives)** — the raw ramps + type scale.
+- **[Semantics](/docs/tokens/semantics)** — the purpose aliases.
+- **[Theming & modes](/docs/tokens/theming)** — how light/dark works.

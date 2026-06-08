@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { Stepper } from "./Stepper.js";
 
-const meta: Meta<typeof Stepper> = { title: "Nexus/Stepper", component: Stepper };
+const meta: Meta<typeof Stepper> = { title: "Components/Navigation/Stepper", component: Stepper , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof Stepper>;
 

@@ -1,0 +1,46 @@
+---
+sidebar_position: 3
+title: ShapeIcon
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { ShapeIcon } from '@nexus/ui/nexus';
+
+# ShapeIcon
+
+<ComponentMeta
+  status="stable"
+  summary="The family-channel shape primitive — circle, square, diamond, hexagon — used in legends and node anatomy."
+  storybook="?path=/docs/components-iconography-shapeicon--docs"
+/>
+
+## Usage
+
+Use `ShapeIcon` to show the **family** channel — the node silhouette that pairs with color (type)
+and the verdict pip. It backs the graph legend and documents node anatomy.
+
+**When not to use:** to render a full node, use **[NodeBadge](/docs/components/graph/node-badge)**.
+
+## Shapes
+
+<Specimen>
+  <ShapeIcon shape="circle" size={28} />
+  <ShapeIcon shape="square" size={28} />
+  <ShapeIcon shape="diamond" size={28} />
+  <ShapeIcon shape="hexagon" size={28} />
+</Specimen>
+
+## Accessibility
+
+- Shape is one of three redundant channels — meaning never rests on shape alone.
+
+## API
+
+<PropsTable rows={[
+  { name: 'shape', type: "'circle' | 'square' | 'diamond' | 'hexagon'", description: 'Family silhouette.' },
+  { name: 'size', type: 'number', default: '24', description: 'Square size in px.' },
+]} />
+
+## Related
+
+- **[NodeBadge](/docs/components/graph/node-badge)** · **[GraphLegend](/docs/components/graph/graph-legend)**

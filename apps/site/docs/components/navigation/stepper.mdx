@@ -1,0 +1,45 @@
+---
+sidebar_position: 1
+title: Stepper
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { Stepper } from '@nexus/ui/nexus';
+
+# Stepper
+
+<ComponentMeta
+  status="stable"
+  summary="A horizontal progress indicator for short, ordered flows — the Splunk setup wizard, multi-step dialogs."
+  storybook="?path=/docs/components-navigation-stepper--docs"
+/>
+
+## Usage
+
+Use a stepper to show position in a linear, finite flow (3–5 steps). Pair it with the content for
+the current step; the stepper itself reports progress, it doesn't navigate.
+
+**When not to use:** for open-ended navigation, use the nav rail. For a single yes/no, use a
+**[Modal](/docs/components/overlays/modal)**.
+
+## Example
+
+<Specimen>
+  <Stepper steps={['Connect','Authorize','Verify']} current={1} />
+</Specimen>
+
+## Accessibility
+
+- Steps expose their order and completed/current state to assistive tech.
+- Don't rely on color alone for the current step — position and label carry it too.
+
+## API
+
+<PropsTable rows={[
+  { name: 'steps', type: 'string[]', description: 'Ordered step labels.' },
+  { name: 'current', type: 'number', description: 'Zero-based index of the active step.' },
+]} />
+
+## Related
+
+- **[Modal](/docs/components/overlays/modal)** — common host for stepped flows.

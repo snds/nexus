@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { StatCircle } from "./StatCircle.js";
 
-const meta: Meta<typeof StatCircle> = { title: "Nexus/StatCircle", component: StatCircle };
+const meta: Meta<typeof StatCircle> = { title: "Components/Data Display/StatCircle", component: StatCircle , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof StatCircle>;
 

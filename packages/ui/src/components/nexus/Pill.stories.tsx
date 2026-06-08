@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { Pill } from "./Pill.js";
 
-const meta: Meta<typeof Pill> = { title: "Nexus/Pill", component: Pill };
+const meta: Meta<typeof Pill> = { title: "Components/Data Display/Pill", component: Pill , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof Pill>;
 

@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "../../story-types.js";
 import { Icon } from "./Icon.js";
 
-const meta: Meta<typeof Icon> = { title: "Nexus/Icon", component: Icon };
+const meta: Meta<typeof Icon> = { title: "Components/Iconography/Icon", component: Icon , tags: ["autodocs"] };
 export default meta;
 type Story = StoryObj<typeof Icon>;
 

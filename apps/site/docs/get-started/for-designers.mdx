@@ -1,0 +1,31 @@
+---
+sidebar_position: 2
+title: For designers
+---
+
+# For designers
+
+The system is **dark-first** and built on three orthogonal channels that keep a dense threat
+graph legible — color encodes entity *type*, shape encodes *family*, and verdict lives on its
+own *pip*. Internalize those three channels and most layout decisions resolve themselves.
+
+## Where the source of truth lives
+
+| You need… | Look at… |
+|---|---|
+| A color, type size, spacing step | **[Tokens → Primitives](/docs/tokens/primitives)** — the raw ramps + type scale |
+| The *meaning* of a color (bg, border, accent) | **[Tokens → Semantics](/docs/tokens/semantics)** |
+| A component's anatomy, states, do/don't | **[Components](/docs/components/)** |
+| Every variant + interactive states | **[Storybook](/nexus/storybook/)** |
+
+## Working with variants & states
+
+Components express **structure** through variants (size, emphasis, family) and **state** through
+modes (default / hover / focus / active / disabled). Don't fork a component to recolor it — the
+state changes are token-driven. If a value you need isn't a token yet, that's a system gap to
+raise, not a one-off override.
+
+## Figma kit
+
+The Figma library mirrors this package structure 1:1 — each Storybook story is one Figma variant.
+See **[Resources](/docs/resources/)** for the kit and contribution path.

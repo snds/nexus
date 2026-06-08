@@ -1,0 +1,58 @@
+---
+sidebar_position: 2
+title: ToolButton
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { ToolButton } from '@nexus/ui/nexus';
+
+# ToolButton
+
+<ComponentMeta
+  status="stable"
+  summary="A square, icon-only control with a built-in Radix tooltip. The unit of the canvas and panel toolbars."
+  storybook="?path=/docs/components-actions-toolbutton--docs"
+/>
+
+## Usage
+
+Use `ToolButton` for compact, repeated icon actions in a toolbar — zoom, fit, save, highlight
+path. The `label` is **required**: it both names the action for screen readers and renders as the
+tooltip. Set `active` for a toggle that's currently on.
+
+**When not to use:** for a labelled action, use **[Button](/docs/components/actions/button)**.
+
+## Variants & states
+
+<Specimen>
+  <ToolButton icon="add" label="Zoom in" />
+  <ToolButton icon="remove" label="Zoom out" />
+  <ToolButton icon="fit_screen" label="Fit to screen" />
+  <ToolButton icon="route" label="Highlight path" active />
+  <ToolButton icon="save" label="Save" filled />
+</Specimen>
+
+`active` applies the selected treatment; `filled` flips the icon's FILL axis (reserve for active /
+emphasis, per the [fill principle](/docs/foundations/principles)).
+
+## Accessibility
+
+- The `label` is applied as the accessible name **and** the tooltip content — never ship an
+  unlabelled icon button.
+- Tooltip is the Radix base: opens on hover **and** keyboard focus, dismisses on Escape, portalled.
+- `tooltipSide` positions the tooltip away from screen edges (e.g. `left` for a right-rail toolbar).
+
+## API
+
+<PropsTable rows={[
+  { name: 'icon', type: 'string', description: 'Material Symbols glyph name.' },
+  { name: 'label', type: 'string', description: 'Accessible name + tooltip content. Required.' },
+  { name: 'tooltipSide', type: "'top' | 'right' | 'bottom' | 'left'", default: "'top'", description: 'Tooltip placement.' },
+  { name: 'active', type: 'boolean', default: 'false', description: 'Selected / toggled-on treatment.' },
+  { name: 'filled', type: 'boolean', default: 'false', description: 'Flip the icon FILL axis.' },
+]} />
+
+## Related
+
+- **[Icon](/docs/components/iconography/icon)** — the glyph primitive it renders.
+- **[Tooltip](/docs/components/overlays/tooltip)** — the overlay it composes.

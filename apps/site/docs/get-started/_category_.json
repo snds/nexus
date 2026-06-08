@@ -1,0 +1,10 @@
+{
+  "label": "Get started",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "title": "Get started",
+    "description": "Install the packages, learn the dual designer/developer workflow, and find the contribution and release process.",
+    "slug": "/get-started"
+  }
+}

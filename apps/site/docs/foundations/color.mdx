@@ -1,0 +1,46 @@
+---
+sidebar_position: 3
+title: Color
+---
+
+import { SwatchGrid } from '@site/src/components/ds';
+
+# Color
+
+Color in Nexus does two jobs: it builds the **neutral UI** (surfaces, borders, text, one accent)
+and it carries **two orthogonal data channels** — entity *type* and *verdict* severity. Keeping
+those channels separate is what lets a dense graph stay legible.
+
+## The neutral system
+
+A single neutral ramp drives every surface and text level; one accent ramp drives interaction.
+The semantic aliases are the contract:
+
+<SwatchGrid tokens={[['--nx-bg','App / canvas'],['--nx-surface-1','Panels'],['--nx-surface-2','Raised'],['--nx-accent','Accent']]} />
+
+Full ramps live in **[Tokens → Primitives](/docs/tokens/primitives)**; the aliases in
+**[Tokens → Semantics](/docs/tokens/semantics)**.
+
+## Channel 1 — entity type
+
+Each entity type owns a hue (`--entity-*`). A node's color answers "what kind of thing is this?"
+— actor, malware, domain, email — and nothing else.
+
+<SwatchGrid tokens={[['--entity-actor','actor'],['--entity-malware','malware'],['--entity-domain','domain'],['--entity-email','email'],['--entity-url','url'],['--entity-campaign','campaign']]} />
+
+## Channel 2 — verdict severity
+
+Verdict has its **own** palette (`--severity-*`) and its own form (the
+[VerdictPip](/docs/components/data-display/verdict-pip) / [VerdictBadge](/docs/components/data-display/verdict-badge)).
+It never borrows entity hues.
+
+<SwatchGrid tokens={[['--severity-malicious','malicious'],['--severity-suspicious','suspicious'],['--severity-medium','medium'],['--severity-benign','benign']]} />
+
+## Rules
+
+- **Don't cross the channels.** Entity color answers *type*; severity color answers *verdict*. A
+  malicious actor is an actor-colored node with a malicious pip — not a red node.
+- **Color is redundant, never sole.** Every colored element carries a label or shape too —
+  see [Accessibility](/docs/foundations/accessibility).
+- **Two background contexts.** The canvas (`--nx-bg`) sits a step below the chrome surfaces so the
+  graph reads as its own plane.

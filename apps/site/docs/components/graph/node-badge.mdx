@@ -1,0 +1,71 @@
+---
+sidebar_position: 1
+title: NodeBadge
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { NodeBadge } from '@nexus/ui/nexus';
+
+# NodeBadge
+
+<ComponentMeta
+  status="stable"
+  summary="The variant-driven graph node. Color = type, shape = family, verdict = its own pip; flags combine into one cluster."
+  storybook="?path=/docs/components-graph-nodebadge--docs"
+/>
+
+## Usage
+
+`NodeBadge` is the single node component for the entire canvas — the demo graph renders it through
+a thin `Entity → NodeBadge` adapter. It encodes the three orthogonal channels and folds VIP /
+status / imposter / +N indicators into one top-right cluster. Every node shares a translucent
+token fill behind a backdrop blur so edges recede behind it.
+
+**When not to use:** outside a graph context, prefer a labelled
+**[VerdictBadge](/docs/components/data-display/verdict-badge)** + **[EntityIcon](/docs/components/iconography/entity-icon)**.
+
+## Families (shape channel)
+
+<Specimen>
+  <NodeBadge family="circle" role="neighbor" colorToken="actor" glyph="badge" label="TA511" sublabel="actor" verdict="malicious" />
+  <NodeBadge family="diamond" role="neighbor" colorToken="exploit" glyph="gpp_bad" label="CVE-2021-40444" sublabel="exploit" />
+  <NodeBadge family="hexagon" role="neighbor" colorToken="email" glyph="alternate_email" label="rcastle@acme.com" sublabel="email" verdict="medium" />
+  <NodeBadge family="square" role="neighbor" colorToken="domain" glyph="language" label="acme.com" sublabel="domain" />
+</Specimen>
+
+## Role, states & indicators
+
+<Specimen>
+  <NodeBadge family="circle" role="hub" colorToken="campaign" glyph="campaign" label="Hub (root)" sublabel="campaign" verdict="malicious" />
+  <NodeBadge family="circle" role="neighbor" colorToken="actor" glyph="badge" label="Selected" sublabel="actor" selected verdict="malicious" />
+  <NodeBadge family="hexagon" role="neighbor" colorToken="email" glyph="alternate_email" label="VIP · impacted" sublabel="email" vip status="impacted" verdict="medium" hiddenChildren={2} />
+  <NodeBadge family="circle" role="neighbor" colorToken="malware" glyph="coronavirus" label="Aggregate" sublabel="malware" aggregate hiddenChildren={6} />
+</Specimen>
+
+## Accessibility
+
+- Verdict, type and family are three redundant channels — never color-only.
+- Each indicator in the cluster carries a tooltip naming it (VIP, impacted, imposter, +N hidden).
+- The `hub` role enlarges the glyph and flips FILL for the root, per the fill principle.
+
+## API
+
+<PropsTable rows={[
+  { name: 'family', type: "'circle' | 'square' | 'diamond' | 'hexagon'", description: 'Shape channel.' },
+  { name: 'role', type: "'hub' | 'neighbor'", default: "'neighbor'", description: 'Root vs connected node.' },
+  { name: 'colorToken', type: 'EntityType', description: 'Entity type → --entity-* color.' },
+  { name: 'glyph', type: 'string', description: 'Material Symbols glyph.' },
+  { name: 'label / sublabel', type: 'string', description: 'Primary / secondary text (fade in on land).' },
+  { name: 'verdict', type: 'Verdict', description: 'Renders the verdict pip.' },
+  { name: 'selected / focused / hidden', type: 'boolean', description: 'Interaction states.' },
+  { name: 'vip / aggregate / imposter', type: 'boolean', description: 'Indicator flags.' },
+  { name: 'status', type: 'string', description: "e.g. 'impacted' — status flag." },
+  { name: 'hiddenChildren', type: 'number', description: 'Drives the +N count chip.' },
+]} />
+
+The full generated table is in **[Storybook autodocs](/nexus/storybook/?path=/docs/components-graph-nodebadge--docs)**.
+
+## Related
+
+- **[The node system](/docs/components/graph/node-system)** — the full anatomy + motion.
+- **[GraphLegend](/docs/components/graph/graph-legend)** · **[VerdictPip](/docs/components/data-display/verdict-pip)**

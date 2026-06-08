@@ -1,0 +1,10 @@
+{
+  "label": "Resources",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "title": "Resources",
+    "description": "Packages, design assets, and how to contribute to the system.",
+    "slug": "/resources"
+  }
+}

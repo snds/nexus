@@ -1,0 +1,52 @@
+---
+sidebar_position: 2
+title: GraphLegend
+---
+
+import { ComponentMeta, Specimen, PropsTable } from '@site/src/components/ds';
+import { GraphLegend } from '@nexus/ui/nexus';
+
+# GraphLegend
+
+<ComponentMeta
+  status="stable"
+  summary="The canvas legend — decodes the entity-type colors and verdict severities for the graph. Collapsed by default."
+  storybook="?path=/docs/components-graph-graphlegend--docs"
+/>
+
+## Usage
+
+Use `GraphLegend` to give the canvas a key for its two color channels — entity type and verdict
+severity. It is **collapsed by default** so it never competes with the graph, and uses bare,
+larger icons (no shape swatches) for the type rows.
+
+**When not to use:** outside the graph. For a single label, use a
+**[Pill](/docs/components/data-display/pill)** or **[VerdictBadge](/docs/components/data-display/verdict-badge)**.
+
+## Example
+
+<Specimen padded={false}>
+  <GraphLegend
+    types={['actor','campaign','malware','domain','email']}
+    verdicts={['malicious','suspicious','benign']}
+    defaultCollapsed={false}
+  />
+</Specimen>
+
+## Accessibility
+
+- Each row pairs the color/icon with its text label — the legend itself is the proof that color is
+  never the sole carrier.
+- The collapse control is a labelled, keyboard-operable button.
+
+## API
+
+<PropsTable rows={[
+  { name: 'types', type: 'EntityType[]', description: 'Entity-type rows to show.' },
+  { name: 'verdicts', type: 'Verdict[]', description: 'Severity rows to show.' },
+  { name: 'defaultCollapsed', type: 'boolean', default: 'true', description: 'Start collapsed.' },
+]} />
+
+## Related
+
+- **[NodeBadge](/docs/components/graph/node-badge)** · **[Foundations → Color](/docs/foundations/color)**
