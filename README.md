@@ -7,12 +7,15 @@ See [`docs/01-discovery-ia.md`](docs/01-discovery-ia.md) and [`docs/02-architect
 
 ## Live
 
-- **Design system docs** (dogfooded — tokens + components): https://snds.github.io/nexus/
+- **Guides** (Docusaurus): https://snds.github.io/nexus/
+- **Storybook** (component explorer + a11y addon): https://snds.github.io/nexus/storybook/
 - **Threat Explorer demo**: https://snds.github.io/nexus/app/
 
-Both deploy from `main` via GitHub Actions (`.github/workflows/deploy.yml`). The docs site
-(`apps/docs`) is built **with** the design system it documents — token swatches read live
-from the cascade, and every component example is the real `@nexus/ui` primitive.
+All three deploy from `main` via GitHub Actions (`.github/workflows/deploy.yml`):
+`apps/site` (Docusaurus prose guides), `@nexus/ui` Storybook (every `*.stories.tsx`), and
+`apps/web` (the demo). The DS itself is shadcn/Radix-based: L1 base primitives in
+`packages/ui/src/components/ui` (Button, Tooltip, Dialog, DropdownMenu, Popover) themed via
+the token bridge, composed by L3 product wrappers in `components/nexus`.
 
 ## Layers (architecture §1)
 

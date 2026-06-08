@@ -3,8 +3,8 @@
  * a live counter, a "Set as private" toggle, and a Save action that's disabled until a
  * name is entered. Esc / backdrop / ✕ dismiss; Enter saves.
  */
-import { useEffect, useState } from "react";
-import { Icon, Tooltip } from "@nexus/ui/nexus";
+import { useState } from "react";
+import { Icon, Tooltip, Modal } from "@nexus/ui/nexus";
 
 const MAX = 48;
 
@@ -31,24 +31,8 @@ export function SaveGraphDialog({
     }, 700);
   };
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "Enter") submit();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  });
-
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/55 p-4" onClick={onClose}>
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="New saved graph"
-        className="w-[440px] overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Modal onClose={onClose} label="New saved graph">
         <div className="flex items-start justify-between p-5 pb-2">
           <h2 className="text-base font-semibold text-[hsl(var(--nx-fg))]">New Saved Graph</h2>
           <Tooltip label="Close" side="left">
@@ -68,6 +52,7 @@ export function SaveGraphDialog({
             value={name}
             maxLength={MAX}
             onChange={(e) => setName(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && submit()}
             placeholder="Enter a graph name…"
             aria-label="Graph name"
             className="w-full border-b border-[hsl(var(--nx-border-strong))] bg-transparent pb-1.5 text-sm text-[hsl(var(--nx-fg))] placeholder:text-[hsl(var(--nx-fg-subtle))] focus:border-[hsl(var(--nx-ring))] focus:outline-none"
@@ -124,7 +109,6 @@ export function SaveGraphDialog({
             {phase === "saving" ? "Saving…" : phase === "failed" ? "Retry" : "Save"}
           </button>
         </div>
-      </div>
-    </div>
+    </Modal>
   );
 }

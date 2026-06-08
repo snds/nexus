@@ -154,7 +154,9 @@ export function NodeBadge({
           <div className="nx-after-land absolute -right-2 -top-2 z-20 flex items-center gap-0.5">
             {verdict && (
               <Tooltip label={`Verdict: ${cap(verdict)}`} side="top">
-                <VerdictPip verdict={verdict} size={12} />
+                <span className="inline-flex">
+                  <VerdictPip verdict={verdict} size={12} />
+                </span>
               </Tooltip>
             )}
             {flags.map((f) => (
@@ -166,7 +168,9 @@ export function NodeBadge({
             ))}
             {count > 0 && (
               <Tooltip label={`${count} hidden ${count === 1 ? "node" : "nodes"}`} side="top">
-                <CountChip count={count} />
+                <span className="inline-flex">
+                  <CountChip count={count} />
+                </span>
               </Tooltip>
             )}
           </div>

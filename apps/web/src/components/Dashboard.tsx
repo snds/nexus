@@ -3,8 +3,8 @@
  * All-Graphs tabs, keyword filter, sort control, grid⇄list toggle, and saved-graph
  * cards/rows (thumbnail, visibility, name, date, owner, kebab → Open / Duplicate / Delete).
  */
-import { useState, type MouseEvent, type ReactNode } from "react";
-import { Icon, StateBlock, Tooltip } from "@nexus/ui/nexus";
+import { useState, type ReactNode } from "react";
+import { Icon, StateBlock, Tooltip, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@nexus/ui/nexus";
 import type { SavedGraph } from "../savedGraphs.js";
 import { GraphThumbnail } from "./GraphThumbnail.js";
 
@@ -24,7 +24,6 @@ export function Dashboard({
   const [tab, setTab] = useState<"mine" | "all">("mine");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [filter, setFilter] = useState("");
-  const [menuId, setMenuId] = useState<string | null>(null);
 
   const rows = graphs.filter(
     (g) => (tab === "all" || g.generatedBy === "You") && g.name.toLowerCase().includes(filter.toLowerCase()),
@@ -93,11 +92,9 @@ export function Dashboard({
                     </p>
                   </div>
                   <RowMenu
-                    open={menuId === g.id}
-                    onToggle={(e) => { e.stopPropagation(); setMenuId(menuId === g.id ? null : g.id); }}
                     onOpen={() => onOpen(g.id)}
-                    onDuplicate={() => { onDuplicate(g.id); setMenuId(null); }}
-                    onDelete={() => { onDelete(g.id); setMenuId(null); }}
+                    onDuplicate={() => onDuplicate(g.id)}
+                    onDelete={() => onDelete(g.id)}
                   />
                 </div>
               </div>
@@ -140,11 +137,9 @@ export function Dashboard({
                   <td className="py-2.5 text-[hsl(var(--nx-fg-muted))]">{g.generatedBy}</td>
                   <td className="py-2.5">
                     <RowMenu
-                      open={menuId === g.id}
-                      onToggle={(e) => { e.stopPropagation(); setMenuId(menuId === g.id ? null : g.id); }}
                       onOpen={() => onOpen(g.id)}
-                      onDuplicate={() => { onDuplicate(g.id); setMenuId(null); }}
-                      onDelete={() => { onDelete(g.id); setMenuId(null); }}
+                      onDuplicate={() => onDuplicate(g.id)}
+                      onDelete={() => onDelete(g.id)}
                     />
                   </td>
                 </tr>
@@ -193,43 +188,36 @@ function ToggleBtn({ active, onClick, icon, label }: { active: boolean; onClick:
   );
 }
 
-function RowMenu({
-  open,
-  onToggle,
-  onOpen,
-  onDuplicate,
-  onDelete,
-}: {
-  open: boolean;
-  onToggle: (e: MouseEvent) => void;
-  onOpen: () => void;
-  onDuplicate: () => void;
-  onDelete: () => void;
-}) {
-  const item = "flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs hover:bg-[hsl(var(--nx-surface-3))]";
+function RowMenu({ onOpen, onDuplicate, onDelete }: { onOpen: () => void; onDuplicate: () => void; onDelete: () => void }) {
+  // Composes the DS DropdownMenu (Radix). stopPropagation keeps the trigger from bubbling to
+  // the card's own click/keydown (the card is a role="button"). Menu items live in a portal,
+  // so their selections never reach the card.
+  const stop = (e: { stopPropagation: () => void }) => e.stopPropagation();
   return (
-    <div className="relative">
+    <DropdownMenu>
       <Tooltip label="More actions" side="left">
-        <button onClick={onToggle} aria-label="More actions" className="grid h-7 w-7 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]">
-          <Icon name="more_vert" size={20} />
-        </button>
+        <DropdownMenuTrigger asChild>
+          <button
+            aria-label="More actions"
+            onClick={stop}
+            onKeyDown={stop}
+            className="grid h-7 w-7 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]"
+          >
+            <Icon name="more_vert" size={20} />
+          </button>
+        </DropdownMenuTrigger>
       </Tooltip>
-      {open && (
-        <>
-          <div className="fixed inset-0 z-30" onClick={onToggle} />
-          <div className="absolute right-0 top-full z-40 mt-1 w-36 overflow-hidden rounded-md border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] py-1 shadow-xl">
-            <button className={item} onClick={(e) => { e.stopPropagation(); onOpen(); }}>
-              <Icon name="open_in_new" size={15} /> Open
-            </button>
-            <button className={item} onClick={(e) => { e.stopPropagation(); onDuplicate(); }}>
-              <Icon name="content_copy" size={15} /> Duplicate
-            </button>
-            <button className={item + " text-[hsl(var(--severity-malicious))]"} onClick={(e) => { e.stopPropagation(); onDelete(); }}>
-              <Icon name="delete" size={15} /> Delete
-            </button>
-          </div>
-        </>
-      )}
-    </div>
+      <DropdownMenuContent align="end" className="w-36">
+        <DropdownMenuItem onSelect={onOpen}>
+          <Icon name="open_in_new" size={16} /> Open
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={onDuplicate}>
+          <Icon name="content_copy" size={16} /> Duplicate
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={onDelete} className="text-[hsl(var(--severity-malicious))] focus:text-[hsl(var(--severity-malicious))]">
+          <Icon name="delete" size={16} /> Delete
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

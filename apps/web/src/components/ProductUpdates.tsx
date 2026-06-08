@@ -2,8 +2,8 @@
  * Product Updates modal — the notifications bell destination. Carousel of release notes
  * (Improvements / Bug Fixes / Known Issues), matching the "Notifications Open" screen.
  */
-import { useEffect, useState } from "react";
-import { Icon, Tooltip } from "@nexus/ui/nexus";
+import { useState } from "react";
+import { Icon, Tooltip, Modal } from "@nexus/ui/nexus";
 
 interface Release {
   date: string;
@@ -50,21 +50,8 @@ export function ProductUpdates({ onClose }: { onClose: () => void }) {
   const [i, setI] = useState(0);
   const rel = RELEASES[i]!;
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  });
-
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/55 p-4" onClick={onClose}>
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Product updates"
-        className="relative flex max-h-[80vh] w-[520px] flex-col overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Modal onClose={onClose} label="Product updates" className="flex max-h-[80vh] w-[520px] flex-col">
         <div className="flex items-start justify-between p-5 pb-2">
           <div>
             <h2 className="text-base font-semibold text-[hsl(var(--nx-fg))]">Product Updates</h2>
@@ -105,7 +92,6 @@ export function ProductUpdates({ onClose }: { onClose: () => void }) {
             </Tooltip>
           </div>
         )}
-      </div>
-    </div>
+    </Modal>
   );
 }

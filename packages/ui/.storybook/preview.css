@@ -1,0 +1,14 @@
+/* DS tokens (the source of truth) + Tailwind so component utility classes generate. */
+@import "@nexus/tokens/index.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark-first: :root IS the dark theme, so no class needed. Apply the canvas bg to the
+   Storybook preview iframe so components sit on the real surface. */
+body {
+  background: hsl(var(--nx-bg));
+  color: hsl(var(--nx-fg));
+  font-family: var(--nx-font-sans);
+}

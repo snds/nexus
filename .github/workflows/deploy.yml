@@ -37,21 +37,23 @@ jobs:
       - name: Verify (typecheck · test · lint)
         run: pnpm turbo run typecheck test lint
 
-      - name: Build docs (served at /nexus/)
-        run: pnpm --filter @nexus/docs build
-        env:
-          BASE_PATH: /nexus/
+      - name: Build guides (Docusaurus, served at /nexus/)
+        run: pnpm --filter @nexus/site build
+
+      - name: Build Storybook (served at /nexus/storybook/)
+        run: pnpm --filter @nexus/ui build:storybook
 
       - name: Build demo app (served at /nexus/app/)
         run: pnpm --filter @nexus/web build
         env:
           BASE_PATH: /nexus/app/
 
-      - name: Assemble site (docs at root, demo under /app)
+      - name: Assemble site (guides at root, storybook + demo nested)
         run: |
           rm -rf _site
-          mkdir -p _site/app
-          cp -r apps/docs/dist/* _site/
+          mkdir -p _site/storybook _site/app
+          cp -r apps/site/build/* _site/
+          cp -r packages/ui/storybook-static/* _site/storybook/
           cp -r apps/web/dist/* _site/app/
           touch _site/.nojekyll
 

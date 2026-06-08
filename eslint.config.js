@@ -12,7 +12,7 @@ import globals from "globals";
  *   - integrations : the ONLY place vendor SDKs (splunk/tap/ptr) may be imported.
  */
 export default tseslint.config(
-  { ignores: ["**/dist/**", "**/.turbo/**", "**/node_modules/**", "design-source/**"] },
+  { ignores: ["**/dist/**", "**/.turbo/**", "**/node_modules/**", "**/storybook-static/**", "design-source/**"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

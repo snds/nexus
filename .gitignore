@@ -7,6 +7,7 @@ dist/
 build/
 .turbo/
 *.tsbuildinfo
+storybook-static/
 
 # vite
 .vite/
@@ -31,3 +32,4 @@ Icon?
 # product screenshots + a Sketch library — not deliverables, and not for a public repo
 # (copyright/IP) — plus ~100MB of binaries that would bloat clones. Kept on disk, never committed.
 design-source/
+.docusaurus/

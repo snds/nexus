@@ -1,3 +1,8 @@
+---
+slug: /
+title: Discovery & IA
+---
+
 # NTX Redesign — Discovery & Information Architecture
 
 **Product:** Proofpoint Nexus Threat Explorer (NTX), the visual link-analysis surface over Targeted Attack Protection (TAP).

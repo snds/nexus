@@ -3,8 +3,8 @@
  * transform. Replicates the connect flow: credentials → submit → query runs and results
  * join the graph. No real integration; this expresses the flow.
  */
-import { useEffect, useState } from "react";
-import { Icon, Tooltip } from "@nexus/ui/nexus";
+import { useState } from "react";
+import { Icon, Tooltip, Modal } from "@nexus/ui/nexus";
 
 export function SplunkLoginDialog({ onSubmit, onClose }: { onSubmit: () => void; onClose: () => void }) {
   const [user, setUser] = useState("");
@@ -19,24 +19,8 @@ export function SplunkLoginDialog({ onSubmit, onClose }: { onSubmit: () => void;
     window.setTimeout(onSubmit, 800);
   };
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "Enter") submit();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  });
-
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/55 p-4" onClick={onClose}>
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Splunk login"
-        className="w-[460px] overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Modal onClose={onClose} label="Splunk login" className="w-[460px]">
         <div className="flex items-start justify-between p-5 pb-2">
           <h2 className="flex items-center gap-2 text-base font-semibold text-[hsl(var(--nx-fg))]">
             <Icon name="cloud_sync" size={20} className="text-[hsl(var(--nx-accent))]" /> Splunk Login
@@ -58,6 +42,7 @@ export function SplunkLoginDialog({ onSubmit, onClose }: { onSubmit: () => void;
             autoFocus
             value={user}
             onChange={(e) => setUser(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && submit()}
             placeholder="Username"
             aria-label="Splunk username"
             disabled={connecting}
@@ -67,6 +52,7 @@ export function SplunkLoginDialog({ onSubmit, onClose }: { onSubmit: () => void;
             type="password"
             value={pass}
             onChange={(e) => setPass(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && submit()}
             placeholder="Password"
             aria-label="Splunk password"
             disabled={connecting}
@@ -95,7 +81,6 @@ export function SplunkLoginDialog({ onSubmit, onClose }: { onSubmit: () => void;
             {connecting ? "Connecting…" : "Submit"}
           </button>
         </div>
-      </div>
-    </div>
+    </Modal>
   );
 }

@@ -11,6 +11,19 @@ export { CountChip, type CountChipProps } from "./CountChip.js";
 export { Icon, type IconProps } from "./Icon.js";
 export { ToolButton, type ToolButtonProps } from "./ToolButton.js";
 export { Tooltip, type TooltipProps, type TooltipSide } from "./Tooltip.js";
+export { Modal, type ModalProps } from "./Modal.js";
+
+// Radix menu/popover primitives — composed directly by app menus (single import surface).
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuGroup,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "../ui/dropdown-menu.js";
+export { Popover, PopoverTrigger, PopoverAnchor, PopoverContent } from "../ui/popover.js";
 export { EntityIcon, ENTITY_SYMBOL, type EntityIconProps } from "./EntityIcon.js";
 export { ShapeIcon, type ShapeIconProps } from "./ShapeIcon.js";
 
