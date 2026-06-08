@@ -17,8 +17,11 @@
   --ifm-code-font-size: 90%;
 }
 
-/* Dark-only system. Bind Infima → DS tokens. */
-[data-theme="dark"] {
+/* Dark-only system. Bind Infima → DS tokens.
+   NOTE: Infima ships its dark defaults under `html[data-theme="dark"]` (specificity 0,1,1).
+   We MUST match that selector — a bare `[data-theme="dark"]` (0,1,0) loses on specificity and
+   the chrome silently falls back to Infima's neutral grays (#1b1b1d), not the cool DS neutrals. */
+html[data-theme="dark"] {
   /* accent ramp */
   --ifm-color-primary: hsl(var(--nx-accent));
   --ifm-color-primary-dark: hsl(var(--nx-accent));
