@@ -87,12 +87,42 @@ export interface UserProfile {
   readonly similarUsers?: readonly { readonly name: string; readonly email: string }[];
 }
 
+/**
+ * Color super-category families (the IDENTITY color channel). Categorical color is reliable to
+ * ~8 hues, so the ~14 types collapse to 8 families — color encodes the family (one maximally-
+ * distinct hue each), and shape + icon read the specific type within it. Each family's hue is the
+ * shared `--entity-{colorToken}` of its members. See DDR DS-2026-006.
+ */
+export type EntityFamily =
+  | "adversary" | "artifact" | "identifier" | "file" | "host" | "web" | "comms" | "meta";
+
+export interface EntityFamilyMeta {
+  readonly key: EntityFamily;
+  readonly label: string;
+  /** Radix hue the family's members share (for the legend swatch + docs). */
+  readonly hue: string;
+}
+
+/** Ordered for legend display (threat-forward first). */
+export const ENTITY_FAMILIES: readonly EntityFamilyMeta[] = [
+  { key: "adversary", label: "Adversary", hue: "crimson" },
+  { key: "artifact", label: "Malicious artifact", hue: "plum" },
+  { key: "identifier", label: "Identifier", hue: "orange" },
+  { key: "file", label: "File", hue: "yellow" },
+  { key: "host", label: "Host", hue: "teal" },
+  { key: "web", label: "Web", hue: "cyan" },
+  { key: "comms", label: "Comms", hue: "iris" },
+  { key: "meta", label: "Meta", hue: "gray" },
+];
+
 /** Display metadata per type — maps a type to its token + glyph id (resolved in the UI layer). */
 export interface EntityTypeMeta {
   readonly type: EntityType;
   readonly label: string;
-  /** CSS token suffix → `--entity-{colorToken}`. Maps the ~14 types onto the legacy color families. */
+  /** CSS token suffix → `--entity-{colorToken}`. Members of a family share this. */
   readonly colorToken: string;
+  /** Color super-category family — the identity color channel (DDR DS-2026-006). */
+  readonly family: EntityFamily;
   /** Icon id resolved by the UI layer (no React here). */
   readonly glyph: string;
   /** Does this type have a dedicated full detail page? (discovery §2.1 vs §2.2) */
@@ -100,18 +130,18 @@ export interface EntityTypeMeta {
 }
 
 export const ENTITY_META: Record<EntityType, EntityTypeMeta> = {
-  actor: { type: "actor", label: "Actor", colorToken: "actor", glyph: "actor", hasDetailPage: true },
-  campaign: { type: "campaign", label: "Campaign", colorToken: "campaign", glyph: "campaign", hasDetailPage: true },
-  malware: { type: "malware", label: "Malware", colorToken: "malware", glyph: "malware", hasDetailPage: true },
-  exploit: { type: "exploit", label: "Exploit", colorToken: "exploit", glyph: "exploit", hasDetailPage: true },
-  sid: { type: "sid", label: "Signature ID", colorToken: "sid", glyph: "sid", hasDetailPage: true },
-  hash: { type: "hash", label: "File Hash", colorToken: "hash", glyph: "hash", hasDetailPage: true },
-  url: { type: "url", label: "URL", colorToken: "url", glyph: "url", hasDetailPage: true },
-  domain: { type: "domain", label: "Domain", colorToken: "domain", glyph: "domain", hasDetailPage: true },
-  ip: { type: "ip", label: "IP Address", colorToken: "ip", glyph: "ip", hasDetailPage: true },
-  hostname: { type: "hostname", label: "Hostname", colorToken: "hostname", glyph: "hostname", hasDetailPage: false },
-  filename: { type: "filename", label: "Filename", colorToken: "filename", glyph: "filename", hasDetailPage: false },
-  email_address: { type: "email_address", label: "Email Address", colorToken: "email", glyph: "email", hasDetailPage: false },
-  prs_message: { type: "prs_message", label: "Message", colorToken: "message", glyph: "message", hasDetailPage: false },
-  scan: { type: "scan", label: "Scan", colorToken: "scan", glyph: "scan", hasDetailPage: false },
+  actor: { type: "actor", label: "Actor", colorToken: "actor", family: "adversary", glyph: "actor", hasDetailPage: true },
+  campaign: { type: "campaign", label: "Campaign", colorToken: "campaign", family: "adversary", glyph: "campaign", hasDetailPage: true },
+  malware: { type: "malware", label: "Malware", colorToken: "malware", family: "artifact", glyph: "malware", hasDetailPage: true },
+  exploit: { type: "exploit", label: "Exploit", colorToken: "exploit", family: "artifact", glyph: "exploit", hasDetailPage: true },
+  sid: { type: "sid", label: "Signature ID", colorToken: "sid", family: "identifier", glyph: "sid", hasDetailPage: true },
+  hash: { type: "hash", label: "File Hash", colorToken: "hash", family: "identifier", glyph: "hash", hasDetailPage: true },
+  url: { type: "url", label: "URL", colorToken: "url", family: "web", glyph: "url", hasDetailPage: true },
+  domain: { type: "domain", label: "Domain", colorToken: "domain", family: "web", glyph: "domain", hasDetailPage: true },
+  ip: { type: "ip", label: "IP Address", colorToken: "ip", family: "host", glyph: "ip", hasDetailPage: true },
+  hostname: { type: "hostname", label: "Hostname", colorToken: "hostname", family: "host", glyph: "hostname", hasDetailPage: false },
+  filename: { type: "filename", label: "Filename", colorToken: "filename", family: "file", glyph: "filename", hasDetailPage: false },
+  email_address: { type: "email_address", label: "Email Address", colorToken: "email", family: "comms", glyph: "email", hasDetailPage: false },
+  prs_message: { type: "prs_message", label: "Message", colorToken: "message", family: "comms", glyph: "message", hasDetailPage: false },
+  scan: { type: "scan", label: "Scan", colorToken: "scan", family: "meta", glyph: "scan", hasDetailPage: false },
 };

@@ -1,27 +1,16 @@
 /**
- * L3 — GraphLegend. The at-a-glance key for the circular node language (source design
- * intent: "visual indicators supported by a legend definition"). Decodes the three
- * orthogonal channels — entity color, verdict severity, and node role/state — so a SOC
- * analyst can read the graph cold.
+ * L3 — GraphLegend. The at-a-glance key for the node language. Decodes the channels a SOC
+ * analyst reads cold: entity color (8 super-category FAMILIES), verdict severity, role/state.
  *
- * Dynamic: only renders the entity types actually present on the canvas, grouped into
- * families for scanning. Families are a PRESENTATION grouping (not a token fork); colors
- * resolve from the same --entity-* / --severity-* tokens the nodes use.
+ * Grouped by the color FAMILY taxonomy (ENTITY_FAMILIES in @nexus/domain): the family swatch
+ * teaches "color = family", and the per-type sub-rows teach "icon = the specific type within it".
+ * Dynamic — only families/types actually on the canvas render. Colors resolve from the same
+ * --entity-* / --severity-* tokens the nodes use (presentation grouping, not a token fork).
  */
 import { useState } from "react";
 import type { EntityType, Verdict } from "@nexus/domain";
-import { ENTITY_META } from "@nexus/domain";
+import { ENTITY_META, ENTITY_FAMILIES } from "@nexus/domain";
 import { EntityIcon } from "./EntityIcon.js";
-import type { NodeShape } from "./nodeShape.js";
-
-/** Family buckets — aligned 1:1 with the node shape channel (shapeOf in GraphNode).
- *  The header silhouette is the legend's contract for "shape = family". */
-const FAMILIES: { label: string; shape: NodeShape; types: EntityType[] }[] = [
-  { label: "Threat", shape: "circle", types: ["actor", "campaign", "malware"] },
-  { label: "Infrastructure", shape: "square", types: ["ip", "domain", "hostname", "url", "hash", "filename"] },
-  { label: "Detection", shape: "diamond", types: ["exploit", "sid", "scan"] },
-  { label: "Messages", shape: "hexagon", types: ["email_address", "prs_message"] },
-];
 
 const VERDICT_LABEL: Record<Verdict, string> = {
   malicious: "Malicious",
@@ -46,9 +35,13 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
   const [open, setOpen] = useState(!defaultCollapsed);
   const present = new Set(types);
   const presentVerdicts = new Set(verdicts);
-  const families = FAMILIES.map((f) => ({ ...f, types: f.types.filter((t) => present.has(t)) })).filter(
-    (f) => f.types.length > 0,
-  );
+  // Group present types under the color super-category families, in canonical order.
+  const families = ENTITY_FAMILIES.map((fam) => ({
+    ...fam,
+    types: (Object.keys(ENTITY_META) as EntityType[]).filter(
+      (t) => present.has(t) && ENTITY_META[t].family === fam.key,
+    ),
+  })).filter((f) => f.types.length > 0);
 
   return (
     <div
@@ -77,16 +70,21 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
       {/* Entity types by family */}
       <div className="flex flex-col gap-2">
         {families.map((fam) => (
-          <div key={fam.label}>
-            <p className="mb-1 text-[9px] font-medium uppercase tracking-wide text-[var(--nx-fg-subtle)]">
+          <div key={fam.key}>
+            {/* Family header: the color swatch IS the "color = family" contract. */}
+            <p className="mb-1 flex items-center gap-1.5 text-[9px] font-medium uppercase tracking-wide text-[var(--nx-fg-subtle)]">
+              <span
+                className="h-2.5 w-2.5 shrink-0 rounded-full"
+                style={{ background: `var(--entity-${ENTITY_META[fam.types[0]!].colorToken})` }}
+                aria-hidden
+              />
               {fam.label}
             </p>
-            <ul className="flex flex-col gap-1.5">
+            {/* Sub-rows: icon = the specific type within the family. */}
+            <ul className="ml-1 flex flex-col gap-1.5 border-l border-[var(--nx-border)] pl-2.5">
               {fam.types.map((t) => (
                 <li key={t} className="flex items-center gap-2.5">
-                  {/* Larger bare icon — at legend size the glyph reads better without the
-                      shape outline (the on-canvas node shape isn't needed here). */}
-                  <EntityIcon type={t} size={20} className="shrink-0" />
+                  <EntityIcon type={t} size={18} className="shrink-0" />
                   <span className="truncate text-[11px] text-[var(--nx-fg-muted)]">{ENTITY_META[t].label}</span>
                 </li>
               ))}

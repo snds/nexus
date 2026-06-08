@@ -16,9 +16,10 @@ import { GraphLegend } from '@nexus/ui/nexus';
 
 ## Usage
 
-Use `GraphLegend` to give the canvas a key for its two color channels — entity type and verdict
-severity. It is **collapsed by default** so it never competes with the graph, and uses bare,
-larger icons (no shape swatches) for the type rows.
+Use `GraphLegend` to give the canvas a key for the node language. It groups entity types by their
+**color super-category family** (the swatch teaches "color = family"), with per-type sub-rows whose
+**icon** reads the specific type — then a verdict-severity key. **Collapsed by default** so it never
+competes with the graph; only families/types present on the canvas render.
 
 **When not to use:** outside the graph. For a single label, use a
 **[Pill](/docs/components/data-display/pill)** or **[VerdictBadge](/docs/components/data-display/verdict-badge)**.
@@ -27,7 +28,7 @@ larger icons (no shape swatches) for the type rows.
 
 <Specimen padded={false}>
   <GraphLegend
-    types={['actor','campaign','malware','domain','email']}
+    types={['actor','campaign','malware','exploit','hash','ip','domain','email_address']}
     verdicts={['malicious','suspicious','benign']}
     defaultCollapsed={false}
   />
