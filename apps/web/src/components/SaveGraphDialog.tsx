@@ -34,16 +34,16 @@ export function SaveGraphDialog({
   return (
     <Modal onClose={onClose} label="New saved graph">
         <div className="flex items-start justify-between p-5 pb-2">
-          <h2 className="text-base font-semibold text-[hsl(var(--nx-fg))]">New Saved Graph</h2>
+          <h2 className="text-base font-semibold text-[var(--nx-fg)]">New Saved Graph</h2>
           <Tooltip label="Close" side="left">
-            <button onClick={onClose} aria-label="Close" className="grid h-7 w-7 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]">
+            <button onClick={onClose} aria-label="Close" className="grid h-7 w-7 place-items-center rounded text-[var(--nx-fg-subtle)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]">
               <Icon name="close" size={20} />
             </button>
           </Tooltip>
         </div>
 
         <div className="px-5 pb-4">
-          <p className="mb-4 text-xs leading-relaxed text-[hsl(var(--nx-fg-muted))]">
+          <p className="mb-4 text-xs leading-relaxed text-[var(--nx-fg-muted)]">
             Give your graph a name to save it for future reference. Limit the name to {MAX} characters.
           </p>
 
@@ -55,22 +55,22 @@ export function SaveGraphDialog({
             onKeyDown={(e) => e.key === "Enter" && submit()}
             placeholder="Enter a graph name…"
             aria-label="Graph name"
-            className="w-full border-b border-[hsl(var(--nx-border-strong))] bg-transparent pb-1.5 text-sm text-[hsl(var(--nx-fg))] placeholder:text-[hsl(var(--nx-fg-subtle))] focus:border-[hsl(var(--nx-ring))] focus:outline-none"
+            className="w-full border-b border-[var(--nx-border-strong)] bg-transparent pb-1.5 text-sm text-[var(--nx-fg)] placeholder:text-[var(--nx-fg-subtle)] focus:border-[var(--nx-ring)] focus:outline-none"
           />
-          <div className="mt-1 text-right text-[10px] tabular-nums text-[hsl(var(--nx-fg-subtle))]">
+          <div className="mt-1 text-right text-[10px] tabular-nums text-[var(--nx-fg-subtle)]">
             {name.length} / {MAX}
           </div>
 
           <button
             onClick={() => setIsPrivate((v) => !v)}
-            className="mt-2 flex items-center gap-2 text-xs text-[hsl(var(--nx-fg-muted))]"
+            className="mt-2 flex items-center gap-2 text-xs text-[var(--nx-fg-muted)]"
             aria-pressed={isPrivate}
           >
             <Icon
               name={isPrivate ? "check_box" : "check_box_outline_blank"}
               filled={isPrivate}
               size={20}
-              className={isPrivate ? "text-[hsl(var(--nx-accent))]" : "text-[hsl(var(--nx-fg-subtle))]"}
+              className={isPrivate ? "text-[var(--nx-accent)]" : "text-[var(--nx-fg-subtle)]"}
             />
             Set as private
           </button>
@@ -78,17 +78,17 @@ export function SaveGraphDialog({
 
         {/* Failure lives inline in the footer (matches design's Save-failed flow): a terse
             status + a "Send bug report?" affordance on the left, Retry as primary on the right. */}
-        <div className="flex items-center justify-between gap-3 border-t border-[hsl(var(--nx-border))] px-5 py-3">
+        <div className="flex items-center justify-between gap-3 border-t border-[var(--nx-border)] px-5 py-3">
           <div className="min-h-[1.25rem] text-xs">
             {phase === "failed" && (
               <span className="flex items-center gap-2">
-                <span className="text-[hsl(var(--severity-malicious))]">Graph save failed.</span>
+                <span className="text-[var(--severity-malicious)]">Graph save failed.</span>
                 {reported ? (
-                  <span className="flex items-center gap-1 text-[hsl(var(--nx-fg-muted))]">
+                  <span className="flex items-center gap-1 text-[var(--nx-fg-muted)]">
                     <Icon name="check" size={13} /> Bug report sent
                   </span>
                 ) : (
-                  <button onClick={() => setReported(true)} className="text-[hsl(var(--nx-accent))] underline underline-offset-2 hover:brightness-110">
+                  <button onClick={() => setReported(true)} className="text-[var(--nx-accent)] underline underline-offset-2 hover:brightness-110">
                     Send bug report?
                   </button>
                 )}
@@ -101,8 +101,8 @@ export function SaveGraphDialog({
             className={
               "flex items-center gap-1.5 rounded-md px-4 py-1.5 text-xs font-semibold uppercase tracking-wide " +
               (valid && phase !== "saving"
-                ? "bg-[hsl(var(--nx-accent))] text-[hsl(var(--nx-accent-fg))] hover:brightness-110"
-                : "cursor-not-allowed bg-[hsl(var(--nx-surface-3))] text-[hsl(var(--nx-fg-subtle))]")
+                ? "bg-[var(--nx-accent)] text-[var(--nx-accent-fg)] hover:brightness-110"
+                : "cursor-not-allowed bg-[var(--nx-surface-3)] text-[var(--nx-fg-subtle)]")
             }
           >
             {phase === "saving" && <Icon name="progress_activity" size={14} className="animate-spin" />}

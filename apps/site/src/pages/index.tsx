@@ -9,19 +9,19 @@ import { Button, Pill, Icon, NodeBadge } from "@nexus/ui/nexus";
 
 const card = {
   borderRadius: 12,
-  border: "1px solid hsl(var(--nx-border))",
-  background: "hsl(var(--nx-surface-1))",
+  border: "1px solid var(--nx-border)",
+  background: "var(--nx-surface-1)",
   padding: 20,
 } as const;
 
 function Feature({ icon, title, body, href, cta }: { icon: string; title: string; body: string; href: string; cta: string }) {
   return (
     <div style={card}>
-      <span style={{ display: "grid", placeItems: "center", height: 36, width: 36, borderRadius: 8, background: "hsl(var(--nx-accent) / 0.14)", color: "hsl(var(--nx-accent))" }}>
+      <span style={{ display: "grid", placeItems: "center", height: 36, width: 36, borderRadius: 8, background: "color-mix(in srgb, var(--nx-accent) 14%, transparent)", color: "var(--nx-accent)" }}>
         <Icon name={icon} size={22} />
       </span>
-      <p style={{ marginTop: 12, marginBottom: 4, fontWeight: 600, color: "hsl(var(--nx-fg))" }}>{title}</p>
-      <p style={{ fontSize: 13, lineHeight: 1.5, color: "hsl(var(--nx-fg-muted))" }}>{body}</p>
+      <p style={{ marginTop: 12, marginBottom: 4, fontWeight: 600, color: "var(--nx-fg)" }}>{title}</p>
+      <p style={{ fontSize: 13, lineHeight: 1.5, color: "var(--nx-fg-muted)" }}>{body}</p>
       <Button asChild variant="link" size="sm" className="!px-0">
         <a href={href}>{cta} →</a>
       </Button>
@@ -35,16 +35,16 @@ export default function Home() {
       <main style={{ maxWidth: 1040, margin: "0 auto", padding: "64px 24px 96px" }}>
         {/* hero — DS components */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-          <span style={{ display: "grid", placeItems: "center", height: 40, width: 40, borderRadius: 10, background: "hsl(var(--nx-accent) / 0.15)", color: "hsl(var(--nx-accent))" }}>
+          <span style={{ display: "grid", placeItems: "center", height: 40, width: 40, borderRadius: 10, background: "color-mix(in srgb, var(--nx-accent) 15%, transparent)", color: "var(--nx-accent)" }}>
             <Icon name="hub" size={24} filled />
           </span>
           <Pill tone="accent">Design System</Pill>
         </div>
-        <h1 style={{ fontSize: 44, lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, color: "hsl(var(--nx-fg))" }}>
+        <h1 style={{ fontSize: 44, lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, color: "var(--nx-fg)" }}>
           Nexus Design System
         </h1>
-        <p style={{ marginTop: 16, maxWidth: 640, fontSize: 16, lineHeight: 1.6, color: "hsl(var(--nx-fg-muted))" }}>
-          A dark-first, <strong style={{ color: "hsl(var(--nx-fg))" }}>shadcn/Radix</strong> design system for SOC
+        <p style={{ marginTop: 16, maxWidth: 640, fontSize: 16, lineHeight: 1.6, color: "var(--nx-fg-muted)" }}>
+          A dark-first, <strong style={{ color: "var(--nx-fg)" }}>shadcn/Radix</strong> design system for SOC
           link-analysis surfaces. The demo, these docs, and the Storybook explorer all consume — and are built from —
           this one system. This page is rendered with the design system's own components.
         </p>
@@ -61,7 +61,7 @@ export default function Home() {
         </div>
 
         {/* live DS components — the node language */}
-        <div style={{ ...card, marginTop: 40, background: "hsl(var(--nx-bg))", display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center", justifyContent: "center", padding: 32 }}>
+        <div style={{ ...card, marginTop: 40, background: "var(--nx-bg)", display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center", justifyContent: "center", padding: 32 }}>
           <NodeBadge family="circle" role="hub" colorToken="campaign" glyph="campaign" label="Zloader Botnet" sublabel="campaign" verdict="malicious" />
           <NodeBadge family="circle" role="neighbor" colorToken="actor" glyph="badge" label="TA511" sublabel="actor" verdict="malicious" selected />
           <NodeBadge family="hexagon" role="neighbor" colorToken="email" glyph="alternate_email" label="rcastle@acme.com" sublabel="email address" vip status="impacted" verdict="medium" hiddenChildren={2} />

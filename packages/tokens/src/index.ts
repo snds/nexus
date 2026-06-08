@@ -33,6 +33,6 @@ export const SEVERITY_LEVELS = [
 
 export type SeverityToken = (typeof SEVERITY_LEVELS)[number];
 
-/** `hsl(var(--entity-ip))` — use in inline styles or cva when a dynamic token is needed. */
-export const entityColor = (t: EntityToken): string => `hsl(var(--entity-${t}))`;
-export const severityColor = (s: SeverityToken): string => `hsl(var(--severity-${s}))`;
+/** `var(--entity-ip)` — use in inline styles or cva when a dynamic token is needed. */
+export const entityColor = (t: EntityToken): string => `var(--entity-${t})`;
+export const severityColor = (s: SeverityToken): string => `var(--severity-${s})`;

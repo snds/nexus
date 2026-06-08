@@ -34,25 +34,25 @@ export function TapPivot({ entity, onBack }: { entity: Entity; onBack: () => voi
     Array.from({ length: n }, (_, i) => USER_POOL[(seeded(entity, salt) + i) % USER_POOL.length]!);
 
   return (
-    <div className="flex h-full flex-col overflow-hidden bg-[hsl(var(--nx-bg))]">
+    <div className="flex h-full flex-col overflow-hidden bg-[var(--nx-bg)]">
       {/* TAP app bar */}
-      <div className="flex items-center gap-3 border-b border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] px-4 py-2.5">
+      <div className="flex items-center gap-3 border-b border-[var(--nx-border)] bg-[var(--nx-surface-1)] px-4 py-2.5">
         <Tooltip label="Back to Nexus" side="bottom">
-          <button onClick={onBack} aria-label="Back to Nexus" className="grid h-8 w-8 place-items-center rounded text-[hsl(var(--nx-fg-muted))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]">
+          <button onClick={onBack} aria-label="Back to Nexus" className="grid h-8 w-8 place-items-center rounded text-[var(--nx-fg-muted)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]">
             <Icon name="arrow_back" size={20} />
           </button>
         </Tooltip>
-        <Icon name="security" size={22} className="text-[hsl(var(--nx-accent))]" />
-        <span className="text-sm font-semibold text-[hsl(var(--nx-fg))]">Targeted Attack Protection</span>
-        <span className="ml-2 rounded bg-[hsl(var(--nx-surface-3))] px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-[hsl(var(--nx-fg-muted))]">Pivoted from Nexus</span>
+        <Icon name="security" size={22} className="text-[var(--nx-accent)]" />
+        <span className="text-sm font-semibold text-[var(--nx-fg)]">Targeted Attack Protection</span>
+        <span className="ml-2 rounded bg-[var(--nx-surface-3)] px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-[var(--nx-fg-muted)]">Pivoted from Nexus</span>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto p-6">
         <div className="mx-auto max-w-5xl">
           {/* threat header */}
-          <div className="rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] p-4 text-center">
-            <p className="truncate text-base font-semibold text-[hsl(var(--nx-fg))]" title={entity.label}>{entity.label}</p>
-            <p className="mt-0.5 text-xs text-[hsl(var(--nx-fg-subtle))]">
+          <div className="rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] p-4 text-center">
+            <p className="truncate text-base font-semibold text-[var(--nx-fg)]" title={entity.label}>{entity.label}</p>
+            <p className="mt-0.5 text-xs text-[var(--nx-fg-subtle)]">
               {delivered + blocked} Messages · 160 Customers · {impacted} Users Impacted · {meta.label}
             </p>
           </div>
@@ -61,14 +61,14 @@ export function TapPivot({ entity, onBack }: { entity: Entity; onBack: () => voi
             {/* network insights */}
             <Card title="NTX Insights" link="Explore">
               <div className="flex items-center gap-3 py-1.5">
-                <Icon name="mail" size={20} className="text-[hsl(var(--nx-accent))]" />
-                <span className="text-lg font-bold tabular-nums text-[hsl(var(--nx-fg))]">{intended + atRisk}</span>
-                <span className="text-xs text-[hsl(var(--nx-fg-muted))]">users received email message threats</span>
+                <Icon name="mail" size={20} className="text-[var(--nx-accent)]" />
+                <span className="text-lg font-bold tabular-nums text-[var(--nx-fg)]">{intended + atRisk}</span>
+                <span className="text-xs text-[var(--nx-fg-muted)]">users received email message threats</span>
               </div>
               <div className="flex items-center gap-3 py-1.5">
-                <Icon name="document_scanner" size={20} className="text-[hsl(var(--severity-malicious))]" />
-                <span className="text-lg font-bold tabular-nums text-[hsl(var(--nx-fg))]">{4 + (seeded(entity, 7) % 12)}</span>
-                <span className="text-xs text-[hsl(var(--nx-fg-muted))]">detailed forensic scans available</span>
+                <Icon name="document_scanner" size={20} className="text-[var(--severity-malicious)]" />
+                <span className="text-lg font-bold tabular-nums text-[var(--nx-fg)]">{4 + (seeded(entity, 7) % 12)}</span>
+                <span className="text-xs text-[var(--nx-fg-muted)]">detailed forensic scans available</span>
               </div>
             </Card>
 
@@ -92,17 +92,17 @@ export function TapPivot({ entity, onBack }: { entity: Entity; onBack: () => voi
                     <div className="flex items-end gap-0.5">
                       {BUCKETS.map((b, i) => (
                         <div key={b} className="flex flex-1 flex-col items-center gap-1">
-                          <span className={"text-[9px] tabular-nums " + (i === active ? "font-bold text-[hsl(var(--nx-fg))]" : "text-[hsl(var(--nx-fg-subtle))]")}>{b}</span>
+                          <span className={"text-[9px] tabular-nums " + (i === active ? "font-bold text-[var(--nx-fg)]" : "text-[var(--nx-fg-subtle)]")}>{b}</span>
                           <div
-                            className={"h-2.5 w-full first:rounded-l-full last:rounded-r-full " + (i === active ? "ring-2 ring-[hsl(var(--nx-fg)/0.5)]" : "")}
+                            className={"h-2.5 w-full first:rounded-l-full last:rounded-r-full " + (i === active ? "ring-2 ring-[color-mix(in_srgb,var(--nx-fg)_50%,transparent)]" : "")}
                             style={{ background: `hsl(${colorFor(i)})`, opacity: i === active ? 1 : 0.4 }}
                           />
                         </div>
                       ))}
                     </div>
-                    <div className="mt-1.5 flex justify-between text-[10px] text-[hsl(var(--nx-fg-subtle))]">
+                    <div className="mt-1.5 flex justify-between text-[10px] text-[var(--nx-fg-subtle)]">
                       <span>Targeted</span>
-                      <span className="font-semibold text-[hsl(var(--nx-fg))]">Seen by {BUCKETS[active]} customers</span>
+                      <span className="font-semibold text-[var(--nx-fg)]">Seen by {BUCKETS[active]} customers</span>
                       <span>Widespread</span>
                     </div>
                   </>
@@ -132,10 +132,10 @@ export function TapPivot({ entity, onBack }: { entity: Entity; onBack: () => voi
 
 function Card({ title, link, children }: { title: string; link?: string; children: ReactNode }) {
   return (
-    <section className="rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] p-4">
+    <section className="rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] p-4">
       <div className="mb-2 flex items-center justify-between">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{title}</h3>
-        {link && <span className="flex items-center gap-0.5 text-[11px] font-medium text-[hsl(var(--nx-accent))]">{link} <Icon name="chevron_right" size={14} /></span>}
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--nx-fg-subtle)]">{title}</h3>
+        {link && <span className="flex items-center gap-0.5 text-[11px] font-medium text-[var(--nx-accent)]">{link} <Icon name="chevron_right" size={14} /></span>}
       </div>
       {children}
     </section>
@@ -144,11 +144,11 @@ function Card({ title, link, children }: { title: string; link?: string; childre
 
 function Row({ label, a, b, warn }: { label: string; a: string; b: string; warn?: boolean }) {
   return (
-    <div className="flex items-center justify-between border-b border-[hsl(var(--nx-border))] py-1.5 text-xs last:border-0">
-      <span className="text-[hsl(var(--nx-fg-subtle))]">{label}</span>
+    <div className="flex items-center justify-between border-b border-[var(--nx-border)] py-1.5 text-xs last:border-0">
+      <span className="text-[var(--nx-fg-subtle)]">{label}</span>
       <span className="flex gap-4">
-        <span className="text-[hsl(var(--nx-fg-muted))]">{a}</span>
-        <span className={warn ? "font-semibold text-[hsl(var(--severity-suspicious))]" : "text-[hsl(var(--nx-fg-muted))]"}>{b}</span>
+        <span className="text-[var(--nx-fg-muted)]">{a}</span>
+        <span className={warn ? "font-semibold text-[var(--severity-suspicious)]" : "text-[var(--nx-fg-muted)]"}>{b}</span>
       </span>
     </div>
   );
@@ -156,27 +156,27 @@ function Row({ label, a, b, warn }: { label: string; a: string; b: string; warn?
 
 function UserTable({ title, note, users, col }: { title: string; note: string; users: string[]; col: string }) {
   return (
-    <section className="rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] p-4">
+    <section className="rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] p-4">
       <div className="mb-1 flex items-center justify-between">
-        <h3 className="text-xs font-semibold text-[hsl(var(--nx-fg))]">{title}</h3>
-        <span className="flex items-center gap-0.5 text-[11px] font-medium text-[hsl(var(--nx-accent))]">Show more <Icon name="chevron_right" size={13} /></span>
+        <h3 className="text-xs font-semibold text-[var(--nx-fg)]">{title}</h3>
+        <span className="flex items-center gap-0.5 text-[11px] font-medium text-[var(--nx-accent)]">Show more <Icon name="chevron_right" size={13} /></span>
       </div>
-      <p className="mb-2 text-[11px] text-[hsl(var(--nx-fg-subtle))]">{note}</p>
+      <p className="mb-2 text-[11px] text-[var(--nx-fg-subtle)]">{note}</p>
       {users.length === 0 ? (
-        <p className="py-3 text-center text-[11px] text-[hsl(var(--nx-fg-subtle))]">No users.</p>
+        <p className="py-3 text-center text-[11px] text-[var(--nx-fg-subtle)]">No users.</p>
       ) : (
         <table className="w-full text-[11px]">
           <thead>
-            <tr className="border-b border-[hsl(var(--nx-border))] text-left text-[hsl(var(--nx-fg-subtle))]">
+            <tr className="border-b border-[var(--nx-border)] text-left text-[var(--nx-fg-subtle)]">
               <th className="py-1 font-medium">User</th>
               <th className="py-1 text-right font-medium">{col}</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u, i) => (
-              <tr key={i} className="border-b border-[hsl(var(--nx-border))] last:border-0">
-                <td className="truncate py-1 text-[hsl(var(--nx-accent))]">{u}</td>
-                <td className="py-1 text-right tabular-nums text-[hsl(var(--nx-fg-muted))]">{1 + (i % 3)}</td>
+              <tr key={i} className="border-b border-[var(--nx-border)] last:border-0">
+                <td className="truncate py-1 text-[var(--nx-accent)]">{u}</td>
+                <td className="py-1 text-right tabular-nums text-[var(--nx-fg-muted)]">{1 + (i % 3)}</td>
               </tr>
             ))}
           </tbody>

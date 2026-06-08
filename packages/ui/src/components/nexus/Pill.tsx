@@ -22,8 +22,8 @@ export function Pill({ children, tone = "neutral", className }: PillProps) {
       className={cn(
         "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px]",
         tone === "accent"
-          ? "border-[hsl(var(--nx-accent)/0.5)] bg-[hsl(var(--nx-accent)/0.12)] text-[hsl(var(--nx-accent))]"
-          : "border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] text-[hsl(var(--nx-fg-muted))]",
+          ? "border-[color-mix(in_srgb,var(--nx-accent)_50%,transparent)] bg-[color-mix(in_srgb,var(--nx-accent)_12%,transparent)] text-[var(--nx-accent)]"
+          : "border-[var(--nx-border)] bg-[var(--nx-surface-2)] text-[var(--nx-fg-muted)]",
         className,
       )}
     >

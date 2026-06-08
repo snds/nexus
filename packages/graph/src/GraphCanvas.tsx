@@ -56,7 +56,7 @@ const PRESET_ORDER: PresetKey[] = ["smooth", "floaty", "snappy", "instant"];
 
 const SNAP_GRID = 24;
 const snap = (v: number) => Math.round(v / SNAP_GRID) * SNAP_GRID;
-const GHOST = "hsl(var(--nx-fg-muted) / 0.5)";
+const GHOST = "color-mix(in srgb, var(--nx-fg-muted) 50%, transparent)";
 
 function prefersReduced() {
   return typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
@@ -262,7 +262,7 @@ export function GraphCanvas({ model, revision, rootId, vipEnabled = true, onNode
   const handlePaneClick = () => onPaneClick?.();
 
   const canvasStyle = {
-    background: "hsl(var(--nx-bg))",
+    background: "var(--nx-bg)",
     ["--nx-node-dur" as string]: `${p.dur}ms`,
     ["--nx-node-ease" as string]: p.css,
     ["--nx-node-enter" as string]: `${p.enter}`,
@@ -291,7 +291,7 @@ export function GraphCanvas({ model, revision, rootId, vipEnabled = true, onNode
       colorMode="dark"
       proOptions={{ hideAttribution: true }}
     >
-      <Background color="hsl(var(--nx-border))" gap={24} />
+      <Background color="var(--nx-border)" gap={24} />
 
       <Panel position="bottom-left" className="flex items-end gap-2">
         <div className="flex flex-col gap-1">
@@ -303,29 +303,29 @@ export function GraphCanvas({ model, revision, rootId, vipEnabled = true, onNode
         </div>
 
         {motionOpen && (
-          <div className="w-60 rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))]/95 p-3 shadow-2xl backdrop-blur">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--nx-fg-subtle))]">Node motion</p>
+          <div className="w-60 rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)]/95 p-3 shadow-2xl backdrop-blur">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--nx-fg-subtle)]">Node motion</p>
             <div className="flex flex-col gap-1">
               {PRESET_ORDER.map((key) => {
                 const pr = PRESETS[key];
                 const on = key === preset;
                 return (
-                  <button key={key} onClick={() => setPreset(key)} aria-pressed={on} className={"flex items-start gap-2 rounded-md px-2 py-1.5 text-left transition-colors " + (on ? "bg-[hsl(var(--nx-accent)/0.14)]" : "hover:bg-[hsl(var(--nx-surface-3))]")}>
-                    <span className={"mt-0.5 grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full border-2 " + (on ? "border-[hsl(var(--nx-accent))]" : "border-[hsl(var(--nx-border-strong))]")}>
-                      {on && <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--nx-accent))]" />}
+                  <button key={key} onClick={() => setPreset(key)} aria-pressed={on} className={"flex items-start gap-2 rounded-md px-2 py-1.5 text-left transition-colors " + (on ? "bg-[color-mix(in_srgb,var(--nx-accent)_14%,transparent)]" : "hover:bg-[var(--nx-surface-3)]")}>
+                    <span className={"mt-0.5 grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full border-2 " + (on ? "border-[var(--nx-accent)]" : "border-[var(--nx-border-strong)]")}>
+                      {on && <span className="h-1.5 w-1.5 rounded-full bg-[var(--nx-accent)]" />}
                     </span>
                     <span className="min-w-0">
-                      <span className={"block text-xs font-medium " + (on ? "text-[hsl(var(--nx-accent))]" : "text-[hsl(var(--nx-fg))]")}>
+                      <span className={"block text-xs font-medium " + (on ? "text-[var(--nx-accent)]" : "text-[var(--nx-fg)]")}>
                         {pr.label}
-                        {pr.dur > 0 && <span className="ml-1 text-[10px] font-normal text-[hsl(var(--nx-fg-subtle))]">{pr.dur}ms</span>}
+                        {pr.dur > 0 && <span className="ml-1 text-[10px] font-normal text-[var(--nx-fg-subtle)]">{pr.dur}ms</span>}
                       </span>
-                      <span className="block text-[10px] leading-tight text-[hsl(var(--nx-fg-subtle))]">{pr.hint}</span>
+                      <span className="block text-[10px] leading-tight text-[var(--nx-fg-subtle)]">{pr.hint}</span>
                     </span>
                   </button>
                 );
               })}
             </div>
-            <button onClick={replay} disabled={p.dur === 0} className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-md bg-[hsl(var(--nx-surface-3))] px-3 py-1.5 text-xs font-semibold text-[hsl(var(--nx-fg))] hover:brightness-110 disabled:opacity-40">
+            <button onClick={replay} disabled={p.dur === 0} className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-md bg-[var(--nx-surface-3)] px-3 py-1.5 text-xs font-semibold text-[var(--nx-fg)] hover:brightness-110 disabled:opacity-40">
               <span className="material-symbols-outlined" style={{ fontSize: 16 }} aria-hidden>replay</span>
               Replay expand
             </button>

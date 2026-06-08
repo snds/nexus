@@ -90,27 +90,27 @@ export function DetailPage({
   const attrs = entity.attrs ? Object.entries(entity.attrs) : [];
 
   return (
-    <div className="flex h-full flex-col overflow-hidden bg-[hsl(var(--nx-bg))]">
+    <div className="flex h-full flex-col overflow-hidden bg-[var(--nx-bg)]">
       {/* header */}
-      <div className="flex items-center gap-3 border-b border-[hsl(var(--nx-border))] px-5 py-3">
+      <div className="flex items-center gap-3 border-b border-[var(--nx-border)] px-5 py-3">
         <Tooltip label="Back to graph" side="bottom">
-          <button onClick={onBack} aria-label="Back to graph" className="grid h-8 w-8 place-items-center rounded text-[hsl(var(--nx-fg-muted))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]">
+          <button onClick={onBack} aria-label="Back to graph" className="grid h-8 w-8 place-items-center rounded text-[var(--nx-fg-muted)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]">
             <Icon name="arrow_back" size={20} />
           </button>
         </Tooltip>
         <span
           className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border-2"
-          style={{ borderColor: `hsl(var(--entity-${meta.colorToken}))`, background: "hsl(var(--nx-surface-2))" }}
+          style={{ borderColor: `var(--entity-${meta.colorToken})`, background: "var(--nx-surface-2)" }}
         >
           <EntityIcon type={entity.type} size={20} />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-base font-semibold text-[hsl(var(--nx-fg))]" title={entity.label}>{entity.label}</p>
-          <p className="text-[10px] uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{meta.label}</p>
+          <p className="truncate text-base font-semibold text-[var(--nx-fg)]" title={entity.label}>{entity.label}</p>
+          <p className="text-[10px] uppercase tracking-wide text-[var(--nx-fg-subtle)]">{meta.label}</p>
         </div>
         <VerdictBadge verdict={entity.verdict} />
-        {typeof entity.score === "number" && <span className="text-xs text-[hsl(var(--nx-fg-muted))]">score {entity.score}</span>}
-        <span className="ml-2 flex items-center gap-1 rounded border border-[hsl(var(--nx-border))] px-2 py-1 text-[11px] text-[hsl(var(--nx-fg-muted))]">
+        {typeof entity.score === "number" && <span className="text-xs text-[var(--nx-fg-muted)]">score {entity.score}</span>}
+        <span className="ml-2 flex items-center gap-1 rounded border border-[var(--nx-border)] px-2 py-1 text-[11px] text-[var(--nx-fg-muted)]">
           <Icon name="calendar_today" size={13} /> Last 7 days
         </span>
       </div>
@@ -118,10 +118,10 @@ export function DetailPage({
       <div className="min-h-0 flex-1 overflow-y-auto">
         {/* summary + graph view */}
         <div className="grid gap-4 p-5 lg:grid-cols-[1fr_360px]">
-          <section className="rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] p-4">
+          <section className="rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] p-4">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-xs font-semibold uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">Summary</h2>
-              <button onClick={() => setShowDesc((v) => !v)} className="text-[11px] font-medium text-[hsl(var(--nx-accent))] hover:underline">
+              <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--nx-fg-subtle)]">Summary</h2>
+              <button onClick={() => setShowDesc((v) => !v)} className="text-[11px] font-medium text-[var(--nx-accent)] hover:underline">
                 {showDesc ? "Hide description" : "View description"}
               </button>
             </div>
@@ -132,7 +132,7 @@ export function DetailPage({
               {attrs.map(([k, v]) => <Field key={k} label={k} value={String(v)} />)}
             </dl>
             {showDesc && (
-              <p className="mt-3 border-t border-[hsl(var(--nx-border))] pt-3 text-[11px] leading-relaxed text-[hsl(var(--nx-fg-muted))]">
+              <p className="mt-3 border-t border-[var(--nx-border)] pt-3 text-[11px] leading-relaxed text-[var(--nx-fg-muted)]">
                 {entity.label} was observed in association with the {meta.label.toLowerCase()} activity tracked by this
                 graph. Indicators below are derived from sandbox detonation, passive DNS, and customer-environment
                 telemetry over the selected window.
@@ -140,23 +140,23 @@ export function DetailPage({
             )}
           </section>
 
-          <section className="rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] p-4">
+          <section className="rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] p-4">
             <div className="mb-2 flex items-center justify-between">
-              <h2 className="text-xs font-semibold uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">Graph View</h2>
-              <button onClick={() => onOpenOnGraph(entity.id)} className="flex items-center gap-1 text-[11px] font-medium text-[hsl(var(--nx-accent))] hover:underline">
+              <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--nx-fg-subtle)]">Graph View</h2>
+              <button onClick={() => onOpenOnGraph(entity.id)} className="flex items-center gap-1 text-[11px] font-medium text-[var(--nx-accent)] hover:underline">
                 Open on graph <Icon name="open_in_new" size={13} />
               </button>
             </div>
             <GraphThumbnail seed={entity.id.length + entity.label.length} className="h-28 w-full" />
             {entity.neighborCounts && (
-              <div className="mt-3 grid grid-cols-3 gap-x-2 gap-y-2 border-t border-[hsl(var(--nx-border))] pt-3">
+              <div className="mt-3 grid grid-cols-3 gap-x-2 gap-y-2 border-t border-[var(--nx-border)] pt-3">
                 {(Object.entries(entity.neighborCounts) as [EntityType, number][]).map(([t]) => {
                   const c = linkedCount(t, entity.id);
                   return (
                     <div key={t} className="flex items-center gap-1.5">
                       <EntityIcon type={t} size={13} />
-                      <span className="text-sm font-bold tabular-nums text-[hsl(var(--nx-fg))]">{c}</span>
-                      <span className="truncate text-[10px] text-[hsl(var(--nx-fg-subtle))]">{plural(ENTITY_META[t].label)}</span>
+                      <span className="text-sm font-bold tabular-nums text-[var(--nx-fg)]">{c}</span>
+                      <span className="truncate text-[10px] text-[var(--nx-fg-subtle)]">{plural(ENTITY_META[t].label)}</span>
                     </div>
                   );
                 })}
@@ -166,7 +166,7 @@ export function DetailPage({
         </div>
 
         {/* tabs */}
-        <div className="border-b border-[hsl(var(--nx-border))] px-5">
+        <div className="border-b border-[var(--nx-border)] px-5">
           <div role="tablist" className="flex gap-1 overflow-x-auto">
             {tabs.map((t) => (
               <button
@@ -177,13 +177,13 @@ export function DetailPage({
                 className={
                   "flex items-center gap-1.5 whitespace-nowrap border-b-2 px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wide " +
                   (tab === t.key
-                    ? "border-[hsl(var(--nx-accent))] text-[hsl(var(--nx-fg))]"
-                    : "border-transparent text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg-muted))]")
+                    ? "border-[var(--nx-accent)] text-[var(--nx-fg)]"
+                    : "border-transparent text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg-muted)]")
                 }
               >
                 {t.label}
                 {typeof t.count === "number" && (
-                  <span className="rounded-full bg-[hsl(var(--nx-surface-3))] px-1.5 text-[10px] tabular-nums text-[hsl(var(--nx-fg-muted))]">{t.count}</span>
+                  <span className="rounded-full bg-[var(--nx-surface-3)] px-1.5 text-[10px] tabular-nums text-[var(--nx-fg-muted)]">{t.count}</span>
                 )}
               </button>
             ))}
@@ -194,13 +194,13 @@ export function DetailPage({
         <div className="p-5">
           {activeType ? (
             <>
-              <h3 className="mb-2 flex items-center gap-1.5 text-sm font-medium text-[hsl(var(--nx-fg))]">
+              <h3 className="mb-2 flex items-center gap-1.5 text-sm font-medium text-[var(--nx-fg)]">
                 <EntityIcon type={activeType} size={16} /> Linked {plural(ENTITY_META[activeType].label)}
-                <span className="text-xs text-[hsl(var(--nx-fg-subtle))]">({rows.length})</span>
+                <span className="text-xs text-[var(--nx-fg-subtle)]">({rows.length})</span>
               </h3>
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="border-b border-[hsl(var(--nx-border))] text-left uppercase tracking-wide text-[10px] text-[hsl(var(--nx-fg-subtle))]">
+                  <tr className="border-b border-[var(--nx-border)] text-left uppercase tracking-wide text-[10px] text-[var(--nx-fg-subtle)]">
                     <th className="py-2 font-medium">{ENTITY_META[activeType].label}</th>
                     <th className="py-2 font-medium">First Seen</th>
                     <th className="py-2 font-medium">Last Seen</th>
@@ -212,14 +212,14 @@ export function DetailPage({
                 </thead>
                 <tbody>
                   {rows.map((r, i) => (
-                    <tr key={i} className="border-b border-[hsl(var(--nx-border))] hover:bg-[hsl(var(--nx-surface-1))]">
-                      <td className="max-w-[280px] truncate py-2 font-medium text-[hsl(var(--nx-accent))]" title={r.name}>{r.name}</td>
-                      <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{r.firstSeen}</td>
-                      <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{r.lastSeen}</td>
-                      <td className="py-2"><span style={{ color: `hsl(var(--severity-${r.verdict}))` }} className="capitalize">{r.verdict}</span></td>
-                      <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{r.users}</td>
-                      <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{r.classification}</td>
-                      <td className="py-2"><Icon name="open_in_new" size={14} className="text-[hsl(var(--nx-fg-subtle))]" /></td>
+                    <tr key={i} className="border-b border-[var(--nx-border)] hover:bg-[var(--nx-surface-1)]">
+                      <td className="max-w-[280px] truncate py-2 font-medium text-[var(--nx-accent)]" title={r.name}>{r.name}</td>
+                      <td className="py-2 text-[var(--nx-fg-muted)]">{r.firstSeen}</td>
+                      <td className="py-2 text-[var(--nx-fg-muted)]">{r.lastSeen}</td>
+                      <td className="py-2"><span style={{ color: `var(--severity-${r.verdict})` }} className="capitalize">{r.verdict}</span></td>
+                      <td className="py-2 text-[var(--nx-fg-muted)]">{r.users}</td>
+                      <td className="py-2 text-[var(--nx-fg-muted)]">{r.classification}</td>
+                      <td className="py-2"><Icon name="open_in_new" size={14} className="text-[var(--nx-fg-subtle)]" /></td>
                     </tr>
                   ))}
                 </tbody>
@@ -237,8 +237,8 @@ export function DetailPage({
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0">
-      <dt className="text-[10px] uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{label}</dt>
-      <dd className="truncate text-[hsl(var(--nx-fg-muted))]" title={value}>{value}</dd>
+      <dt className="text-[10px] uppercase tracking-wide text-[var(--nx-fg-subtle)]">{label}</dt>
+      <dd className="truncate text-[var(--nx-fg-muted)]" title={value}>{value}</dd>
     </div>
   );
 }
@@ -255,10 +255,10 @@ function ActivityTab({ entity }: { entity: Entity }) {
   }));
   return (
     <>
-      <h3 className="mb-2 text-sm font-medium text-[hsl(var(--nx-fg))]">Connections</h3>
+      <h3 className="mb-2 text-sm font-medium text-[var(--nx-fg)]">Connections</h3>
       <table className="w-full text-xs">
         <thead>
-          <tr className="border-b border-[hsl(var(--nx-border))] text-left uppercase tracking-wide text-[10px] text-[hsl(var(--nx-fg-subtle))]">
+          <tr className="border-b border-[var(--nx-border)] text-left uppercase tracking-wide text-[10px] text-[var(--nx-fg-subtle)]">
             <th className="py-2 font-medium">Date</th>
             <th className="py-2 font-medium">Protocol</th>
             <th className="py-2 font-medium">Source</th>
@@ -270,20 +270,20 @@ function ActivityTab({ entity }: { entity: Entity }) {
         </thead>
         <tbody>
           {conns.map((c, i) => (
-            <tr key={i} className="border-b border-[hsl(var(--nx-border))] hover:bg-[hsl(var(--nx-surface-1))]">
-              <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{c.date}</td>
-              <td className="py-2 uppercase text-[hsl(var(--nx-fg-muted))]">{c.proto}</td>
-              <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{c.src}</td>
-              <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{c.dst}</td>
-              <td className="py-2 text-[hsl(var(--nx-fg-muted))]">{c.port}</td>
-              <td className="py-2 tabular-nums text-[hsl(var(--nx-fg-muted))]">{c.up.toLocaleString()}</td>
-              <td className="py-2 tabular-nums text-[hsl(var(--nx-fg-muted))]">{c.down.toLocaleString()}</td>
+            <tr key={i} className="border-b border-[var(--nx-border)] hover:bg-[var(--nx-surface-1)]">
+              <td className="py-2 text-[var(--nx-fg-muted)]">{c.date}</td>
+              <td className="py-2 uppercase text-[var(--nx-fg-muted)]">{c.proto}</td>
+              <td className="py-2 text-[var(--nx-fg-muted)]">{c.src}</td>
+              <td className="py-2 text-[var(--nx-fg-muted)]">{c.dst}</td>
+              <td className="py-2 text-[var(--nx-fg-muted)]">{c.port}</td>
+              <td className="py-2 tabular-nums text-[var(--nx-fg-muted)]">{c.up.toLocaleString()}</td>
+              <td className="py-2 tabular-nums text-[var(--nx-fg-muted)]">{c.down.toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
       </table>
       {entity.attrs && (
-        <p className="mt-3 text-[11px] text-[hsl(var(--nx-fg-subtle))]">Sandbox detonation and passive telemetry for {entity.label}.</p>
+        <p className="mt-3 text-[11px] text-[var(--nx-fg-subtle)]">Sandbox detonation and passive telemetry for {entity.label}.</p>
       )}
     </>
   );

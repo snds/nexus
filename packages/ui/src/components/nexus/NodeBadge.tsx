@@ -77,14 +77,14 @@ export function NodeBadge({
   className,
 }: NodeBadgeProps) {
   const hub = role === "hub";
-  const colorVar = `hsl(var(--entity-${colorToken}))`;
+  const colorVar = `var(--entity-${colorToken})`;
   const size = hub ? HUB_SIZE : NODE_SIZE;
 
   const flags: { icon: string; bg: string; fg: string; title: string }[] = [];
-  if (imposter) flags.push({ icon: "theater_comedy", bg: "hsl(var(--entity-sid))", fg: "hsl(var(--nx-accent-fg))", title: "Imposter / masquerade" });
-  else if (status === "impacted") flags.push({ icon: "priority_high", bg: "hsl(var(--severity-malicious))", fg: "hsl(var(--nx-accent-fg))", title: "Impacted recipient" });
-  else if (status === "at_risk") flags.push({ icon: "warning", bg: "hsl(var(--severity-suspicious))", fg: "hsl(var(--nx-bg))", title: "At-risk recipient" });
-  if (vip) flags.push({ icon: "star", bg: "hsl(var(--severity-medium))", fg: "hsl(var(--nx-bg))", title: "VIP" });
+  if (imposter) flags.push({ icon: "theater_comedy", bg: "var(--entity-sid)", fg: "var(--nx-accent-fg)", title: "Imposter / masquerade" });
+  else if (status === "impacted") flags.push({ icon: "priority_high", bg: "var(--severity-malicious)", fg: "var(--nx-accent-fg)", title: "Impacted recipient" });
+  else if (status === "at_risk") flags.push({ icon: "warning", bg: "var(--severity-suspicious)", fg: "var(--nx-bg)", title: "At-risk recipient" });
+  if (vip) flags.push({ icon: "star", bg: "var(--severity-medium)", fg: "var(--nx-bg)", title: "VIP" });
   const count = hiddenChildren ?? 0;
   const hasIndicators = Boolean(verdict) || flags.length > 0 || count > 0;
 
@@ -119,7 +119,7 @@ export function NodeBadge({
               <div aria-hidden className="absolute inset-0" style={{ clipPath: HEX_CLIP, ...fillStyle }} />
               <svg viewBox="0 0 100 100" width={size} height={size} className="absolute inset-0 overflow-visible" aria-hidden>
                 {(selected || focused) && (
-                  <polygon points={HEX_POINTS} fill="none" stroke={selected ? "hsl(var(--nx-ring))" : "hsl(var(--nx-ring) / 0.6)"} strokeWidth={selected ? 6 : 4} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+                  <polygon points={HEX_POINTS} fill="none" stroke={selected ? "var(--nx-ring)" : "color-mix(in srgb, var(--nx-ring) 60%, transparent)"} strokeWidth={selected ? 6 : 4} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
                 )}
                 <polygon points={HEX_POINTS} fill="none" stroke={colorVar} strokeWidth={2} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
               </svg>
@@ -129,8 +129,8 @@ export function NodeBadge({
               aria-hidden
               className={cn(
                 "absolute inset-0 m-auto border-2 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.6)]",
-                selected && "ring-2 ring-[hsl(var(--nx-ring))] ring-offset-2 ring-offset-[hsl(var(--nx-bg))]",
-                focused && !selected && "ring-2 ring-[hsl(var(--nx-ring))]/60",
+                selected && "ring-2 ring-[var(--nx-ring)] ring-offset-2 ring-offset-[var(--nx-bg)]",
+                focused && !selected && "ring-2 ring-[var(--nx-ring)]/60",
               )}
               style={{
                 width: family === "diamond" ? size * 0.72 : size,
@@ -161,7 +161,7 @@ export function NodeBadge({
             )}
             {flags.map((f) => (
               <Tooltip key={f.title} label={f.title} side="top">
-                <span className="grid h-4 w-4 place-items-center rounded-full border-2 border-[hsl(var(--nx-bg))]" style={{ background: f.bg, color: f.fg }}>
+                <span className="grid h-4 w-4 place-items-center rounded-full border-2 border-[var(--nx-bg)]" style={{ background: f.bg, color: f.fg }}>
                   <Icon name={f.icon} size={10} filled />
                 </span>
               </Tooltip>
@@ -179,10 +179,10 @@ export function NodeBadge({
 
       {/* ---- label stack (fades in after landing) ---- */}
       <div className="nx-after-land flex max-w-full flex-col items-center text-center leading-tight">
-        <span className="max-w-full truncate text-xs font-semibold text-[hsl(var(--nx-fg))]" title={label}>
+        <span className="max-w-full truncate text-xs font-semibold text-[var(--nx-fg)]" title={label}>
           {label}
         </span>
-        {sublabel && <span className="text-[10px] uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{sublabel}</span>}
+        {sublabel && <span className="text-[10px] uppercase tracking-wide text-[var(--nx-fg-subtle)]">{sublabel}</span>}
       </div>
     </div>
   );

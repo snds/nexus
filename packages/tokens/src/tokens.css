@@ -1,61 +1,118 @@
 /**
  * NTX design tokens — SINGLE SOURCE OF TRUTH for appearance, in three tiers:
- *   L0 PRIMITIVES — raw scales: neutral + accent color RAMPS, the type scale, entity/severity
- *                   palettes. The vocabulary; not used directly by components.
+ *   L0 PRIMITIVES — Radix Colors scales (Slate neutral, Indigo accent, Red destructive) as FLAT,
+ *                   theme-agnostic constants. Both light AND dark values exist side by side
+ *                   (--nx-neutral-light-* / --nx-neutral-dark-*). Primitives are SINGLE-MODE:
+ *                   they are NOT re-defined per theme. Plus the type scale + entity/severity hex.
  *   L1 SEMANTICS  — purpose aliases (--nx-bg, --nx-fg, --nx-accent, …) that point at primitives.
- *                   This is what components consume.
- *   (L2 component tokens live with their components / the Text variants.)
+ *                   THIS is the only layer with modes: :root selects the DARK primitives,
+ *                   :root.light re-points the same semantics to the LIGHT primitives.
  *
- * Dark-first: :root IS the dark theme. `:root.light` re-points the PRIMITIVE ramps; the
- * semantic aliases follow automatically. HSL triplets (used as `hsl(var(--token))`).
+ * Colors are full values (hex), consumed directly as `var(--token)` — never `hsl(var())`.
+ * Opacity comes from Tailwind opacity utilities or `color-mix()`, never inline hsl alpha.
+ *
+ * Radix 12-step CONTRACT (every step has one job — do not cross these contexts):
+ *   1–2 app/bg · 3–5 component states (normal/hover/active) · 6–8 borders (8 = focus ring)
+ *   9–10 solid fills (9 solid, 10 hover) · 11 low-contrast text (AA) · 12 high-contrast text.
+ * Text comes ONLY from 11/12. Solids ONLY from 9/10. Accent-as-text (11) ≠ accent-as-fill (9).
  */
 
 :root {
-  /* ============================================================ L0 — PRIMITIVES */
+  /* ============================================================ L0 — PRIMITIVES (flat constants) */
 
-  /* ---- neutral ramp (cool, hue ~222): 1 = app bg … 12 = primary text ---- */
-  --nx-neutral-1: 222 38% 5%;
-  --nx-neutral-2: 222 26% 10%;
-  --nx-neutral-3: 222 20% 13%;
-  --nx-neutral-4: 222 18% 17%;
-  --nx-neutral-5: 222 16% 20%;
-  --nx-neutral-6: 222 14% 22%;
-  --nx-neutral-7: 222 14% 30%;
-  --nx-neutral-8: 220 13% 44%;
-  --nx-neutral-9: 214 13% 62%;
-  --nx-neutral-10: 214 14% 66%;
-  --nx-neutral-11: 213 18% 80%;
-  --nx-neutral-12: 210 30% 96%;
+  /* ---- neutral = Radix Slate (cool gray) ---- */
+  --nx-neutral-light-1: #fcfcfd;
+  --nx-neutral-light-2: #f9f9fb;
+  --nx-neutral-light-3: #f0f0f3;
+  --nx-neutral-light-4: #e8e8ec;
+  --nx-neutral-light-5: #e0e1e6;
+  --nx-neutral-light-6: #d9d9e0;
+  --nx-neutral-light-7: #cdced6;
+  --nx-neutral-light-8: #b9bbc6;
+  --nx-neutral-light-9: #8b8d98;
+  --nx-neutral-light-10: #80838d;
+  --nx-neutral-light-11: #60646c;
+  --nx-neutral-light-12: #1c2024;
+  --nx-neutral-dark-1: #111113;
+  --nx-neutral-dark-2: #18191b;
+  --nx-neutral-dark-3: #212225;
+  --nx-neutral-dark-4: #272a2d;
+  --nx-neutral-dark-5: #2e3135;
+  --nx-neutral-dark-6: #363a3f;
+  --nx-neutral-dark-7: #43484e;
+  --nx-neutral-dark-8: #5a6169;
+  --nx-neutral-dark-9: #696e77;
+  --nx-neutral-dark-10: #777b84;
+  --nx-neutral-dark-11: #b0b4ba;
+  --nx-neutral-dark-12: #edeef0;
 
-  /* ---- accent ramp (blue, hue ~205): 9 = solid interactive ---- */
-  --nx-accent-1: 210 40% 8%;
-  --nx-accent-2: 209 45% 11%;
-  --nx-accent-3: 208 60% 16%;
-  --nx-accent-4: 207 70% 21%;
-  --nx-accent-5: 206 75% 27%;
-  --nx-accent-6: 205 78% 34%;
-  --nx-accent-7: 205 82% 42%;
-  --nx-accent-8: 205 86% 49%;
-  --nx-accent-9: 205 90% 56%;
-  --nx-accent-10: 205 92% 62%;
-  --nx-accent-11: 205 95% 72%;
-  --nx-accent-12: 205 100% 90%;
+  /* ---- accent = Radix Indigo (white-on-9 = 5.21:1, AA) ---- */
+  --nx-accent-light-1: #fdfdfe;
+  --nx-accent-light-2: #f7f9ff;
+  --nx-accent-light-3: #edf2fe;
+  --nx-accent-light-4: #e1e9ff;
+  --nx-accent-light-5: #d2deff;
+  --nx-accent-light-6: #c1d0ff;
+  --nx-accent-light-7: #abbdf9;
+  --nx-accent-light-8: #8da4ef;
+  --nx-accent-light-9: #3e63dd;
+  --nx-accent-light-10: #3358d4;
+  --nx-accent-light-11: #3a5bc7;
+  --nx-accent-light-12: #1f2d5c;
+  --nx-accent-dark-1: #11131f;
+  --nx-accent-dark-2: #141726;
+  --nx-accent-dark-3: #182449;
+  --nx-accent-dark-4: #1d2e62;
+  --nx-accent-dark-5: #253974;
+  --nx-accent-dark-6: #304384;
+  --nx-accent-dark-7: #3a4f97;
+  --nx-accent-dark-8: #435db1;
+  --nx-accent-dark-9: #3e63dd;
+  --nx-accent-dark-10: #5472e4;
+  --nx-accent-dark-11: #9eb1ff;
+  --nx-accent-dark-12: #d6e1ff;
 
-  --nx-white: 0 0% 100%;
+  /* ---- red = Radix Red (destructive channel) ---- */
+  --nx-red-light-1: #fffcfc;
+  --nx-red-light-2: #fff7f7;
+  --nx-red-light-3: #feebec;
+  --nx-red-light-4: #ffdbdc;
+  --nx-red-light-5: #ffcdce;
+  --nx-red-light-6: #fdbdbe;
+  --nx-red-light-7: #f4a9aa;
+  --nx-red-light-8: #eb8e90;
+  --nx-red-light-9: #e5484d;
+  --nx-red-light-10: #dc3e42;
+  --nx-red-light-11: #ce2c31;
+  --nx-red-light-12: #641723;
+  --nx-red-dark-1: #191111;
+  --nx-red-dark-2: #201314;
+  --nx-red-dark-3: #3b1219;
+  --nx-red-dark-4: #500f1c;
+  --nx-red-dark-5: #611623;
+  --nx-red-dark-6: #72232d;
+  --nx-red-dark-7: #8c333a;
+  --nx-red-dark-8: #b54548;
+  --nx-red-dark-9: #e5484d;
+  --nx-red-dark-10: #ec5d5e;
+  --nx-red-dark-11: #ff9592;
+  --nx-red-dark-12: #ffd1d9;
 
-  /* ---- type scale (primitives) ----
-   * sizes (rem on a 16px root), weights, line-heights, letter-spacing. */
-  --nx-text-2xs: 0.6875rem; /* 11 */
-  --nx-text-xs: 0.75rem;    /* 12 */
-  --nx-text-sm: 0.8125rem;  /* 13 */
-  --nx-text-base: 0.875rem; /* 14 — UI default */
-  --nx-text-md: 1rem;       /* 16 */
-  --nx-text-lg: 1.125rem;   /* 18 */
-  --nx-text-xl: 1.25rem;    /* 20 */
-  --nx-text-2xl: 1.5rem;    /* 24 */
-  --nx-text-3xl: 1.875rem;  /* 30 */
-  --nx-text-4xl: 2.25rem;   /* 36 */
-  --nx-text-5xl: 2.75rem;   /* 44 */
+  --nx-white: #ffffff;
+  --nx-black: #000000;
+
+  /* ---- type scale (primitives) ---- */
+  --nx-text-2xs: 0.6875rem;
+  --nx-text-xs: 0.75rem;
+  --nx-text-sm: 0.8125rem;
+  --nx-text-base: 0.875rem;
+  --nx-text-md: 1rem;
+  --nx-text-lg: 1.125rem;
+  --nx-text-xl: 1.25rem;
+  --nx-text-2xl: 1.5rem;
+  --nx-text-3xl: 1.875rem;
+  --nx-text-4xl: 2.25rem;
+  --nx-text-5xl: 2.75rem;
 
   --nx-weight-regular: 400;
   --nx-weight-medium: 500;
@@ -73,50 +130,33 @@
   --nx-tracking-wide: 0.02em;
   --nx-tracking-wider: 0.06em;
 
-  /* ---- entity palette (color = entity type). PROVISIONAL — single-tone primitives ---- */
-  --entity-actor: 0 72% 58%;
-  --entity-campaign: 28 90% 58%;
-  --entity-malware: 350 75% 56%;
-  --entity-exploit: 320 60% 60%;
-  --entity-sid: 265 60% 65%;
-  --entity-hash: 200 70% 58%;
-  --entity-url: 190 70% 52%;
-  --entity-domain: 175 65% 48%;
-  --entity-ip: 160 60% 48%;
-  --entity-hostname: 150 50% 52%;
-  --entity-filename: 215 14% 60%;
-  --entity-email: 45 85% 58%;
-  --entity-message: 50 80% 56%;
-  --entity-scan: 215 12% 55%;
+  /* ---- entity palette (color = entity type) — theme-agnostic hex, identity preserved ---- */
+  --entity-actor: #e14747;
+  --entity-campaign: #f48d34;
+  --entity-malware: #e33b57;
+  --entity-exploit: #d65cad;
+  --entity-sid: #9d70db;
+  --entity-hash: #49addf;
+  --entity-url: #2fbeda;
+  --entity-domain: #2bcabd;
+  --entity-ip: #31c493;
+  --entity-hostname: #47c285;
+  --entity-filename: #8b97a7;
+  --entity-email: #efc139;
+  --entity-message: #e9cb35;
+  --entity-scan: #7e8a9a;
 
   /* ---- severity palette (verdict — its own channel) ---- */
-  --severity-malicious: 0 78% 56%;
-  --severity-phishing: 330 75% 56%;
-  --severity-suspicious: 28 90% 56%;
-  --severity-medium: 45 92% 54%;
-  --severity-benign: 145 60% 45%;
-  --severity-unknown: 215 12% 52%;
+  --severity-malicious: #e63737;
+  --severity-phishing: #e33b8f;
+  --severity-suspicious: #f4882a;
+  --severity-medium: #f6c01e;
+  --severity-benign: #2eb867;
+  --severity-unknown: #768293;
 
-  --alert-error: 0 78% 56%;
-  --alert-warning: 38 92% 54%;
-  --alert-success: 145 60% 45%;
-
-  /* ============================================================ L1 — SEMANTICS */
-
-  /* Two Radix-style background contexts + raised surfaces. */
-  --nx-bg: var(--nx-neutral-1);            /* app / canvas */
-  --nx-surface-1: var(--nx-neutral-2);     /* panels / cards */
-  --nx-surface-2: var(--nx-neutral-3);     /* raised / popover */
-  --nx-surface-3: var(--nx-neutral-4);     /* hover / selected */
-  --nx-border: var(--nx-neutral-6);
-  --nx-border-strong: var(--nx-neutral-7);
-  --nx-fg: var(--nx-neutral-12);           /* primary text */
-  --nx-fg-muted: var(--nx-neutral-10);     /* secondary text */
-  --nx-fg-subtle: var(--nx-neutral-9);     /* tertiary — ≥4.5:1 AA on dark surfaces */
-
-  --nx-accent: var(--nx-accent-9);         /* interactive primary */
-  --nx-accent-fg: var(--nx-white);
-  --nx-ring: var(--nx-accent-9);
+  --alert-error: #e63737;
+  --alert-warning: #f6a61e;
+  --alert-success: #2eb867;
 
   /* ---- radius ---- */
   --nx-radius: 0.5rem;
@@ -133,45 +173,79 @@
   --nx-motion-slow: 300ms;
   --nx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --nx-ease-standard: cubic-bezier(0.2, 0, 0, 1);
-
-  /* ---- node treatment ---- */
-  --nx-node-fill: hsl(var(--nx-bg) / 0.48);
   --nx-node-blur: 6px;
+
+  /* ============================================================ L1 — SEMANTICS · DARK (default) */
+  /* Mapped to the correct Radix step per context. Modes live HERE only. */
+
+  /* backgrounds / surfaces (steps 1–5) */
+  --nx-bg: var(--nx-neutral-dark-1);          /* app / canvas — step 1 */
+  --nx-surface-1: var(--nx-neutral-dark-2);   /* panels — step 2 */
+  --nx-surface-2: var(--nx-neutral-dark-3);   /* raised / popover — step 3 */
+  --nx-surface-3: var(--nx-neutral-dark-4);   /* hover / selected — step 4 */
+
+  /* borders (steps 6–8) */
+  --nx-border: var(--nx-neutral-dark-6);          /* subtle — step 6 */
+  --nx-border-strong: var(--nx-neutral-dark-7);   /* interactive — step 7 */
+
+  /* text (steps 11–12 ONLY) */
+  --nx-fg: var(--nx-neutral-dark-12);         /* primary — step 12 (Lc90) */
+  --nx-fg-muted: var(--nx-neutral-dark-11);   /* secondary — step 11 (Lc60, AA) */
+  --nx-fg-subtle: var(--nx-neutral-dark-11);  /* tertiary — step 11 (AA-guaranteed) */
+
+  /* accent — SOLID (9/10) is distinct from accent-as-TEXT (11) */
+  --nx-accent: var(--nx-accent-dark-9);        /* solid fill — step 9 */
+  --nx-accent-hover: var(--nx-accent-dark-10); /* solid hover — step 10 */
+  --nx-accent-text: var(--nx-accent-dark-11);  /* accent text / icons / links — step 11 (AA) */
+  --nx-accent-fg: var(--nx-white);             /* text ON the solid (indigo-9 → 5.21:1) */
+  --nx-ring: var(--nx-accent-dark-8);          /* focus ring — step 8 */
+
+  /* destructive — solid red */
+  --nx-destructive: var(--nx-red-dark-9);
+  --nx-destructive-hover: var(--nx-red-dark-10);
+  --nx-destructive-text: var(--nx-red-dark-11);
+  --nx-destructive-fg: var(--nx-white);
+
+  /* node treatment — translucent app-bg behind backdrop blur (color-mix, not inline alpha) */
+  --nx-node-fill: color-mix(in srgb, var(--nx-bg) 48%, transparent);
 }
 
-/* Light override — re-point the PRIMITIVE ramps; semantics follow automatically. */
+/* ============================================================ L1 — SEMANTICS · LIGHT
+ * Theme switch lives ONLY here: re-point every semantic to the LIGHT primitives.
+ * Primitives themselves are untouched. */
 :root.light {
-  --nx-neutral-1: 210 30% 99%;
-  --nx-neutral-2: 0 0% 100%;
-  --nx-neutral-3: 210 30% 98%;
-  --nx-neutral-4: 210 24% 94%;
-  --nx-neutral-5: 214 22% 91%;
-  --nx-neutral-6: 214 20% 88%;
-  --nx-neutral-7: 214 18% 78%;
-  --nx-neutral-8: 215 16% 60%;
-  --nx-neutral-9: 215 14% 52%;
-  --nx-neutral-10: 215 16% 38%;
-  --nx-neutral-11: 220 22% 24%;
-  --nx-neutral-12: 222 30% 12%;
+  --nx-bg: var(--nx-neutral-light-1);
+  --nx-surface-1: var(--nx-neutral-light-2);
+  --nx-surface-2: var(--nx-neutral-light-3);
+  --nx-surface-3: var(--nx-neutral-light-4);
 
-  --nx-accent-1: 210 60% 98%;
-  --nx-accent-2: 209 70% 95%;
-  --nx-accent-3: 208 80% 90%;
-  --nx-accent-4: 207 82% 83%;
-  --nx-accent-5: 206 84% 75%;
-  --nx-accent-6: 205 86% 66%;
-  --nx-accent-7: 205 88% 58%;
-  --nx-accent-8: 205 90% 50%;
-  --nx-accent-9: 205 90% 46%;
-  --nx-accent-10: 205 92% 41%;
-  --nx-accent-11: 205 95% 34%;
-  --nx-accent-12: 210 60% 16%;
+  --nx-border: var(--nx-neutral-light-6);
+  --nx-border-strong: var(--nx-neutral-light-7);
 
-  /* entity + severity hues darken slightly for light-bg contrast */
-  --entity-url: 190 75% 42%;
-  --entity-domain: 175 70% 38%;
-  --entity-ip: 160 65% 38%;
-  --entity-hostname: 150 55% 40%;
-  --severity-benign: 145 62% 38%;
-  --alert-success: 145 62% 38%;
+  --nx-fg: var(--nx-neutral-light-12);
+  --nx-fg-muted: var(--nx-neutral-light-11);   /* slate-light-11 #60646c → AA on light bg */
+  --nx-fg-subtle: var(--nx-neutral-light-11);
+
+  --nx-accent: var(--nx-accent-light-9);
+  --nx-accent-hover: var(--nx-accent-light-10);
+  --nx-accent-text: var(--nx-accent-light-11);
+  --nx-accent-fg: var(--nx-white);
+  --nx-ring: var(--nx-accent-light-8);
+
+  --nx-destructive: var(--nx-red-light-9);
+  --nx-destructive-hover: var(--nx-red-light-10);
+  --nx-destructive-text: var(--nx-red-light-11);
+  --nx-destructive-fg: var(--nx-white);
+
+  --nx-node-fill: color-mix(in srgb, var(--nx-bg) 48%, transparent);
+
+  /* domain palettes: a few entity/severity hues darken for legibility on light surfaces.
+   * (entity/severity remain single-tone primitives consumed directly; full Radix-scale
+   * mapping of these channels is a tracked fast-follow.) */
+  --entity-url: #1496b0;
+  --entity-domain: #149d92;
+  --entity-ip: #199a73;
+  --entity-hostname: #2e9d68;
+  --severity-benign: #1f9d56;
+  --alert-success: #1f9d56;
 }

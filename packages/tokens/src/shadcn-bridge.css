@@ -26,8 +26,8 @@
   --accent: var(--nx-surface-3);
   --accent-foreground: var(--nx-fg);
 
-  --destructive: var(--severity-malicious);
-  --destructive-foreground: 0 0% 100%;
+  --destructive: var(--nx-destructive);
+  --destructive-foreground: var(--nx-destructive-fg);
 
   --border: var(--nx-border);
   --input: var(--nx-border-strong);

@@ -55,7 +55,7 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
       data-slot="graph-legend"
       data-collapsed={!open || undefined}
       className={
-        "w-[200px] overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))]/95 text-[hsl(var(--nx-fg))] shadow-lg backdrop-blur " +
+        "w-[200px] overflow-hidden rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)]/95 text-[var(--nx-fg)] shadow-lg backdrop-blur " +
         (className ?? "")
       }
     >
@@ -64,7 +64,7 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg))]"
+        className="flex w-full items-center justify-between px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg)]"
       >
         Legend
         <span className={"transition-transform duration-150 " + (open ? "" : "-rotate-90")} aria-hidden>
@@ -78,7 +78,7 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
       <div className="flex flex-col gap-2">
         {families.map((fam) => (
           <div key={fam.label}>
-            <p className="mb-1 text-[9px] font-medium uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">
+            <p className="mb-1 text-[9px] font-medium uppercase tracking-wide text-[var(--nx-fg-subtle)]">
               {fam.label}
             </p>
             <ul className="flex flex-col gap-1.5">
@@ -87,7 +87,7 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
                   {/* Larger bare icon — at legend size the glyph reads better without the
                       shape outline (the on-canvas node shape isn't needed here). */}
                   <EntityIcon type={t} size={20} className="shrink-0" />
-                  <span className="truncate text-[11px] text-[hsl(var(--nx-fg-muted))]">{ENTITY_META[t].label}</span>
+                  <span className="truncate text-[11px] text-[var(--nx-fg-muted)]">{ENTITY_META[t].label}</span>
                 </li>
               ))}
             </ul>
@@ -98,8 +98,8 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
       {/* Verdict (severity) key */}
       {presentVerdicts.size > 0 && (
         <>
-          <div className="my-2 h-px bg-[hsl(var(--nx-border))]" />
-          <p className="mb-1 text-[9px] font-medium uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">Verdict</p>
+          <div className="my-2 h-px bg-[var(--nx-border)]" />
+          <p className="mb-1 text-[9px] font-medium uppercase tracking-wide text-[var(--nx-fg-subtle)]">Verdict</p>
           <ul className="flex flex-col gap-1">
             {(Object.keys(VERDICT_LABEL) as Verdict[])
               .filter((v) => presentVerdicts.has(v))
@@ -107,9 +107,9 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
                 <li key={v} className="flex items-center gap-2">
                   <span
                     className="h-2.5 w-2.5 shrink-0 rounded-full"
-                    style={{ background: `hsl(var(--severity-${v}))` }}
+                    style={{ background: `var(--severity-${v})` }}
                   />
-                  <span className="text-[11px] text-[hsl(var(--nx-fg-muted))]">{VERDICT_LABEL[v]}</span>
+                  <span className="text-[11px] text-[var(--nx-fg-muted)]">{VERDICT_LABEL[v]}</span>
                 </li>
               ))}
           </ul>
@@ -117,19 +117,19 @@ export function GraphLegend({ types, verdicts, defaultCollapsed = false, classNa
       )}
 
       {/* Node role / state key */}
-      <div className="my-2 h-px bg-[hsl(var(--nx-border))]" />
-      <p className="mb-1 text-[9px] font-medium uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">Indicators</p>
-      <ul className="flex flex-col gap-1 text-[11px] text-[hsl(var(--nx-fg-muted))]">
+      <div className="my-2 h-px bg-[var(--nx-border)]" />
+      <p className="mb-1 text-[9px] font-medium uppercase tracking-wide text-[var(--nx-fg-subtle)]">Indicators</p>
+      <ul className="flex flex-col gap-1 text-[11px] text-[var(--nx-fg-muted)]">
         <li className="flex items-center gap-2">
-          <span className="h-3.5 w-3.5 shrink-0 rounded-full" style={{ background: "hsl(var(--nx-fg-muted))" }} />
+          <span className="h-3.5 w-3.5 shrink-0 rounded-full" style={{ background: "var(--nx-fg-muted)" }} />
           Root / focus node
         </li>
         <li className="flex items-center gap-2">
-          <span className="h-3.5 w-3.5 shrink-0 rounded-full border-2 border-[hsl(var(--nx-fg-muted))]" />
+          <span className="h-3.5 w-3.5 shrink-0 rounded-full border-2 border-[var(--nx-fg-muted)]" />
           Related entity
         </li>
         <li className="flex items-center gap-2">
-          <span className="rounded-full border border-[hsl(var(--nx-border-strong))] bg-[hsl(var(--nx-surface-2))] px-1 text-[9px] font-semibold">
+          <span className="rounded-full border border-[var(--nx-border-strong)] bg-[var(--nx-surface-2)] px-1 text-[9px] font-semibold">
             +N
           </span>
           Aggregated group

@@ -58,7 +58,7 @@ export function Text({ variant = "body", tone, as, className, children }: TextPr
     fontWeight: `var(--nx-weight-${spec.weight})` as unknown as number,
     lineHeight: `var(--nx-leading-${spec.leading})`,
     letterSpacing: `var(--nx-tracking-${spec.tracking})`,
-    color: `hsl(var(${TONE_VAR[resolvedTone]}))`,
+    color: `var(${TONE_VAR[resolvedTone]})`,
     fontFamily: spec.mono ? "var(--nx-font-mono)" : undefined,
     textTransform: spec.upper ? "uppercase" : undefined,
     margin: 0,

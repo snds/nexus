@@ -16,7 +16,7 @@ export const AllVariants: Story = {
     <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
       {VARIANTS.map((v) => (
         <div key={v} style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
-          <code style={{ width: 90, flexShrink: 0, fontFamily: "var(--nx-font-mono)", fontSize: 11, color: "hsl(var(--nx-fg-subtle))" }}>{v}</code>
+          <code style={{ width: 90, flexShrink: 0, fontFamily: "var(--nx-font-mono)", fontSize: 11, color: "var(--nx-fg-subtle)" }}>{v}</code>
           <Text variant={v}>The quick brown fox</Text>
         </div>
       ))}

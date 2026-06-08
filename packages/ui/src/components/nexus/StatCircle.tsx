@@ -27,7 +27,7 @@ export interface StatCircleProps {
 
 export function StatCircle({ value, label, tone = "neutral", size = 48, className }: StatCircleProps) {
   // A count of zero is "all clear" → render neutral even on a severity tone.
-  const color = value === 0 ? "hsl(var(--nx-fg-subtle))" : `hsl(var(${TONE_VAR[tone]}))`;
+  const color = value === 0 ? "var(--nx-fg-subtle)" : `var(${TONE_VAR[tone]})`;
   return (
     <div data-slot="stat-circle" className={cn("flex flex-col items-center gap-1 text-center", className)}>
       <span
@@ -36,7 +36,7 @@ export function StatCircle({ value, label, tone = "neutral", size = 48, classNam
       >
         {value}
       </span>
-      <span className="text-[9px] uppercase leading-tight tracking-wide text-[hsl(var(--nx-fg-subtle))]">{label}</span>
+      <span className="text-[9px] uppercase leading-tight tracking-wide text-[var(--nx-fg-subtle)]">{label}</span>
     </div>
   );
 }

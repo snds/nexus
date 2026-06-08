@@ -114,7 +114,7 @@ export function toFlow(
   const edges: Edge[] = model.edges().map((r) => {
     const onPath = highlightActive && !dimMap.get(r.source) && !dimMap.get(r.target);
     const receded = highlightActive && !onPath;
-    const stroke = onPath ? "hsl(var(--nx-accent))" : "hsl(var(--nx-border-strong))";
+    const stroke = onPath ? "var(--nx-accent)" : "var(--nx-border-strong)";
     return {
       id: r.id,
       source: r.source,

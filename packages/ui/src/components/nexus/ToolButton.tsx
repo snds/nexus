@@ -34,8 +34,8 @@ export function ToolButton({ icon, label, tooltipSide = "top", active, filled, c
         className={cn(
           "grid h-9 w-9 place-items-center rounded-md border shadow transition-colors",
           active
-            ? "border-[hsl(var(--nx-accent)/0.6)] bg-[hsl(var(--nx-accent)/0.18)] text-[hsl(var(--nx-accent))]"
-            : "border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] text-[hsl(var(--nx-fg-muted))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]",
+            ? "border-[color-mix(in_srgb,var(--nx-accent)_60%,transparent)] bg-[color-mix(in_srgb,var(--nx-accent)_18%,transparent)] text-[var(--nx-accent)]"
+            : "border-[var(--nx-border)] bg-[var(--nx-surface-2)] text-[var(--nx-fg-muted)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]",
           className,
         )}
         {...rest}

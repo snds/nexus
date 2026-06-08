@@ -30,12 +30,12 @@ export function NavRail({ active = "graph", onSelect }: { active?: NavKey; onSel
           className={
             "relative grid h-10 w-10 place-items-center rounded-lg transition-colors " +
             (isActive
-              ? "bg-[hsl(var(--nx-accent)/0.14)] text-[hsl(var(--nx-accent))]"
-              : "text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]")
+              ? "bg-[color-mix(in_srgb,var(--nx-accent)_14%,transparent)] text-[var(--nx-accent)]"
+              : "text-[var(--nx-fg-subtle)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]")
           }
         >
           {isActive && (
-            <span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-r bg-[hsl(var(--nx-accent))]" />
+            <span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-r bg-[var(--nx-accent)]" />
           )}
           <Icon name={it.icon} size={22} filled={isActive} />
         </button>
@@ -46,7 +46,7 @@ export function NavRail({ active = "graph", onSelect }: { active?: NavKey; onSel
   return (
     <nav
       aria-label="Primary"
-      className="flex w-14 shrink-0 flex-col items-center gap-1 border-r border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] py-3"
+      className="flex w-14 shrink-0 flex-col items-center gap-1 border-r border-[var(--nx-border)] bg-[var(--nx-surface-1)] py-3"
     >
       {TOP.map(renderItem)}
       <div className="mt-auto" />

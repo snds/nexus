@@ -30,28 +30,28 @@ export function Dashboard({
   );
 
   return (
-    <div className="flex h-full flex-col overflow-hidden bg-[hsl(var(--nx-bg))]">
+    <div className="flex h-full flex-col overflow-hidden bg-[var(--nx-bg)]">
       {/* tabs */}
-      <div role="tablist" className="flex justify-center border-b border-[hsl(var(--nx-border))]">
+      <div role="tablist" className="flex justify-center border-b border-[var(--nx-border)]">
         <TabBtn active={tab === "mine"} onClick={() => setTab("mine")}>My Saved Graphs</TabBtn>
         <TabBtn active={tab === "all"} onClick={() => setTab("all")}>All Graphs</TabBtn>
       </div>
 
       {/* toolbar */}
       <div className="flex items-center gap-3 px-6 py-3">
-        <div className="flex w-[280px] items-center gap-2 border-b border-[hsl(var(--nx-border))] pb-1">
-          <Icon name="filter_list" size={16} className="text-[hsl(var(--nx-fg-subtle))]" />
+        <div className="flex w-[280px] items-center gap-2 border-b border-[var(--nx-border)] pb-1">
+          <Icon name="filter_list" size={16} className="text-[var(--nx-fg-subtle)]" />
           <input
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder="Filter by keyword…"
             aria-label="Filter saved graphs"
-            className="w-full bg-transparent text-sm text-[hsl(var(--nx-fg))] placeholder:text-[hsl(var(--nx-fg-subtle))] focus:outline-none"
+            className="w-full bg-transparent text-sm text-[var(--nx-fg)] placeholder:text-[var(--nx-fg-subtle)] focus:outline-none"
           />
         </div>
-        <span className="ml-auto flex items-center gap-1 text-xs text-[hsl(var(--nx-fg-muted))]">
+        <span className="ml-auto flex items-center gap-1 text-xs text-[var(--nx-fg-muted)]">
           Sorted by most recent
-          <Icon name="arrow_drop_down" size={18} className="text-[hsl(var(--nx-fg-subtle))]" />
+          <Icon name="arrow_drop_down" size={18} className="text-[var(--nx-fg-subtle)]" />
         </span>
         <div className="flex items-center gap-1">
           <ToggleBtn active={view === "grid"} onClick={() => setView("grid")} icon="grid_view" label="Grid view" />
@@ -78,16 +78,16 @@ export function Dashboard({
                 tabIndex={0}
                 onClick={() => onOpen(g.id)}
                 onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onOpen(g.id)}
-                className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] text-left transition-colors hover:border-[hsl(var(--nx-border-strong))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[hsl(var(--nx-ring))]"
+                className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] text-left transition-colors hover:border-[var(--nx-border-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--nx-ring)]"
               >
-                <div className="border-b border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-bg))] p-2">
+                <div className="border-b border-[var(--nx-border)] bg-[var(--nx-bg)] p-2">
                   <GraphThumbnail seed={g.seed} className="h-24 w-full" />
                 </div>
                 <div className="flex items-start gap-2 p-3">
-                  <Icon name={g.isPrivate ? "lock" : "visibility"} size={15} className="mt-0.5 text-[hsl(var(--nx-fg-subtle))]" />
+                  <Icon name={g.isPrivate ? "lock" : "visibility"} size={15} className="mt-0.5 text-[var(--nx-fg-subtle)]" />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-[hsl(var(--nx-fg))]" title={g.name}>{g.name}</p>
-                    <p className="text-[11px] text-[hsl(var(--nx-fg-subtle))]">
+                    <p className="truncate text-sm font-medium text-[var(--nx-fg)]" title={g.name}>{g.name}</p>
+                    <p className="text-[11px] text-[var(--nx-fg-subtle)]">
                       Generated on {g.generatedOn} · {g.nodeCount} nodes
                     </p>
                   </div>
@@ -104,7 +104,7 @@ export function Dashboard({
             {onNew && tab === "mine" && !filter && (
               <button
                 onClick={onNew}
-                className="group flex min-h-[180px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-[hsl(var(--nx-border-strong))] bg-transparent text-[hsl(var(--nx-fg-subtle))] transition-colors hover:border-[hsl(var(--nx-accent))] hover:text-[hsl(var(--nx-accent))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[hsl(var(--nx-ring))]"
+                className="group flex min-h-[180px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-[var(--nx-border-strong)] bg-transparent text-[var(--nx-fg-subtle)] transition-colors hover:border-[var(--nx-accent)] hover:text-[var(--nx-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--nx-ring)]"
               >
                 <Icon name="add_circle" size={26} />
                 <span className="text-xs font-semibold uppercase tracking-wide">New saved graph</span>
@@ -114,7 +114,7 @@ export function Dashboard({
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-[hsl(var(--nx-border))] text-left text-[11px] uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">
+              <tr className="border-b border-[var(--nx-border)] text-left text-[11px] uppercase tracking-wide text-[var(--nx-fg-subtle)]">
                 <th className="w-10 py-2 font-medium">Vis.</th>
                 <th className="py-2 font-medium">Graph Name</th>
                 <th className="py-2 font-medium">Generated On</th>
@@ -127,14 +127,14 @@ export function Dashboard({
                 <tr
                   key={g.id}
                   onClick={() => onOpen(g.id)}
-                  className="cursor-pointer border-b border-[hsl(var(--nx-border))] hover:bg-[hsl(var(--nx-surface-1))]"
+                  className="cursor-pointer border-b border-[var(--nx-border)] hover:bg-[var(--nx-surface-1)]"
                 >
                   <td className="py-2.5">
-                    <Icon name={g.isPrivate ? "lock" : "visibility"} size={15} className="text-[hsl(var(--nx-fg-subtle))]" />
+                    <Icon name={g.isPrivate ? "lock" : "visibility"} size={15} className="text-[var(--nx-fg-subtle)]" />
                   </td>
-                  <td className="py-2.5 font-medium text-[hsl(var(--nx-accent))]">{g.name}</td>
-                  <td className="py-2.5 text-[hsl(var(--nx-fg-muted))]">{g.generatedOn}</td>
-                  <td className="py-2.5 text-[hsl(var(--nx-fg-muted))]">{g.generatedBy}</td>
+                  <td className="py-2.5 font-medium text-[var(--nx-accent)]">{g.name}</td>
+                  <td className="py-2.5 text-[var(--nx-fg-muted)]">{g.generatedOn}</td>
+                  <td className="py-2.5 text-[var(--nx-fg-muted)]">{g.generatedBy}</td>
                   <td className="py-2.5">
                     <RowMenu
                       onOpen={() => onOpen(g.id)}
@@ -161,8 +161,8 @@ function TabBtn({ active, onClick, children }: { active: boolean; onClick: () =>
       className={
         "border-b-2 px-6 py-3 text-xs font-semibold uppercase tracking-wide " +
         (active
-          ? "border-[hsl(var(--nx-accent))] text-[hsl(var(--nx-fg))]"
-          : "border-transparent text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg-muted))]")
+          ? "border-[var(--nx-accent)] text-[var(--nx-fg)]"
+          : "border-transparent text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg-muted)]")
       }
     >
       {children}
@@ -179,7 +179,7 @@ function ToggleBtn({ active, onClick, icon, label }: { active: boolean; onClick:
         aria-pressed={active}
         className={
           "grid h-8 w-8 place-items-center rounded " +
-          (active ? "bg-[hsl(var(--nx-accent)/0.14)] text-[hsl(var(--nx-accent))]" : "text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))]")
+          (active ? "bg-[color-mix(in_srgb,var(--nx-accent)_14%,transparent)] text-[var(--nx-accent)]" : "text-[var(--nx-fg-subtle)] hover:bg-[var(--nx-surface-3)]")
         }
       >
         <Icon name={icon} size={20} filled={active} />
@@ -201,7 +201,7 @@ function RowMenu({ onOpen, onDuplicate, onDelete }: { onOpen: () => void; onDupl
             aria-label="More actions"
             onClick={stop}
             onKeyDown={stop}
-            className="grid h-7 w-7 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]"
+            className="grid h-7 w-7 place-items-center rounded text-[var(--nx-fg-subtle)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]"
           >
             <Icon name="more_vert" size={20} />
           </button>
@@ -214,7 +214,7 @@ function RowMenu({ onOpen, onDuplicate, onDelete }: { onOpen: () => void; onDupl
         <DropdownMenuItem onSelect={onDuplicate}>
           <Icon name="content_copy" size={16} /> Duplicate
         </DropdownMenuItem>
-        <DropdownMenuItem onSelect={onDelete} className="text-[hsl(var(--severity-malicious))] focus:text-[hsl(var(--severity-malicious))]">
+        <DropdownMenuItem onSelect={onDelete} className="text-[var(--severity-malicious)] focus:text-[var(--severity-malicious)]">
           <Icon name="delete" size={16} /> Delete
         </DropdownMenuItem>
       </DropdownMenuContent>

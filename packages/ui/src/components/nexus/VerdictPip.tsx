@@ -16,14 +16,14 @@ export interface VerdictPipProps {
   className?: string;
 }
 
-export function VerdictPip({ verdict, size = 12, ringColor = "hsl(var(--nx-bg))", className }: VerdictPipProps) {
+export function VerdictPip({ verdict, size = 12, ringColor = "var(--nx-bg)", className }: VerdictPipProps) {
   return (
     <span
       data-slot="verdict-pip"
       data-verdict={verdict}
       title={verdict}
       className={cn("inline-block rounded-full border-2", className)}
-      style={{ width: size, height: size, background: `hsl(var(--severity-${verdict}))`, borderColor: ringColor }}
+      style={{ width: size, height: size, background: `var(--severity-${verdict})`, borderColor: ringColor }}
     />
   );
 }

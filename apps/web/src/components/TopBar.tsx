@@ -19,15 +19,15 @@ export function TopBar({
   onNotifications: () => void;
 }) {
   return (
-    <header className="flex items-center gap-3 border-b border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] px-3 py-2">
+    <header className="flex items-center gap-3 border-b border-[var(--nx-border)] bg-[var(--nx-surface-1)] px-3 py-2">
       <AppSwitcher />
       <div className="flex shrink-0 items-center gap-2">
         <NexusLogo size={24} />
         <div className="leading-none">
-          <span className="text-sm font-semibold tracking-tight text-[hsl(var(--nx-fg))]">Nexus</span>
-          <span className="ml-1 text-sm font-light tracking-tight text-[hsl(var(--nx-fg-muted))]">Threat Explorer</span>
+          <span className="text-sm font-semibold tracking-tight text-[var(--nx-fg)]">Nexus</span>
+          <span className="ml-1 text-sm font-light tracking-tight text-[var(--nx-fg-muted)]">Threat Explorer</span>
         </div>
-        <span className="ml-1 hidden rounded bg-[hsl(var(--nx-surface-3))] px-1.5 py-0.5 text-[10px] text-[hsl(var(--nx-fg-muted))] sm:inline">
+        <span className="ml-1 hidden rounded bg-[var(--nx-surface-3)] px-1.5 py-0.5 text-[10px] text-[var(--nx-fg-muted)] sm:inline">
           {nodeCount} nodes
         </span>
       </div>
@@ -54,11 +54,11 @@ function IconButton({ name, label, badge, onClick }: { name: string; label: stri
       <button
         onClick={onClick}
         aria-label={label}
-        className="relative grid h-9 w-9 place-items-center rounded-full text-[hsl(var(--nx-fg-muted))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]"
+        className="relative grid h-9 w-9 place-items-center rounded-full text-[var(--nx-fg-muted)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]"
       >
         <Icon name={name} size={20} />
         {badge && (
-          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full border border-[hsl(var(--nx-surface-1))] bg-[hsl(var(--severity-malicious))]" />
+          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full border border-[var(--nx-surface-1)] bg-[var(--severity-malicious)]" />
         )}
       </button>
     </Tooltip>

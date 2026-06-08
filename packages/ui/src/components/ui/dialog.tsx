@@ -31,7 +31,7 @@ const DialogContent = React.forwardRef<
       ref={ref}
       data-slot="dialog-content"
       className={cn(
-        "fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] shadow-2xl focus:outline-none",
+        "fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] shadow-2xl focus:outline-none",
         className,
       )}
       {...props}
@@ -44,7 +44,7 @@ const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title ref={ref} className={cn("text-base font-semibold text-[hsl(var(--nx-fg))]", className)} {...props} />
+  <DialogPrimitive.Title ref={ref} className={cn("text-base font-semibold text-[var(--nx-fg)]", className)} {...props} />
 ));
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
@@ -52,7 +52,7 @@ const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description ref={ref} className={cn("text-xs leading-relaxed text-[hsl(var(--nx-fg-muted))]", className)} {...props} />
+  <DialogPrimitive.Description ref={ref} className={cn("text-xs leading-relaxed text-[var(--nx-fg-muted)]", className)} {...props} />
 ));
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 

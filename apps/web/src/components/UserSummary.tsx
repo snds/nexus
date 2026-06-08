@@ -15,13 +15,13 @@ export function UserSummary({ profile }: { profile: UserProfile }) {
       <div className="flex items-center gap-3 p-4 pb-3">
         <span
           className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-white"
-          style={{ background: "hsl(var(--entity-sid))" }}
+          style={{ background: "var(--entity-sid)" }}
         >
           <Icon name="person" size={24} filled />
         </span>
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-[hsl(var(--nx-fg))]">{profile.displayName}</p>
-          {profile.title && <p className="truncate text-xs text-[hsl(var(--nx-fg-muted))]">{profile.title}</p>}
+          <p className="truncate text-sm font-semibold text-[var(--nx-fg)]">{profile.displayName}</p>
+          {profile.title && <p className="truncate text-xs text-[var(--nx-fg-muted)]">{profile.title}</p>}
         </div>
       </div>
 
@@ -36,8 +36,8 @@ export function UserSummary({ profile }: { profile: UserProfile }) {
         <Block title={`Email Addresses (${profile.emails.length})`}>
           <ul className="flex flex-col gap-0.5">
             {profile.emails.map((e, i) => (
-              <li key={e} className="flex items-center gap-1.5 text-[11px] text-[hsl(var(--nx-fg-muted))]">
-                {i === 0 && <span className="text-[9px] uppercase text-[hsl(var(--nx-fg-subtle))]">primary</span>}
+              <li key={e} className="flex items-center gap-1.5 text-[11px] text-[var(--nx-fg-muted)]">
+                {i === 0 && <span className="text-[9px] uppercase text-[var(--nx-fg-subtle)]">primary</span>}
                 {e}
               </li>
             ))}
@@ -69,19 +69,19 @@ export function UserSummary({ profile }: { profile: UserProfile }) {
         <Block title={`Similar Users (${profile.similarUsers.length})`}>
           <table className="w-full text-[11px]">
             <thead>
-              <tr className="text-left text-[hsl(var(--nx-fg-subtle))]">
+              <tr className="text-left text-[var(--nx-fg-subtle)]">
                 <th className="pb-1 font-medium">Name</th>
                 <th className="pb-1 font-medium">Email</th>
               </tr>
             </thead>
             <tbody>
               {profile.similarUsers.map((u) => (
-                <tr key={u.email} className="border-t border-[hsl(var(--nx-border))]">
-                  <td className="flex items-center gap-1.5 py-1 text-[hsl(var(--nx-fg-muted))]">
-                    <Icon name="person" size={13} className="text-[hsl(var(--nx-fg-subtle))]" />
+                <tr key={u.email} className="border-t border-[var(--nx-border)]">
+                  <td className="flex items-center gap-1.5 py-1 text-[var(--nx-fg-muted)]">
+                    <Icon name="person" size={13} className="text-[var(--nx-fg-subtle)]" />
                     {u.name}
                   </td>
-                  <td className="truncate py-1 text-[hsl(var(--nx-fg-subtle))]">{u.email}</td>
+                  <td className="truncate py-1 text-[var(--nx-fg-subtle)]">{u.email}</td>
                 </tr>
               ))}
             </tbody>
@@ -96,9 +96,9 @@ function Field({ label, value, warn }: { label: string; value?: string | undefin
   if (!value) return null;
   return (
     <div className="min-w-0">
-      <p className="text-[9px] uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{label}</p>
-      <p className="flex items-center gap-1 truncate text-[11px] text-[hsl(var(--nx-fg-muted))]" title={value}>
-        {warn && <Icon name="warning" size={12} className="text-[hsl(var(--severity-suspicious))]" />}
+      <p className="text-[9px] uppercase tracking-wide text-[var(--nx-fg-subtle)]">{label}</p>
+      <p className="flex items-center gap-1 truncate text-[11px] text-[var(--nx-fg-muted)]" title={value}>
+        {warn && <Icon name="warning" size={12} className="text-[var(--severity-suspicious)]" />}
         {value}
       </p>
     </div>
@@ -107,8 +107,8 @@ function Field({ label, value, warn }: { label: string; value?: string | undefin
 
 function Block({ title, children }: { title?: string; children: ReactNode }) {
   return (
-    <div className="border-t border-[hsl(var(--nx-border))] p-4">
-      {title && <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{title}</h3>}
+    <div className="border-t border-[var(--nx-border)] p-4">
+      {title && <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--nx-fg-subtle)]">{title}</h3>}
       {children}
     </div>
   );

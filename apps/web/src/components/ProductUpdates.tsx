@@ -36,8 +36,8 @@ function Section({ title, items }: { title: string; items: string[] }) {
   if (items.length === 0) return null;
   return (
     <div className="mb-4">
-      <h3 className="mb-1.5 text-xs font-semibold text-[hsl(var(--nx-fg))]">{title}</h3>
-      <ul className="ml-4 list-disc space-y-1 text-xs leading-relaxed text-[hsl(var(--nx-fg-muted))]">
+      <h3 className="mb-1.5 text-xs font-semibold text-[var(--nx-fg)]">{title}</h3>
+      <ul className="ml-4 list-disc space-y-1 text-xs leading-relaxed text-[var(--nx-fg-muted)]">
         {items.map((t, i) => (
           <li key={i}>{t}</li>
         ))}
@@ -54,13 +54,13 @@ export function ProductUpdates({ onClose }: { onClose: () => void }) {
     <Modal onClose={onClose} label="Product updates" className="flex max-h-[80vh] w-[520px] flex-col">
         <div className="flex items-start justify-between p-5 pb-2">
           <div>
-            <h2 className="text-base font-semibold text-[hsl(var(--nx-fg))]">Product Updates</h2>
-            <p className="text-[11px] text-[hsl(var(--nx-fg-subtle))]">{rel.date}</p>
+            <h2 className="text-base font-semibold text-[var(--nx-fg)]">Product Updates</h2>
+            <p className="text-[11px] text-[var(--nx-fg-subtle)]">{rel.date}</p>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={onClose} className="text-[11px] font-medium text-[hsl(var(--nx-accent))] hover:underline">Show me later</button>
+            <button onClick={onClose} className="text-[11px] font-medium text-[var(--nx-accent)] hover:underline">Show me later</button>
             <Tooltip label="Close" side="left">
-              <button onClick={onClose} aria-label="Close" className="grid h-7 w-7 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]">
+              <button onClick={onClose} aria-label="Close" className="grid h-7 w-7 place-items-center rounded text-[var(--nx-fg-subtle)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]">
                 <Icon name="close" size={20} />
               </button>
             </Tooltip>
@@ -74,19 +74,19 @@ export function ProductUpdates({ onClose }: { onClose: () => void }) {
         </div>
 
         {RELEASES.length > 1 && (
-          <div className="flex items-center justify-between border-t border-[hsl(var(--nx-border))] px-5 py-2">
+          <div className="flex items-center justify-between border-t border-[var(--nx-border)] px-5 py-2">
             <Tooltip label="Previous update" side="top">
-              <button onClick={() => setI((v) => Math.max(0, v - 1))} disabled={i === 0} aria-label="Previous update" className="grid h-7 w-7 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg))] disabled:opacity-30">
+              <button onClick={() => setI((v) => Math.max(0, v - 1))} disabled={i === 0} aria-label="Previous update" className="grid h-7 w-7 place-items-center rounded text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg)] disabled:opacity-30">
                 <Icon name="chevron_left" size={20} />
               </button>
             </Tooltip>
             <div className="flex gap-1.5">
               {RELEASES.map((_, idx) => (
-                <span key={idx} className={"h-1.5 w-1.5 rounded-full " + (idx === i ? "bg-[hsl(var(--nx-accent))]" : "bg-[hsl(var(--nx-border-strong))]")} />
+                <span key={idx} className={"h-1.5 w-1.5 rounded-full " + (idx === i ? "bg-[var(--nx-accent)]" : "bg-[var(--nx-border-strong)]")} />
               ))}
             </div>
             <Tooltip label="Next update" side="top">
-              <button onClick={() => setI((v) => Math.min(RELEASES.length - 1, v + 1))} disabled={i === RELEASES.length - 1} aria-label="Next update" className="grid h-7 w-7 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg))] disabled:opacity-30">
+              <button onClick={() => setI((v) => Math.min(RELEASES.length - 1, v + 1))} disabled={i === RELEASES.length - 1} aria-label="Next update" className="grid h-7 w-7 place-items-center rounded text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg)] disabled:opacity-30">
                 <Icon name="chevron_right" size={20} />
               </button>
             </Tooltip>

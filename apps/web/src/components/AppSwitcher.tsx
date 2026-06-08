@@ -21,21 +21,21 @@ export function AppSwitcher() {
         <PopoverTrigger asChild>
           <button
             aria-label="Switch apps"
-            className="grid h-9 w-9 place-items-center rounded text-[hsl(var(--nx-fg-muted))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))] data-[state=open]:text-[hsl(var(--nx-fg))]"
+            className="grid h-9 w-9 place-items-center rounded text-[var(--nx-fg-muted)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)] data-[state=open]:text-[var(--nx-fg)]"
           >
             <Icon name="apps" size={22} />
           </button>
         </PopoverTrigger>
       </Tooltip>
       <PopoverContent align="start" className="w-[300px] p-2">
-        <p className="px-2 pb-1 pt-1 text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--nx-fg-subtle))]">Converged Intelligence</p>
+        <p className="px-2 pb-1 pt-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--nx-fg-subtle)]">Converged Intelligence</p>
         <div className="grid grid-cols-3 gap-1">
           {APPS.map((a) => (
             <button
               key={a.name}
               className={
-                "flex flex-col items-center gap-1.5 rounded-md p-3 text-center hover:bg-[hsl(var(--nx-surface-3))] " +
-                (a.active ? "text-[hsl(var(--nx-accent))]" : "text-[hsl(var(--nx-fg-muted))]")
+                "flex flex-col items-center gap-1.5 rounded-md p-3 text-center hover:bg-[var(--nx-surface-3)] " +
+                (a.active ? "text-[var(--nx-accent)]" : "text-[var(--nx-fg-muted)]")
               }
             >
               <Icon name={a.icon} size={24} filled={Boolean(a.active)} />

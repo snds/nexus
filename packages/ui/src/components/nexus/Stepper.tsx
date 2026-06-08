@@ -27,20 +27,20 @@ export function Stepper({ steps, current, className }: StepperProps) {
               <span
                 className={cn(
                   "grid h-9 w-9 place-items-center rounded-full text-sm font-semibold",
-                  done && "bg-[hsl(var(--nx-accent))] text-[hsl(var(--nx-accent-fg))]",
-                  active && "bg-[hsl(var(--nx-surface-3))] text-[hsl(var(--nx-fg))] ring-2 ring-[hsl(var(--nx-accent))]",
-                  !done && !active && "bg-[hsl(var(--nx-surface-2))] text-[hsl(var(--nx-fg-subtle))]",
+                  done && "bg-[var(--nx-accent)] text-[var(--nx-accent-fg)]",
+                  active && "bg-[var(--nx-surface-3)] text-[var(--nx-fg)] ring-2 ring-[var(--nx-accent)]",
+                  !done && !active && "bg-[var(--nx-surface-2)] text-[var(--nx-fg-subtle)]",
                 )}
                 aria-current={active ? "step" : undefined}
               >
                 {done ? <Icon name="check" size={18} filled /> : i + 1}
               </span>
-              <span className={cn("text-[10px] uppercase tracking-wide", active ? "text-[hsl(var(--nx-fg))]" : "text-[hsl(var(--nx-fg-subtle))]")}>
+              <span className={cn("text-[10px] uppercase tracking-wide", active ? "text-[var(--nx-fg)]" : "text-[var(--nx-fg-subtle)]")}>
                 {label}
               </span>
             </div>
             {i < steps.length - 1 && (
-              <span className={cn("mx-2 mb-5 h-0.5 flex-1", done ? "bg-[hsl(var(--nx-accent))]" : "bg-[hsl(var(--nx-border))]")} />
+              <span className={cn("mx-2 mb-5 h-0.5 flex-1", done ? "bg-[var(--nx-accent)]" : "bg-[var(--nx-border)]")} />
             )}
           </li>
         );

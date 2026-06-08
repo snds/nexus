@@ -39,3 +39,27 @@ stable ID for cross-tool reference.
   component exposing semantic variants. Document **all** of it, not just values in use.
 - **Rationale:** A design system documents the whole range; consumers need the scale, not only the
   subset the product happens to render today.
+
+## DS-2026-004 — Re-base color on Radix Colors + the 12-step contract
+
+- **Status:** Active · **Severity:** High (a11y + architecture) · **Date:** 2026-06-08
+- **Context:** A `/qa` audit measured three WCAG AA contrast failures — primary button (white on
+  accent, **2.83:1**), destructive (3.91), and light-mode subtle text (3.82). Root cause was
+  architectural: the hand-rolled HSL ramps violated the Radix step contract — text was drawn from
+  **step 9** (a *solid* step, not a text step), and accent was used for both fills and text.
+- **Decision:** Adopt `@radix-ui/colors` as L0 primitives — **Slate** (neutral) + **Indigo**
+  (accent) + **Red** (destructive). Primitives are single-mode flat constants (light + dark side by
+  side); modes live only at L1 semantics. Remap every semantic to its correct Radix step: text →
+  **11/12**, solids → **9/10**, borders → **6–8** (8 = ring). Split `--nx-accent` (solid, step 9)
+  from `--nx-accent-text` (step 11). Consume as `var()`; opacity via Tailwind utilities /
+  `color-mix`, not inline hsl alpha.
+- **Why Indigo over Blue:** white on Radix Blue-9 is only **3.26:1** (Radix step-9 targets APCA/3:1,
+  not WCAG-small). White on **Indigo-9 = 5.21:1** — a solid, on-brand primary that passes AA.
+- **Result (measured, both themes):** primary **5.21**, fg-subtle **5.79–9.06**, accent-text
+  **5.85–9.15** — all AA. Locked by a CI contrast test.
+- **Tradeoffs accepted:** (1) **Destructive** solid (Red-9 + white) is **3.91** — Radix reds can't
+  carry white at AA (same physics as Blue); kept as the standard solid destructive (passes AA-large
+  / APCA / 3:1), the single documented exception. Strict-AA alternative = the "soft" recipe
+  (red-3 bg + red-11 text). (2) Three text tiers collapse to two AA-safe steps (11/12); finer
+  hierarchy is by weight/size, not a sub-AA color. (3) Entity/severity remain single-tone primitives
+  (full Radix-scale mapping is a tracked fast-follow).

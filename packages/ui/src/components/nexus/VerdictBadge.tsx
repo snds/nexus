@@ -30,10 +30,10 @@ export function VerdictBadge({ verdict, className }: VerdictBadgeProps) {
         className,
       )}
       style={{
-        color: `hsl(var(--severity-${verdict}))`,
-        backgroundColor: `hsl(var(--severity-${verdict}) / 0.12)`,
+        color: `var(--severity-${verdict})`,
+        backgroundColor: `color-mix(in srgb, var(--severity-${verdict}) 12%, transparent)`,
         // ring color via box-shadow-compatible token
-        boxShadow: `inset 0 0 0 1px hsl(var(--severity-${verdict}) / 0.35)`,
+        boxShadow: `inset 0 0 0 1px color-mix(in srgb, var(--severity-${verdict}) 35%, transparent)`,
       }}
     >
       {LABEL[verdict]}

@@ -7,7 +7,7 @@ export default meta;
 type Story = StoryObj<typeof Tooltip>;
 
 const Trigger = (
-  <button type="button" aria-label="Anchor" className="grid h-9 w-9 place-items-center rounded-md border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))]">
+  <button type="button" aria-label="Anchor" className="grid h-9 w-9 place-items-center rounded-md border border-[var(--nx-border)] bg-[var(--nx-surface-2)]">
     ★
   </button>
 );

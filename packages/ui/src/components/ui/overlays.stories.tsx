@@ -46,7 +46,7 @@ export const DropdownMenuStory: Story = {
         <DropdownMenuItem>Open</DropdownMenuItem>
         <DropdownMenuItem>Duplicate</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-[hsl(var(--severity-malicious))]">Delete</DropdownMenuItem>
+        <DropdownMenuItem className="text-[var(--severity-malicious)]">Delete</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ),
@@ -60,8 +60,8 @@ export const PopoverStory: Story = {
         <Button variant="outline">Open popover</Button>
       </PopoverTrigger>
       <PopoverContent className="w-64 p-4">
-        <p className="text-sm font-medium text-[hsl(var(--nx-fg))]">Popover</p>
-        <p className="mt-1 text-xs text-[hsl(var(--nx-fg-muted))]">Anchored, collision-aware floating surface (Radix Popover).</p>
+        <p className="text-sm font-medium text-[var(--nx-fg)]">Popover</p>
+        <p className="mt-1 text-xs text-[var(--nx-fg-muted)]">Anchored, collision-aware floating surface (Radix Popover).</p>
       </PopoverContent>
     </Popover>
   ),

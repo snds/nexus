@@ -7,33 +7,35 @@ import { SwatchGrid } from '@site/src/components/ds';
 
 # Theming & modes
 
-The system is **dark-first**: `:root` defines the dark theme, and a single `:root.light` class
-**re-points the primitive ramps** (and a few entity/severity overrides). Because every component
-reads [semantics](/docs/tokens/semantics) — which alias primitives — nothing else changes.
+The system is **dark-first**, and the theme switch lives in **one layer only — the semantics**.
+Primitives are flat constants exposing both light and dark Radix values side by side; `:root`
+points the semantics at the dark set and `:root.light` re-points the *same* semantics at the light
+set. Primitives themselves never change between themes.
 
 ## How a mode switch works
 
 ```css
-:root {                      /* dark — the default */
-  --nx-neutral-1: 222 38% 5%;
-  --nx-neutral-12: 210 30% 96%;
-  --nx-accent-9: 205 90% 56%;
+:root {                      /* dark — the default: semantics → dark primitives */
+  --nx-bg: var(--nx-neutral-dark-1);
+  --nx-fg: var(--nx-neutral-dark-12);
+  --nx-accent: var(--nx-accent-dark-9);
 }
-:root.light {                /* light — re-point primitives only */
-  --nx-neutral-1: 210 30% 99%;
-  --nx-neutral-12: 222 40% 11%;
-  /* …accent + a few domain overrides */
+:root.light {                /* light — same semantics → light primitives */
+  --nx-bg: var(--nx-neutral-light-1);
+  --nx-fg: var(--nx-neutral-light-12);
+  --nx-accent: var(--nx-accent-light-9);
 }
 ```
 
-Semantics (`--nx-bg: var(--nx-neutral-1)`) and components never change — they follow the ramp.
-This is the payoff of the [tier model](/docs/tokens/token-model): theming is a one-layer edit.
+Components read semantics (`var(--nx-bg)`) and never change — they follow whichever primitive set
+the active theme selected. This is the payoff of the [tier model](/docs/tokens/token-model):
+theming is a one-layer edit, and primitives stay single-mode.
 
-## HSL triplets
+## Color values & opacity
 
-Values are stored as bare HSL triplets (`222 38% 5%`) and consumed as `hsl(var(--token))`. That
-lets any consumer add an alpha channel inline — e.g. the translucent node fill is
-`hsl(var(--nx-bg) / 0.48)`.
+Colors are real **Radix Colors** values (hex), consumed directly as `var(--token)` — never wrapped
+in `hsl()`. Opacity comes from Tailwind opacity utilities or `color-mix()` — e.g. the translucent
+node fill is `color-mix(in srgb, var(--nx-bg) 48%, transparent)` — never an inline alpha channel.
 
 ## Live preview
 

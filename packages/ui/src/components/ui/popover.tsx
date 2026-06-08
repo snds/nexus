@@ -22,7 +22,7 @@ const PopoverContent = React.forwardRef<
       sideOffset={sideOffset}
       data-slot="popover-content"
       className={cn(
-        "z-50 overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] shadow-2xl focus:outline-none",
+        "z-50 overflow-hidden rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] shadow-2xl focus:outline-none",
         className,
       )}
       {...props}

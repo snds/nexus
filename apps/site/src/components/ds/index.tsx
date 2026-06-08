@@ -46,12 +46,12 @@ export function ComponentMeta({
         padding: "16px 20px",
         margin: "8px 0 24px",
         borderRadius: 12,
-        border: "1px solid hsl(var(--nx-border))",
-        background: "hsl(var(--nx-surface-1))",
+        border: "1px solid var(--nx-border)",
+        background: "var(--nx-surface-1)",
       }}
     >
       <StatusBadge status={status} />
-      <span style={{ flex: 1, minWidth: 220, color: "hsl(var(--nx-fg-muted))", fontSize: 14 }}>{summary}</span>
+      <span style={{ flex: 1, minWidth: 220, color: "var(--nx-fg-muted)", fontSize: 14 }}>{summary}</span>
       <div style={{ display: "flex", gap: 8 }}>
         {storybook ? (
           <a href={STORYBOOK + storybook} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
@@ -59,7 +59,7 @@ export function ComponentMeta({
           </a>
         ) : null}
         {source ? (
-          <a href={source} style={{ alignSelf: "center", fontSize: 13, color: "hsl(var(--nx-fg-subtle))", fontFamily: "var(--nx-font-mono)" }}>
+          <a href={source} style={{ alignSelf: "center", fontSize: 13, color: "var(--nx-fg-subtle)", fontFamily: "var(--nx-font-mono)" }}>
             {source.replace(/^.*\/src\//, "src/")}
           </a>
         ) : null}
@@ -106,14 +106,14 @@ export function Swatch({ name, label, kind = "fill" }: { name: string; label: st
   return (
     <div className="tw-flex tw-items-center tw-gap-3" style={{ display: "flex", alignItems: "center", gap: 12 }}>
       {kind === "text" ? (
-        <span style={{ display: "grid", placeItems: "center", height: 40, width: 40, flexShrink: 0, borderRadius: 8, border: "1px solid hsl(var(--nx-border))", background: "hsl(var(--nx-bg))", color: `hsl(var(${name}))`, fontWeight: 700 }}>Aa</span>
+        <span style={{ display: "grid", placeItems: "center", height: 40, width: 40, flexShrink: 0, borderRadius: 8, border: "1px solid var(--nx-border)", background: "var(--nx-bg)", color: `var(${name})`, fontWeight: 700 }}>Aa</span>
       ) : (
-        <span style={kind === "border" ? { height: 40, width: 40, flexShrink: 0, borderRadius: 8, border: `3px solid hsl(var(${name}))`, background: "hsl(var(--nx-surface-2))" } : { height: 40, width: 40, flexShrink: 0, borderRadius: 8, background: `hsl(var(${name}))`, boxShadow: "inset 0 0 0 1px hsl(var(--nx-border))" }} />
+        <span style={kind === "border" ? { height: 40, width: 40, flexShrink: 0, borderRadius: 8, border: `3px solid var(${name})`, background: "var(--nx-surface-2)" } : { height: 40, width: 40, flexShrink: 0, borderRadius: 8, background: `var(${name})`, boxShadow: "inset 0 0 0 1px var(--nx-border)" }} />
       )}
       <div style={{ minWidth: 0 }}>
-        <div style={{ fontSize: 12, fontWeight: 500, color: "hsl(var(--nx-fg))" }}>{label}</div>
-        <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "hsl(var(--nx-fg-subtle))" }}>{name}</div>
-        <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "hsl(var(--nx-fg-subtle))" }}>{v || "—"}</div>
+        <div style={{ fontSize: 12, fontWeight: 500, color: "var(--nx-fg)" }}>{label}</div>
+        <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "var(--nx-fg-subtle)" }}>{name}</div>
+        <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "var(--nx-fg-subtle)" }}>{v || "—"}</div>
       </div>
     </div>
   );
@@ -136,9 +136,9 @@ export function Ramp({ prefix }: { prefix: string }) {
         const name = `${prefix}-${i}`;
         return (
           <div key={i} style={{ width: 64 }}>
-            <div style={{ height: 44, borderRadius: 8, background: `hsl(var(${name}))`, boxShadow: "inset 0 0 0 1px hsl(var(--nx-border))" }} />
-            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "hsl(var(--nx-fg-subtle))", marginTop: 4 }}>{i}</div>
-            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 9, color: "hsl(var(--nx-fg-subtle))" }}>{val(name) || "—"}</div>
+            <div style={{ height: 44, borderRadius: 8, background: `var(${name})`, boxShadow: "inset 0 0 0 1px var(--nx-border)" }} />
+            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 10, color: "var(--nx-fg-subtle)", marginTop: 4 }}>{i}</div>
+            <div style={{ fontFamily: "var(--nx-font-mono)", fontSize: 9, color: "var(--nx-fg-subtle)" }}>{val(name) || "—"}</div>
           </div>
         );
       })}
@@ -157,8 +157,8 @@ export function Specimen({ children, padded = true }: { children: ReactNode; pad
         padding: padded ? 28 : 12,
         margin: "16px 0",
         borderRadius: 12,
-        border: "1px solid hsl(var(--nx-border))",
-        background: "hsl(var(--nx-bg))",
+        border: "1px solid var(--nx-border)",
+        background: "var(--nx-bg)",
       }}
     >
       {children}

@@ -16,9 +16,9 @@ const KIND_ICON: Record<StateKind, string> = {
   error: "error",
 };
 const KIND_COLOR: Record<StateKind, string> = {
-  loading: "hsl(var(--nx-fg-subtle))",
-  empty: "hsl(var(--nx-fg-subtle))",
-  error: "hsl(var(--severity-malicious))",
+  loading: "var(--nx-fg-subtle)",
+  empty: "var(--nx-fg-subtle)",
+  error: "var(--severity-malicious)",
 };
 
 export interface StateBlockProps {
@@ -45,12 +45,12 @@ export function StateBlock({ kind, title, message, icon, action, className }: St
         <span style={{ color: KIND_COLOR[kind] }}>
           <Icon name={name} size={40} className={cn(kind === "loading" && "animate-spin")} />
         </span>
-        <p className="text-sm font-medium text-[hsl(var(--nx-fg))]">{title}</p>
-        {message && <p className="text-xs leading-relaxed text-[hsl(var(--nx-fg-muted))]">{message}</p>}
+        <p className="text-sm font-medium text-[var(--nx-fg)]">{title}</p>
+        {message && <p className="text-xs leading-relaxed text-[var(--nx-fg-muted)]">{message}</p>}
         {action && (
           <button
             onClick={action.onClick}
-            className="mt-2 rounded-md border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] px-3 py-1.5 text-xs font-medium text-[hsl(var(--nx-fg))] hover:bg-[hsl(var(--nx-surface-3))]"
+            className="mt-2 rounded-md border border-[var(--nx-border)] bg-[var(--nx-surface-2)] px-3 py-1.5 text-xs font-medium text-[var(--nx-fg)] hover:bg-[var(--nx-surface-3)]"
           >
             {action.label}
           </button>

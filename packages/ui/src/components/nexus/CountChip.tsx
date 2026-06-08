@@ -20,7 +20,7 @@ export function CountChip({ count, prefix = "+", className }: CountChipProps) {
     <span
       data-slot="count-chip"
       className={cn(
-        "rounded-full border border-[hsl(var(--nx-border-strong))] bg-[hsl(var(--nx-surface-2))] px-1.5 py-px text-[10px] font-semibold tabular-nums text-[hsl(var(--nx-fg))] shadow-sm",
+        "rounded-full border border-[var(--nx-border-strong)] bg-[var(--nx-surface-2)] px-1.5 py-px text-[10px] font-semibold tabular-nums text-[var(--nx-fg)] shadow-sm",
         className,
       )}
     >

@@ -10,7 +10,7 @@
 @tailwind utilities;
 
 :root {
-  --ifm-color-primary: hsl(var(--nx-accent));
+  --ifm-color-primary: var(--nx-accent);
   --ifm-font-family-base: var(--nx-font-sans);
   --ifm-font-family-monospace: var(--nx-font-mono);
   --ifm-global-radius: var(--nx-radius);
@@ -23,77 +23,77 @@
    the chrome silently falls back to Infima's neutral grays (#1b1b1d), not the cool DS neutrals. */
 html[data-theme="dark"] {
   /* accent ramp */
-  --ifm-color-primary: hsl(var(--nx-accent));
-  --ifm-color-primary-dark: hsl(var(--nx-accent));
-  --ifm-color-primary-darker: hsl(var(--nx-accent));
-  --ifm-color-primary-darkest: hsl(var(--nx-accent));
-  --ifm-color-primary-light: hsl(var(--nx-accent));
-  --ifm-color-primary-lighter: hsl(var(--nx-accent));
-  --ifm-color-primary-lightest: hsl(var(--nx-accent));
-  --ifm-link-color: hsl(var(--nx-accent));
+  --ifm-color-primary: var(--nx-accent);
+  --ifm-color-primary-dark: var(--nx-accent);
+  --ifm-color-primary-darker: var(--nx-accent);
+  --ifm-color-primary-darkest: var(--nx-accent);
+  --ifm-color-primary-light: var(--nx-accent);
+  --ifm-color-primary-lighter: var(--nx-accent);
+  --ifm-color-primary-lightest: var(--nx-accent);
+  --ifm-link-color: var(--nx-accent);
 
   /* surfaces */
-  --ifm-background-color: hsl(var(--nx-bg));
-  --ifm-background-surface-color: hsl(var(--nx-surface-1));
-  --ifm-card-background-color: hsl(var(--nx-surface-1));
-  --ifm-hover-overlay: hsl(var(--nx-surface-2));
+  --ifm-background-color: var(--nx-bg);
+  --ifm-background-surface-color: var(--nx-surface-1);
+  --ifm-card-background-color: var(--nx-surface-1);
+  --ifm-hover-overlay: var(--nx-surface-2);
 
   /* emphasis ramp (used for borders/dividers/muted bg across the chrome) */
-  --ifm-color-emphasis-0: hsl(var(--nx-bg));
-  --ifm-color-emphasis-100: hsl(var(--nx-surface-1));
-  --ifm-color-emphasis-200: hsl(var(--nx-surface-2));
-  --ifm-color-emphasis-300: hsl(var(--nx-surface-3));
-  --ifm-color-emphasis-400: hsl(var(--nx-border));
-  --ifm-color-emphasis-500: hsl(var(--nx-border-strong));
-  --ifm-color-emphasis-600: hsl(var(--nx-fg-subtle));
-  --ifm-color-emphasis-700: hsl(var(--nx-fg-muted));
-  --ifm-color-emphasis-800: hsl(var(--nx-fg-muted));
-  --ifm-color-emphasis-900: hsl(var(--nx-fg));
+  --ifm-color-emphasis-0: var(--nx-bg);
+  --ifm-color-emphasis-100: var(--nx-surface-1);
+  --ifm-color-emphasis-200: var(--nx-surface-2);
+  --ifm-color-emphasis-300: var(--nx-surface-3);
+  --ifm-color-emphasis-400: var(--nx-border);
+  --ifm-color-emphasis-500: var(--nx-border-strong);
+  --ifm-color-emphasis-600: var(--nx-fg-subtle);
+  --ifm-color-emphasis-700: var(--nx-fg-muted);
+  --ifm-color-emphasis-800: var(--nx-fg-muted);
+  --ifm-color-emphasis-900: var(--nx-fg);
 
   /* text */
-  --ifm-color-content: hsl(var(--nx-fg));
-  --ifm-color-content-secondary: hsl(var(--nx-fg-muted));
-  --ifm-heading-color: hsl(var(--nx-fg));
+  --ifm-color-content: var(--nx-fg);
+  --ifm-color-content-secondary: var(--nx-fg-muted);
+  --ifm-heading-color: var(--nx-fg);
 
   /* navbar */
-  --ifm-navbar-background-color: hsl(var(--nx-surface-1));
-  --ifm-navbar-link-color: hsl(var(--nx-fg-muted));
-  --ifm-navbar-link-hover-color: hsl(var(--nx-fg));
-  --ifm-navbar-shadow: 0 1px 0 0 hsl(var(--nx-border));
+  --ifm-navbar-background-color: var(--nx-surface-1);
+  --ifm-navbar-link-color: var(--nx-fg-muted);
+  --ifm-navbar-link-hover-color: var(--nx-fg);
+  --ifm-navbar-shadow: 0 1px 0 0 var(--nx-border);
 
   /* sidebar / menu */
-  --ifm-menu-color: hsl(var(--nx-fg-muted));
-  --ifm-menu-color-active: hsl(var(--nx-accent));
-  --ifm-menu-color-background-active: hsl(var(--nx-accent) / 0.14);
-  --ifm-menu-color-background-hover: hsl(var(--nx-surface-2));
+  --ifm-menu-color: var(--nx-fg-muted);
+  --ifm-menu-color-active: var(--nx-accent);
+  --ifm-menu-color-background-active: color-mix(in srgb, var(--nx-accent) 14%, transparent);
+  --ifm-menu-color-background-hover: var(--nx-surface-2);
 
   /* TOC + breadcrumbs + tables + rules */
-  --ifm-toc-border-color: hsl(var(--nx-border));
-  --ifm-table-border-color: hsl(var(--nx-border));
-  --ifm-table-stripe-background: hsl(var(--nx-surface-1));
-  --ifm-hr-background-color: hsl(var(--nx-border));
-  --ifm-breadcrumb-color-active: hsl(var(--nx-accent));
-  --ifm-breadcrumb-item-background-active: hsl(var(--nx-surface-2));
+  --ifm-toc-border-color: var(--nx-border);
+  --ifm-table-border-color: var(--nx-border);
+  --ifm-table-stripe-background: var(--nx-surface-1);
+  --ifm-hr-background-color: var(--nx-border);
+  --ifm-breadcrumb-color-active: var(--nx-accent);
+  --ifm-breadcrumb-item-background-active: var(--nx-surface-2);
 
   /* code */
-  --ifm-code-background: hsl(var(--nx-surface-2));
-  --ifm-pre-background: hsl(var(--nx-surface-1));
-  --docusaurus-highlighted-code-line-bg: hsl(var(--nx-surface-3));
+  --ifm-code-background: var(--nx-surface-2);
+  --ifm-pre-background: var(--nx-surface-1);
+  --docusaurus-highlighted-code-line-bg: var(--nx-surface-3);
 
   /* blockquote / admonitions */
-  --ifm-blockquote-color: hsl(var(--nx-fg-muted));
-  --ifm-blockquote-border-color: hsl(var(--nx-border-strong));
+  --ifm-blockquote-color: var(--nx-fg-muted);
+  --ifm-blockquote-border-color: var(--nx-border-strong);
 
   /* footer */
-  --ifm-footer-background-color: hsl(var(--nx-surface-1));
-  --ifm-footer-color: hsl(var(--nx-fg-muted));
-  --ifm-footer-link-color: hsl(var(--nx-fg-muted));
-  --ifm-footer-title-color: hsl(var(--nx-fg));
+  --ifm-footer-background-color: var(--nx-surface-1);
+  --ifm-footer-color: var(--nx-fg-muted);
+  --ifm-footer-link-color: var(--nx-fg-muted);
+  --ifm-footer-title-color: var(--nx-fg);
 }
 
 /* Navbar bottom hairline uses the DS border. */
 .navbar {
-  border-bottom: 1px solid hsl(var(--nx-border));
+  border-bottom: 1px solid var(--nx-border);
 }
 
 /* Material Symbols base class (font loaded via config `stylesheets`). */

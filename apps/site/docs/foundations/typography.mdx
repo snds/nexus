@@ -19,7 +19,7 @@ primitives. This is how text is used in product.
 <div style={{ display: 'flex', flexDirection: 'column', gap: 12, margin: '16px 0' }}>
   {['display','h1','h2','h3','title','body','body-sm','label','caption','overline','code'].map((v) => (
     <div key={v} style={{ display: 'flex', alignItems: 'baseline', gap: 16 }}>
-      <code style={{ width: 84, flexShrink: 0, color: 'hsl(var(--nx-fg-subtle))', fontSize: 11 }}>{v}</code>
+      <code style={{ width: 84, flexShrink: 0, color: 'var(--nx-fg-subtle)', fontSize: 11 }}>{v}</code>
       <Text variant={v}>The quick brown fox</Text>
     </div>
   ))}

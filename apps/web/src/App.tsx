@@ -516,13 +516,13 @@ export function App() {
             <ToolButton icon="theater_comedy" label="Masquerade mode" tooltipSide="left" active={masquerade} onClick={() => setMasquerade((v) => !v)} />
           </div>
           {masquerade && (
-            <div className="absolute left-1/2 top-3 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-[hsl(var(--entity-sid)/0.5)] bg-[hsl(var(--entity-sid)/0.15)] px-3 py-1.5 text-xs text-[hsl(var(--entity-sid))]">
+            <div className="absolute left-1/2 top-3 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-[color-mix(in_srgb,var(--entity-sid)_50%,transparent)] bg-[color-mix(in_srgb,var(--entity-sid)_15%,transparent)] px-3 py-1.5 text-xs text-[var(--entity-sid)]">
               <Icon name="theater_comedy" size={14} filled />
               Masquerade mode — sender impersonation highlighted
             </div>
           )}
           {note && (
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-md border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] px-3 py-1.5 text-xs shadow">
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-md border border-[var(--nx-border)] bg-[var(--nx-surface-2)] px-3 py-1.5 text-xs shadow">
               {note}
             </div>
           )}
@@ -544,7 +544,7 @@ export function App() {
         <aside
           aria-hidden={!panel.open}
           className={
-            "absolute right-0 top-0 z-10 h-full w-[340px] overflow-y-auto border-l border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] shadow-2xl transition-transform duration-300 ease-out " +
+            "absolute right-0 top-0 z-10 h-full w-[340px] overflow-y-auto border-l border-[var(--nx-border)] bg-[var(--nx-surface-1)] shadow-2xl transition-transform duration-300 ease-out " +
             (panel.open ? "translate-x-0" : "translate-x-full")
           }
         >
@@ -640,7 +640,7 @@ function ContextMenu({
       <div className="fixed inset-0 z-40" onClick={onClose} onContextMenu={(e) => { e.preventDefault(); onClose(); }} />
       <div
         role="menu"
-        className="fixed z-50 w-[224px] overflow-hidden rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] py-1 text-[hsl(var(--nx-fg))] shadow-2xl"
+        className="fixed z-50 w-[224px] overflow-hidden rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-2)] py-1 text-[var(--nx-fg)] shadow-2xl"
         style={{ left, top }}
       >
         {groups.map((g, gi) => {
@@ -648,8 +648,8 @@ function ContextMenu({
           if (cmds.length === 0) return null;
           return (
             <div key={g.cls}>
-              {gi > 0 && <div className="my-1 h-px bg-[hsl(var(--nx-border))]" />}
-              <p className="px-3 pb-0.5 pt-1 text-[9px] font-semibold uppercase tracking-wider text-[hsl(var(--nx-fg-subtle))]">
+              {gi > 0 && <div className="my-1 h-px bg-[var(--nx-border)]" />}
+              <p className="px-3 pb-0.5 pt-1 text-[9px] font-semibold uppercase tracking-wider text-[var(--nx-fg-subtle)]">
                 {g.title}
               </p>
               {cmds.map((c) => (
@@ -657,10 +657,10 @@ function ContextMenu({
                   key={c.id}
                   role="menuitem"
                   onClick={() => onRun(c)}
-                  className="flex w-full items-center justify-between px-3 py-1.5 text-left text-xs hover:bg-[hsl(var(--nx-surface-3))]"
+                  className="flex w-full items-center justify-between px-3 py-1.5 text-left text-xs hover:bg-[var(--nx-surface-3)]"
                 >
                   <span>{c.label}</span>
-                  {c.shortcut && <span className="ml-3 text-[10px] text-[hsl(var(--nx-fg-subtle))]">{c.shortcut}</span>}
+                  {c.shortcut && <span className="ml-3 text-[10px] text-[var(--nx-fg-subtle)]">{c.shortcut}</span>}
                 </button>
               ))}
             </div>
@@ -677,7 +677,7 @@ function CloseBtn({ onClose }: { onClose: () => void }) {
     <button
       onClick={onClose}
       aria-label="Close detail panel"
-      className="grid h-7 w-7 shrink-0 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]"
+      className="grid h-7 w-7 shrink-0 place-items-center rounded text-[var(--nx-fg-subtle)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]"
     >
       <Icon name="close" size={18} />
     </button>
@@ -693,8 +693,8 @@ function Tab({ active, onClick, children }: { active: boolean; onClick: () => vo
       className={
         "border-b-2 px-4 py-3 text-[11px] font-semibold uppercase tracking-wide " +
         (active
-          ? "border-[hsl(var(--nx-accent))] text-[hsl(var(--nx-fg))]"
-          : "border-transparent text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg-muted))]")
+          ? "border-[var(--nx-accent)] text-[var(--nx-fg)]"
+          : "border-transparent text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg-muted)]")
       }
     >
       {children}
@@ -709,9 +709,9 @@ function NeighborGrid({ neighbors }: { neighbors: [EntityType, number][] }) {
         <div key={t} className="flex flex-col gap-1">
           <div className="flex items-center gap-1.5">
             <EntityIcon type={t} size={14} />
-            <span className="text-sm font-bold tabular-nums text-[hsl(var(--nx-fg))]">{n}</span>
+            <span className="text-sm font-bold tabular-nums text-[var(--nx-fg)]">{n}</span>
           </div>
-          <span className="text-[10px] leading-tight text-[hsl(var(--nx-fg-subtle))]">
+          <span className="text-[10px] leading-tight text-[var(--nx-fg-subtle)]">
             {n === 1 ? ENTITY_META[t].label : plural(ENTITY_META[t].label)}
           </span>
         </div>
@@ -744,7 +744,7 @@ function DetailContent({
   if (profile) {
     return (
       <div data-slot="detail-content" className="flex flex-col">
-        <div className="flex items-center justify-between border-b border-[hsl(var(--nx-border))] pr-2">
+        <div className="flex items-center justify-between border-b border-[var(--nx-border)] pr-2">
           <div role="tablist" className="flex">
             <Tab active={tab === "summary"} onClick={() => setTab("summary")}>
               Summary
@@ -762,7 +762,7 @@ function DetailContent({
             <NeighborGrid neighbors={neighbors} />
           </Section>
         ) : (
-          <p className="p-4 text-xs text-[hsl(var(--nx-fg-subtle))]">No neighbor nodes loaded yet.</p>
+          <p className="p-4 text-xs text-[var(--nx-fg-subtle)]">No neighbor nodes loaded yet.</p>
         )}
       </div>
     );
@@ -771,11 +771,11 @@ function DetailContent({
   return (
     <div data-slot="detail-content" className="flex flex-col">
       {/* header */}
-      <div className="border-b border-[hsl(var(--nx-border))] p-4">
+      <div className="border-b border-[var(--nx-border)] p-4">
         <div className="mb-2 flex items-start gap-2.5">
           <span
             className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border-2"
-            style={{ borderColor: `hsl(var(--entity-${meta.colorToken}))`, background: "hsl(var(--nx-surface-2))" }}
+            style={{ borderColor: `var(--entity-${meta.colorToken})`, background: "var(--nx-surface-2)" }}
           >
             <EntityIcon type={entity.type} size={18} />
           </span>
@@ -783,26 +783,26 @@ function DetailContent({
             <p className="truncate text-sm font-semibold" title={entity.label}>
               {entity.label}
             </p>
-            <p className="text-[10px] uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{meta.label}</p>
+            <p className="text-[10px] uppercase tracking-wide text-[var(--nx-fg-subtle)]">{meta.label}</p>
           </div>
           <CloseBtn onClose={onClose} />
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <VerdictBadge verdict={entity.verdict} />
           {typeof entity.score === "number" && (
-            <span className="text-xs text-[hsl(var(--nx-fg-muted))]">score {entity.score}</span>
+            <span className="text-xs text-[var(--nx-fg-muted)]">score {entity.score}</span>
           )}
         </div>
       </div>
 
       {/* affected users */}
       {entity.usersAtRisk ? (
-        <div className="mx-4 mt-4 flex items-center gap-3 rounded-lg border border-[hsl(var(--severity-medium)/0.4)] bg-[hsl(var(--severity-medium)/0.08)] px-3 py-2.5">
-          <span className="text-xl font-bold tabular-nums text-[hsl(var(--severity-medium))]">{entity.usersAtRisk}</span>
-          <span className="text-xs leading-tight text-[hsl(var(--nx-fg-muted))]">
+        <div className="mx-4 mt-4 flex items-center gap-3 rounded-lg border border-[color-mix(in_srgb,var(--severity-medium)_40%,transparent)] bg-[color-mix(in_srgb,var(--severity-medium)_8%,transparent)] px-3 py-2.5">
+          <span className="text-xl font-bold tabular-nums text-[var(--severity-medium)]">{entity.usersAtRisk}</span>
+          <span className="text-xs leading-tight text-[var(--nx-fg-muted)]">
             Users impacted
             <br />
-            <span className="text-[hsl(var(--nx-fg-subtle))]">in your organization</span>
+            <span className="text-[var(--nx-fg-subtle)]">in your organization</span>
           </span>
         </div>
       ) : null}
@@ -813,8 +813,8 @@ function DetailContent({
           <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-[11px]">
             {attrs.map(([k, v]) => (
               <div key={k} className="contents">
-                <dt className="text-[hsl(var(--nx-fg-subtle))]">{k}</dt>
-                <dd className="text-right text-[hsl(var(--nx-fg-muted))]">{String(v)}</dd>
+                <dt className="text-[var(--nx-fg-subtle)]">{k}</dt>
+                <dd className="text-right text-[var(--nx-fg-muted)]">{String(v)}</dd>
               </div>
             ))}
           </dl>
@@ -827,14 +827,14 @@ function DetailContent({
           <dl className="grid grid-cols-2 gap-y-1 text-[11px]">
             {entity.firstSeen && (
               <>
-                <dt className="text-[hsl(var(--nx-fg-subtle))]">First seen</dt>
-                <dd className="text-right text-[hsl(var(--nx-fg-muted))]">{entity.firstSeen}</dd>
+                <dt className="text-[var(--nx-fg-subtle)]">First seen</dt>
+                <dd className="text-right text-[var(--nx-fg-muted)]">{entity.firstSeen}</dd>
               </>
             )}
             {entity.lastSeen && (
               <>
-                <dt className="text-[hsl(var(--nx-fg-subtle))]">Last seen</dt>
-                <dd className="text-right text-[hsl(var(--nx-fg-muted))]">{entity.lastSeen}</dd>
+                <dt className="text-[var(--nx-fg-subtle)]">Last seen</dt>
+                <dd className="text-right text-[var(--nx-fg-muted)]">{entity.lastSeen}</dd>
               </>
             )}
           </dl>
@@ -851,19 +851,19 @@ function DetailContent({
       {/* description */}
       {description && (
         <Section title="Description">
-          <p className="text-[11px] leading-relaxed text-[hsl(var(--nx-fg-muted))]">{description}</p>
+          <p className="text-[11px] leading-relaxed text-[var(--nx-fg-muted)]">{description}</p>
         </Section>
       )}
 
       {/* external links (dummy) */}
       <div className="flex flex-col gap-1.5 p-4">
-        <button className="rounded-md border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] px-3 py-1.5 text-xs hover:bg-[hsl(var(--nx-surface-3))]">
+        <button className="rounded-md border border-[var(--nx-border)] bg-[var(--nx-surface-2)] px-3 py-1.5 text-xs hover:bg-[var(--nx-surface-3)]">
           View VirusTotal Results ↗
         </button>
-        <button onClick={onViewInTap} className="flex items-center justify-center gap-1.5 rounded-md border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] px-3 py-1.5 text-xs hover:bg-[hsl(var(--nx-surface-3))]">
-          <Icon name="security" size={14} className="text-[hsl(var(--nx-accent))]" /> View in TAP ↗
+        <button onClick={onViewInTap} className="flex items-center justify-center gap-1.5 rounded-md border border-[var(--nx-border)] bg-[var(--nx-surface-2)] px-3 py-1.5 text-xs hover:bg-[var(--nx-surface-3)]">
+          <Icon name="security" size={14} className="text-[var(--nx-accent)]" /> View in TAP ↗
         </button>
-        <button onClick={onViewFullDetails} className="rounded-md px-3 py-1.5 text-xs text-[hsl(var(--nx-accent))] hover:underline">
+        <button onClick={onViewFullDetails} className="rounded-md px-3 py-1.5 text-xs text-[var(--nx-accent)] hover:underline">
           View full details →
         </button>
       </div>
@@ -873,8 +873,8 @@ function DetailContent({
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="border-t border-[hsl(var(--nx-border))] p-4">
-      <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">{title}</h3>
+    <div className="border-t border-[var(--nx-border)] p-4">
+      <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--nx-fg-subtle)]">{title}</h3>
       {children}
     </div>
   );
@@ -885,20 +885,20 @@ function DetailSkeleton() {
   return (
     <div className="animate-pulse p-4" data-slot="detail-skeleton">
       <div className="mb-3 flex items-center gap-2.5">
-        <div className="h-9 w-9 rounded-lg bg-[hsl(var(--nx-surface-3))]" />
+        <div className="h-9 w-9 rounded-lg bg-[var(--nx-surface-3)]" />
         <div className="flex-1">
-          <div className="mb-1.5 h-4 w-40 rounded bg-[hsl(var(--nx-surface-3))]" />
-          <div className="h-2.5 w-16 rounded bg-[hsl(var(--nx-surface-3))]" />
+          <div className="mb-1.5 h-4 w-40 rounded bg-[var(--nx-surface-3)]" />
+          <div className="h-2.5 w-16 rounded bg-[var(--nx-surface-3)]" />
         </div>
       </div>
-      <div className="mb-4 h-5 w-24 rounded-full bg-[hsl(var(--nx-surface-3))]" />
+      <div className="mb-4 h-5 w-24 rounded-full bg-[var(--nx-surface-3)]" />
       {[0, 1].map((i) => (
         <div key={i} className="mb-4">
-          <div className="mb-2 h-2.5 w-20 rounded bg-[hsl(var(--nx-surface-3))]" />
+          <div className="mb-2 h-2.5 w-20 rounded bg-[var(--nx-surface-3)]" />
           <div className="space-y-1.5">
-            <div className="h-3 w-full rounded bg-[hsl(var(--nx-surface-3))]" />
-            <div className="h-3 w-5/6 rounded bg-[hsl(var(--nx-surface-3))]" />
-            <div className="h-3 w-4/6 rounded bg-[hsl(var(--nx-surface-3))]" />
+            <div className="h-3 w-full rounded bg-[var(--nx-surface-3)]" />
+            <div className="h-3 w-5/6 rounded bg-[var(--nx-surface-3)]" />
+            <div className="h-3 w-4/6 rounded bg-[var(--nx-surface-3)]" />
           </div>
         </div>
       ))}

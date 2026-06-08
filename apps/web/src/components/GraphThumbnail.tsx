@@ -18,15 +18,15 @@ export function GraphThumbnail({ seed = 0, className }: { seed?: number; classNa
 
   return (
     <svg viewBox="0 0 100 76" className={className} preserveAspectRatio="xMidYMid meet" aria-hidden>
-      <g stroke="hsl(var(--nx-border-strong))" strokeWidth="0.6">
+      <g stroke="var(--nx-border-strong)" strokeWidth="0.6">
         {sats.map((s, i) => (
           <line key={i} x1={50} y1={38} x2={s.x} y2={s.y} />
         ))}
       </g>
       {sats.map((s, i) => (
-        <circle key={i} cx={s.x} cy={s.y} r={3.4} fill="hsl(var(--nx-surface-3))" stroke={`hsl(var(--entity-${s.tone}))`} strokeWidth="1.2" />
+        <circle key={i} cx={s.x} cy={s.y} r={3.4} fill="var(--nx-surface-3)" stroke={`var(--entity-${s.tone})`} strokeWidth="1.2" />
       ))}
-      <circle cx={50} cy={38} r={7} fill="hsl(var(--entity-campaign))" />
+      <circle cx={50} cy={38} r={7} fill="var(--entity-campaign)" />
     </svg>
   );
 }

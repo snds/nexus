@@ -32,14 +32,14 @@ export function IocResultCard({
   for (const e of entities) groups.set(e.type, (groups.get(e.type) ?? 0) + 1);
 
   return (
-    <div className="w-[260px] overflow-hidden rounded-lg border border-[hsl(var(--nx-accent)/0.5)] bg-[hsl(var(--nx-surface-2))] shadow-2xl">
-      <div className="flex items-center justify-between bg-[hsl(var(--nx-accent)/0.16)] px-3 py-2">
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-[hsl(var(--nx-fg))]">
-          <Icon name="travel_explore" size={16} className="text-[hsl(var(--nx-accent))]" />
+    <div className="w-[260px] overflow-hidden rounded-lg border border-[color-mix(in_srgb,var(--nx-accent)_50%,transparent)] bg-[var(--nx-surface-2)] shadow-2xl">
+      <div className="flex items-center justify-between bg-[color-mix(in_srgb,var(--nx-accent)_16%,transparent)] px-3 py-2">
+        <span className="flex items-center gap-1.5 text-xs font-semibold text-[var(--nx-fg)]">
+          <Icon name="travel_explore" size={16} className="text-[var(--nx-accent)]" />
           {title}
         </span>
         <Tooltip label="Dismiss" side="left">
-          <button onClick={onClose} aria-label="Dismiss" className="grid h-6 w-6 place-items-center rounded text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg))]">
+          <button onClick={onClose} aria-label="Dismiss" className="grid h-6 w-6 place-items-center rounded text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg)]">
             <Icon name="close" size={20} />
           </button>
         </Tooltip>
@@ -50,17 +50,17 @@ export function IocResultCard({
           <li key={type}>
             <button
               onClick={() => onReveal(type)}
-              className="flex w-full items-center gap-2.5 px-3 py-2 text-left hover:bg-[hsl(var(--nx-surface-3))]"
+              className="flex w-full items-center gap-2.5 px-3 py-2 text-left hover:bg-[var(--nx-surface-3)]"
               title={`Reveal ${count} ${count === 1 ? ENTITY_META[type].label : plural(ENTITY_META[type].label)}`}
             >
               <EntityIcon type={type} size={16} />
               <span className="flex-1">
-                <span className="text-sm font-bold tabular-nums text-[hsl(var(--nx-fg))]">{count}</span>
-                <span className="ml-1.5 text-[11px] text-[hsl(var(--nx-fg-muted))]">
+                <span className="text-sm font-bold tabular-nums text-[var(--nx-fg)]">{count}</span>
+                <span className="ml-1.5 text-[11px] text-[var(--nx-fg-muted)]">
                   {count === 1 ? ENTITY_META[type].label : plural(ENTITY_META[type].label)}
                 </span>
               </span>
-              <Icon name="add_circle" size={16} className="text-[hsl(var(--nx-fg-subtle))]" />
+              <Icon name="add_circle" size={16} className="text-[var(--nx-fg-subtle)]" />
             </button>
           </li>
         ))}
@@ -68,7 +68,7 @@ export function IocResultCard({
 
       <button
         onClick={onRevealAll}
-        className="w-full border-t border-[hsl(var(--nx-border))] px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-[hsl(var(--nx-accent))] hover:bg-[hsl(var(--nx-surface-3))]"
+        className="w-full border-t border-[var(--nx-border)] px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--nx-accent)] hover:bg-[var(--nx-surface-3)]"
       >
         Reveal all on graph
       </button>

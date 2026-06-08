@@ -62,8 +62,8 @@ export function SearchBox({ onSelect }: { onSelect: (id: string) => void }) {
 
   return (
     <div ref={boxRef} className="relative w-full max-w-[520px]">
-      <div className="flex h-9 items-center gap-2 rounded-md border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-2))] px-3 focus-within:border-[hsl(var(--nx-ring))]">
-        <Icon name="search" size={20} className="shrink-0 text-[hsl(var(--nx-fg-subtle))]" />
+      <div className="flex h-9 items-center gap-2 rounded-md border border-[var(--nx-border)] bg-[var(--nx-surface-2)] px-3 focus-within:border-[var(--nx-ring)]">
+        <Icon name="search" size={20} className="shrink-0 text-[var(--nx-fg-subtle)]" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -73,11 +73,11 @@ export function SearchBox({ onSelect }: { onSelect: (id: string) => void }) {
           aria-label="Search"
           aria-expanded={open}
           aria-controls={listId}
-          className="w-full bg-transparent text-sm text-[hsl(var(--nx-fg))] placeholder:text-[hsl(var(--nx-fg-subtle))] focus:outline-none"
+          className="w-full bg-transparent text-sm text-[var(--nx-fg)] placeholder:text-[var(--nx-fg-subtle)] focus:outline-none"
         />
         {query && (
           <Tooltip label="Clear search" side="bottom">
-            <button onClick={() => setQuery("")} aria-label="Clear search" className="shrink-0 text-[hsl(var(--nx-fg-subtle))] hover:text-[hsl(var(--nx-fg))]">
+            <button onClick={() => setQuery("")} aria-label="Clear search" className="shrink-0 text-[var(--nx-fg-subtle)] hover:text-[var(--nx-fg)]">
               <Icon name="close" size={20} />
             </button>
           </Tooltip>
@@ -88,26 +88,26 @@ export function SearchBox({ onSelect }: { onSelect: (id: string) => void }) {
         <div
           id={listId}
           role="listbox"
-          className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 max-h-[60vh] overflow-y-auto rounded-lg border border-[hsl(var(--nx-border))] bg-[hsl(var(--nx-surface-1))] shadow-2xl"
+          className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 max-h-[60vh] overflow-y-auto rounded-lg border border-[var(--nx-border)] bg-[var(--nx-surface-1)] shadow-2xl"
         >
-          <div className="flex items-center justify-between border-b border-[hsl(var(--nx-border))] px-3 py-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">
+          <div className="flex items-center justify-between border-b border-[var(--nx-border)] px-3 py-2">
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-[var(--nx-fg-subtle)]">
               {loading ? "Searching…" : `${results.length} result${results.length === 1 ? "" : "s"}`}
             </span>
-            <span className="flex items-center gap-1 text-[11px] text-[hsl(var(--nx-fg-subtle))]">
+            <span className="flex items-center gap-1 text-[11px] text-[var(--nx-fg-subtle)]">
               <Icon name="calendar_today" size={13} /> Last 7 days
             </span>
           </div>
 
           {!loading && results.length === 0 && (
-            <p className="px-3 py-6 text-center text-xs text-[hsl(var(--nx-fg-subtle))]">No matches for “{query}”.</p>
+            <p className="px-3 py-6 text-center text-xs text-[var(--nx-fg-subtle)]">No matches for “{query}”.</p>
           )}
 
           {[...groups.entries()].map(([type, items]) => (
-            <div key={type} className="border-b border-[hsl(var(--nx-border))] py-1 last:border-0">
+            <div key={type} className="border-b border-[var(--nx-border)] py-1 last:border-0">
               <div className="flex items-center gap-1.5 px-3 py-1">
                 <EntityIcon type={type} size={14} />
-                <span className="text-[10px] font-semibold uppercase tracking-wide text-[hsl(var(--nx-fg-subtle))]">
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nx-fg-subtle)]">
                   {ENTITY_META[type].label}
                 </span>
               </div>
@@ -117,7 +117,7 @@ export function SearchBox({ onSelect }: { onSelect: (id: string) => void }) {
                   role="option"
                   aria-selected={false}
                   onClick={() => pick(e.id)}
-                  className="block w-full truncate px-3 py-1.5 pl-8 text-left text-xs text-[hsl(var(--nx-fg-muted))] hover:bg-[hsl(var(--nx-surface-3))] hover:text-[hsl(var(--nx-fg))]"
+                  className="block w-full truncate px-3 py-1.5 pl-8 text-left text-xs text-[var(--nx-fg-muted)] hover:bg-[var(--nx-surface-3)] hover:text-[var(--nx-fg)]"
                   title={e.label}
                 >
                   {e.label}
@@ -127,7 +127,7 @@ export function SearchBox({ onSelect }: { onSelect: (id: string) => void }) {
           ))}
 
           {results.length > 0 && (
-            <button className="w-full px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-[hsl(var(--nx-accent))] hover:underline">
+            <button className="w-full px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-[var(--nx-accent)] hover:underline">
               View all results
             </button>
           )}

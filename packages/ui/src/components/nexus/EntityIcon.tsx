@@ -39,7 +39,7 @@ export function EntityIcon({ type, size = 16, className, color, filled }: Entity
   return (
     <span
       className={cn("inline-flex", className)}
-      style={{ color: color ?? `hsl(var(--entity-${entityColorToken(type)}))` }}
+      style={{ color: color ?? `var(--entity-${entityColorToken(type)})` }}
     >
       <Icon name={ENTITY_SYMBOL[type]} size={size} filled={filled ?? false} />
     </span>

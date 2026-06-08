@@ -13,16 +13,16 @@ import { Icon, Tooltip } from "@nexus/ui/nexus";
 function Brand() {
   return (
     <Link to="/" className="tw" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-      <span style={{ display: "grid", placeItems: "center", height: 30, width: 30, borderRadius: 8, background: "hsl(var(--nx-accent) / 0.15)", color: "hsl(var(--nx-accent))" }}>
+      <span style={{ display: "grid", placeItems: "center", height: 30, width: 30, borderRadius: 8, background: "color-mix(in srgb, var(--nx-accent) 15%, transparent)", color: "var(--nx-accent)" }}>
         <Icon name="hub" size={20} filled />
       </span>
-      <strong style={{ color: "hsl(var(--nx-fg))", fontSize: 15 }}>Nexus DS</strong>
+      <strong style={{ color: "var(--nx-fg)", fontSize: 15 }}>Nexus DS</strong>
     </Link>
   );
 }
 
 function NavLink({ to, href, children }: { to?: string; href?: string; children: React.ReactNode }) {
-  const cls = "rounded-md px-2.5 py-1.5 text-sm text-[hsl(var(--nx-fg-muted))] no-underline transition-colors hover:bg-[hsl(var(--nx-surface-2))] hover:text-[hsl(var(--nx-fg))] hover:no-underline";
+  const cls = "rounded-md px-2.5 py-1.5 text-sm text-[var(--nx-fg-muted)] no-underline transition-colors hover:bg-[var(--nx-surface-2)] hover:text-[var(--nx-fg)] hover:no-underline";
   return to ? <Link to={to} className={cls}>{children}</Link> : <a href={href} className={cls}>{children}</a>;
 }
 
@@ -32,7 +32,7 @@ function IconLink({ href, icon, label }: { href: string; icon: string; label: st
       <a
         href={href}
         aria-label={label}
-        className="grid h-9 w-9 place-items-center rounded-md text-[hsl(var(--nx-fg-muted))] no-underline transition-colors hover:bg-[hsl(var(--nx-surface-2))] hover:text-[hsl(var(--nx-fg))]"
+        className="grid h-9 w-9 place-items-center rounded-md text-[var(--nx-fg-muted)] no-underline transition-colors hover:bg-[var(--nx-surface-2)] hover:text-[var(--nx-fg)]"
       >
         <Icon name={icon} size={20} />
       </a>
