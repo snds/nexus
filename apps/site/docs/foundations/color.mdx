@@ -39,11 +39,11 @@ danger signal. Identity skews cool by design, which makes the warm severity **pi
 
 ## Channel 1 — entity type (identity zone)
 
-A node's color answers "what kind of thing is this?" — never how dangerous. Drawn only from the
-non-reserved hues, grouped into families (adversary · artifact · web · host · identifier · file ·
-comms · meta), with shape + icon disambiguating within a family.
+A node's color answers "what kind of thing is this?" — never how dangerous. Categorical color is
+reliable to ~8 hues, so color encodes **8 super-category families** (each a maximally-distinct hue
+≥39° apart across the full wheel); **shape + icon** read the specific type within a family.
 
-<SwatchGrid tokens={[['--entity-actor','actor · purple'],['--entity-malware','malware · plum'],['--entity-domain','domain · sky'],['--entity-email','email · iris'],['--entity-ip','ip · teal'],['--entity-hash','hash · bronze']]} />
+<SwatchGrid tokens={[['--entity-actor','adversary · crimson'],['--entity-malware','artifact · plum'],['--entity-hash','identifier · orange'],['--entity-ip','host · teal'],['--entity-url','web · cyan'],['--entity-email','comms · iris']]} />
 
 ## Channel 2 — verdict severity (intent zone)
 

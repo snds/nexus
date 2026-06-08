@@ -48,12 +48,26 @@ Ordinal, worst → best, read by the warm→cool progression (not a rainbow):
 
 <SwatchGrid tokens={[['--severity-malicious','malicious → danger (red)'],['--severity-phishing','phishing → crimson (danger band)'],['--severity-suspicious','suspicious → caution (orange)'],['--severity-medium','medium → warning (amber)'],['--severity-benign','benign → success (grass)'],['--severity-unknown','unknown → neutral (gray)']]} />
 
-## Entity (color = type) — identity zone only
+## Entity (color = type) — 8 super-category families
 
-Nominal categories, grouped into hue families (adversary · artifact · web · host · identifier ·
-file · comms · meta), disambiguated within a family by shape + icon:
+Categorical color is reliable to ~8 hues, so **color encodes 8 super-category families** (each a
+maximally-distinct hue, ≥39° apart in OKLCH across the full wheel); the **specific type within a
+family is read by shape + icon**. Intent/verdict may share these hues — it's kept distinct by
+*form* (a small pip/badge with icon + label), not by an exclusive zone. Green is intentionally
+absent (reserved as the "benign/safe" signal) and pure danger-red stays out of identity.
 
-<SwatchGrid tokens={[['--entity-actor','actor → purple'],['--entity-campaign','campaign → violet'],['--entity-malware','malware → plum'],['--entity-exploit','exploit → pink'],['--entity-url','url → cyan'],['--entity-domain','domain → sky'],['--entity-ip','ip → teal'],['--entity-hostname','hostname → jade'],['--entity-hash','hash → bronze'],['--entity-sid','sid → gold'],['--entity-filename','filename → brown'],['--entity-email','email → iris'],['--entity-message','message → mint'],['--entity-scan','scan → mauve']]} />
+| Family | Hue | Types |
+|---|---|---|
+| Adversary | crimson | actor · campaign |
+| Malicious artifact | plum | malware · exploit |
+| Identifier | orange | hash · sid |
+| File | yellow | filename |
+| Host | teal | ip · hostname |
+| Web | cyan | url · domain |
+| Comms | iris | email · message |
+| Meta | gray | scan |
+
+<SwatchGrid tokens={[['--entity-actor','adversary · crimson'],['--entity-malware','artifact · plum'],['--entity-hash','identifier · orange'],['--entity-filename','file · yellow'],['--entity-ip','host · teal'],['--entity-url','web · cyan'],['--entity-email','comms · iris'],['--entity-scan','meta · gray']]} />
 
 ## Radius & motion
 

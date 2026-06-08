@@ -88,20 +88,29 @@ stable ID for cross-tool reference.
   **nominal-only** channel (Bertin; Cleveland & McGill), yet verdict severity (ordinal) was a hue
   rainbow, and entity *type* (nominal) borrowed the semantic danger hues (`actor→red`,
   `malware→crimson`) — so a node's color falsely signaled danger and risked red/green CVD confusion.
-- **Decision:** Split color-as-identifier into two systems in **disjoint hue zones**:
+- **Decision:** Split color-as-identifier into two systems, disambiguated by **encoding role +
+  form** (revised from the initial disjoint-zone idea — see Amendment):
   - **Intent / outcome** (ordinal + semantic): one shared `--intent-*` ramp — danger (red),
     caution (orange), warning (amber), success (grass), info (blue), neutral (gray). **Verdict
     severity and status alerts both alias it.** Verdict is a **diverging** ramp (worst→best) read by
-    the warm→cool progression, not a rainbow.
-  - **Identity** (nominal): entity *type* drawn **only** from non-reserved hues (purples, teals,
-    metals), grouped into families (adversary · artifact · web · host · identifier · file · comms ·
-    meta), disambiguated within a family by shape + icon.
+    the warm→cool progression, not a rainbow. It always appears as a small pip/badge with icon+label.
+  - **Identity** (nominal): entity *type* → **8 super-category families**, each a maximally-distinct
+    hue (≥39° apart in OKLCH, full wheel): adversary=crimson · artifact=plum · identifier=orange ·
+    file=yellow · host=teal · web=cyan · comms=iris · meta=gray. Specific type within a family is
+    read by **shape + icon**.
 - **Rationale:** Matches the encoding-theory contract (`uid-color-for-ui`, `infod-encoding-theory`):
-  hue=nominal → identity; ordinal severity → diverging ramp; reserve semantic hues for status only;
-  ≥8 categories require redundant shape/icon encoding (already present). Identity skews cool so the
-  warm severity pips pop ("make the exception visible, not the rule").
-- **Tradeoffs:** (1) Identity is cool-biased (the warm arc is reserved) and adversary-heavy graphs
-  read purple-ish — acceptable, and shape/icon carry within-family distinction. (2) Some channels
-  share a hue's *family* but differ by step/shape rather than a wholly unique hue (14 types exceed
-  the ~8 reliable-color budget). (3) `phishing` sits in the danger band (crimson) rather than as a
-  unique verdict, preserving the ramp's monotonic order.
+  hue=nominal → identity; ordinal severity → diverging ramp; categorical color is reliable only to
+  ~8 hues, so 14 types collapse to 8 family hues + redundant shape/icon. Identity and intent share
+  the wheel but never confuse because they differ in **form** (large node fill vs small pip/badge)
+  and both pair color with shape/icon/label.
+- **Amendment (form-based, supersedes disjoint-zone):** The first cut reserved the entire warm arc
+  for intent, confining identity to the cool/purple region — which crowded 14 hues into ~⅓ of the
+  wheel (measured min gap **4°**, far below the ~30° at-a-glance threshold). Relaxing to form-based
+  separation reopened the full wheel; the 8-family palette now sits at **≥39° min gap** with
+  lightness variation. Green stays out of identity (reserved as the benign/safe signal) and pure
+  danger-red stays out as a node fill.
+- **Tradeoffs:** (1) Within a family two types share a hue (e.g. actor & campaign = crimson), relying
+  on shape + icon — the correct response to the ~8-color limit, and arguably richer (color = family,
+  icon = type). (2) Identity and intent hues can coincide (e.g. identifier-orange vs caution-orange),
+  accepted because form disambiguates. (3) `phishing` sits in the danger band (crimson) rather than
+  as a unique verdict, preserving the ramp's monotonic order.
