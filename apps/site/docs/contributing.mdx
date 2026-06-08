@@ -1,0 +1,38 @@
+---
+sidebar_position: 6
+title: Contributing
+---
+
+# Contributing
+
+## Layered architecture
+
+- **L0 `@nexus/tokens`** — `tokens.css` (the `--nx-*` / `--entity-*` / `--severity-*` source of
+  truth) + `shadcn-bridge.css` (maps shadcn names like `--background` → `--nx-bg`).
+- **L1 `components/ui`** — pristine shadcn/Radix bases. Regenerable; restyle via the bridge, not
+  by hand-editing.
+- **L3 `components/nexus`** — product primitives that compose L1 + tokens. This is what apps import
+  (`@nexus/ui/nexus`).
+
+## Adding a component
+
+1. **Resolve the system first.** Reuse a token, a base primitive, or an existing wrapper before
+   inventing anything. No hand-rolled value the system already provides.
+2. If it's a generic (overlay, control), **compose the Radix base** in `components/ui` and wrap it
+   in `components/nexus` with the product API.
+3. Add a `*.stories.tsx` enumerating its variants → it's automatically axe-tested **and** appears
+   in Storybook.
+4. Document it here / in the relevant section.
+
+## Token-first rule
+
+Every styled value maps to a token. Local exceptions are allowed only for genuinely new patterns —
+and must be flagged immediately. An undocumented override is invisible debt.
+
+## Verify
+
+```bash
+pnpm turbo run typecheck test lint   # 17 tasks · 62 axe tests
+```
+
+The same gate runs on every push before the docs, Storybook, and demo deploy from `main`.

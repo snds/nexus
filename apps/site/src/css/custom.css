@@ -1,5 +1,13 @@
-/* Light brand alignment for Docusaurus (Infima). Dark mode is the default; tuned toward the
-   Nexus cool near-black + accent so the guides feel of-a-piece with the system. */
+/* Dogfood: load the DS tokens + Tailwind utilities so live @nexus/ui components render fully
+   styled inside the docs. Tailwind preflight is disabled (tailwind.config.js) so it doesn't
+   reset Docusaurus/Infima. */
+@import "../../../../packages/tokens/src/index.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Infima brand alignment — dark is the only mode for this dark-first system. */
 :root {
   --ifm-color-primary: #1f8fe0;
   --ifm-color-primary-dark: #1c81ca;
@@ -19,6 +27,20 @@
   --ifm-color-primary-light: #6ec0f8;
   --ifm-color-primary-lighter: #80c8f9;
   --ifm-color-primary-lightest: #b5e0fc;
-  --ifm-background-color: #080b12;
-  --ifm-background-surface-color: #0f131c;
+  --ifm-background-color: hsl(var(--nx-bg));
+  --ifm-background-surface-color: hsl(var(--nx-surface-1));
+}
+
+/* Material Symbols base class (the font itself is loaded via config `stylesheets`). */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
 }

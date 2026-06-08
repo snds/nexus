@@ -1,0 +1,35 @@
+---
+slug: /
+sidebar_position: 1
+title: Overview
+---
+
+import { Pill, VerdictBadge } from '@nexus/ui/nexus';
+
+# Nexus Design System
+
+A dark-first, **shadcn/Radix-based** design system for SOC link-analysis surfaces — the
+system behind the Nexus Threat Explorer demo. These docs are **built with the system they
+document**: the swatches below read their values live from the token cascade, and every
+component example is the real `@nexus/ui` primitive, not a screenshot.
+
+Three orthogonal channels keep a dense threat graph legible:
+<Pill tone="accent">color = entity type</Pill> <Pill tone="neutral">shape = family</Pill> and
+a <VerdictBadge verdict="malicious" /> on its own channel.
+
+## Architecture
+
+| Layer | Where | Owns |
+|---|---|---|
+| **L0 Tokens** | `@nexus/tokens` | Appearance — the single source of truth (`--nx-*`, `--entity-*`, `--severity-*`) + a shadcn var bridge. |
+| **L1 Base** | `packages/ui/src/components/ui` | Pristine **shadcn/Radix** primitives (Button, Tooltip, Dialog, DropdownMenu, Popover). Regenerable; themed only via the bridge. |
+| **L3 Wrapper** | `packages/ui/src/components/nexus` | Product primitives (NodeBadge, ToolButton, Modal, GraphLegend…) that compose L1 + tokens. |
+
+Everything downstream **consumes and dogfoods** this DS: the demo app, these docs, and the
+Storybook component explorer.
+
+## The three surfaces
+
+- **Documentation** (this site) — foundations, components, principles, contribution.
+- **[Storybook](/nexus/storybook/)** — the interactive component explorer (every variant + the a11y addon).
+- **[Live demo](/nexus/app/)** — the Threat Explorer, the DS in real product use.

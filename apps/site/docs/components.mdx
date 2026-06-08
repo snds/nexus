@@ -1,0 +1,66 @@
+---
+sidebar_position: 3
+title: Components
+---
+
+import { Specimen } from '@site/src/components/ds';
+import { Icon, ToolButton, Tooltip, EntityIcon, ShapeIcon, VerdictBadge, VerdictPip, CountChip, StatCircle, Pill, Stepper } from '@nexus/ui/nexus';
+
+# Components
+
+The library has two tiers. **L1 base** are pristine shadcn/Radix primitives (Button, Tooltip,
+Dialog, DropdownMenu, Popover) — explore their variants and interactive (open) states in
+**[Storybook → Base](/nexus/storybook/?path=/story/base-button--all-variants)**. **L3 product
+primitives** compose them with tokens; live examples follow.
+
+## Iconography
+
+<Specimen>
+  <Icon name="hub" size={28} />
+  <Icon name="campaign" size={28} />
+  <Icon name="shield_person" size={28} filled />
+  <EntityIcon type="actor" size={28} />
+  <EntityIcon type="malware" size={28} />
+  <ShapeIcon shape="circle" size={24} />
+  <ShapeIcon shape="square" size={24} />
+  <ShapeIcon shape="diamond" size={24} />
+  <ShapeIcon shape="hexagon" size={24} />
+</Specimen>
+
+Material Symbols, outlined by default; `filled` only for active states.
+
+## Controls & tooltips
+
+<Specimen>
+  <ToolButton icon="save" label="Save" />
+  <ToolButton icon="route" label="Highlight path" active />
+  <ToolButton icon="history" label="History" />
+  <Tooltip label="A real DOM tooltip" side="top">
+    <button style={{ height: 36, width: 36, borderRadius: 6, border: '1px solid hsl(var(--nx-border))', background: 'hsl(var(--nx-surface-2))', color: 'hsl(var(--nx-fg))' }}>★</button>
+  </Tooltip>
+</Specimen>
+
+`ToolButton` and `Tooltip` compose the Radix base — real focus, escape, portal, and delay.
+
+## Badges, chips & stats
+
+<Specimen>
+  <VerdictBadge verdict="malicious" />
+  <VerdictBadge verdict="suspicious" />
+  <VerdictBadge verdict="benign" />
+  <VerdictPip verdict="malicious" />
+  <VerdictPip verdict="medium" />
+  <CountChip count={3} />
+  <Pill tone="neutral">neutral</Pill>
+  <Pill tone="accent">accent</Pill>
+</Specimen>
+
+<Specimen>
+  <StatCircle label="DLP" value={42} tone="malicious" />
+  <StatCircle label="Logins" value={1280} tone="neutral" />
+  <StatCircle label="Clean" value={98} tone="benign" />
+  <Stepper steps={['Connect','Authorize','Verify']} current={1} />
+</Specimen>
+
+> Every variant — plus the interactive overlays (Dialog, DropdownMenu, Popover) — lives in the
+> **[Storybook component explorer](/nexus/storybook/)** with the accessibility addon.

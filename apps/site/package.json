@@ -11,10 +11,18 @@
   "dependencies": {
     "@docusaurus/core": "^3.7.0",
     "@docusaurus/preset-classic": "^3.7.0",
+    "@nexus/domain": "workspace:*",
+    "@nexus/tokens": "workspace:*",
+    "@nexus/ui": "workspace:*",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16"
   },
   "browserslist": {
     "production": [">0.5%", "not dead", "not op_mini all"],

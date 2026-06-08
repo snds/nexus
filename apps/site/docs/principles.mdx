@@ -1,0 +1,27 @@
+---
+sidebar_position: 5
+title: Principles
+---
+
+# Principles
+
+**Three orthogonal channels.** Color encodes entity *type*, shape encodes *family*, and verdict
+lives on its own *pip*. They never collide — so a node reads at a glance and the legend stays
+trustworthy.
+
+**Fill is for active only.** Material Symbols are outlined by default; the FILL axis flips to 1
+only for active / selected / hub states. Don't use fill for decoration.
+
+**Token-sourced everything.** No component hardcodes a hue, blur, radius, or duration. Two
+background contexts (canvas / panels), AA-safe text, and a dark-first ramp with a light override.
+
+**Compose on Radix for generics.** Buttons, tooltips, dialogs, menus, and popovers are built on
+shadcn/Radix bases — real focus management, escape, portals, and keyboard navigation — wrapped by
+thin product primitives. Only the genuinely domain-specific graph pieces are bespoke.
+
+**Motion that informs.** Entrances ease-out; new nodes expand from their parent; edges stay
+locked to centers and never draw ahead of an arriving node. Everything honors
+`prefers-reduced-motion`.
+
+**Accessibility is enforced, not aspirational.** Every Storybook story is rendered through axe in
+CI; structural/ARIA failures break the build.

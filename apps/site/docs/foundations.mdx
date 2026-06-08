@@ -1,0 +1,43 @@
+---
+sidebar_position: 2
+title: Foundations
+---
+
+import { SwatchGrid } from '@site/src/components/ds';
+
+# Foundations
+
+Tokens are the single source of truth — no component hardcodes a hue, blur, or duration.
+Values below are **read live from `:root`**.
+
+## Background contexts
+
+Two Radix-style background steps — the app/canvas (step 1) and panels that lift off it
+(step 2) — plus raised/hover surfaces.
+
+<SwatchGrid tokens={[['--nx-bg','App / canvas · bg 1'],['--nx-surface-1','Panels · bg 2'],['--nx-surface-2','Raised / popover'],['--nx-surface-3','Hover / selected']]} />
+
+## Borders & accent
+
+<SwatchGrid kind="border" tokens={[['--nx-border','Border'],['--nx-border-strong','Border strong'],['--nx-accent','Accent (interactive)'],['--nx-ring','Focus ring']]} />
+
+## Text
+
+<SwatchGrid kind="text" tokens={[['--nx-fg','Primary'],['--nx-fg-muted','Muted'],['--nx-fg-subtle','Subtle · ≥4.5:1 AA']]} />
+
+## Entity color (channel — type)
+
+<SwatchGrid tokens={[['--entity-actor','actor'],['--entity-campaign','campaign'],['--entity-malware','malware'],['--entity-exploit','exploit'],['--entity-sid','sid'],['--entity-hash','hash'],['--entity-url','url'],['--entity-domain','domain'],['--entity-ip','ip'],['--entity-hostname','hostname'],['--entity-filename','filename'],['--entity-email','email'],['--entity-message','message'],['--entity-scan','scan']]} />
+
+## Severity (own channel — verdict)
+
+<SwatchGrid tokens={[['--severity-malicious','malicious'],['--severity-phishing','phishing'],['--severity-suspicious','suspicious'],['--severity-medium','medium'],['--severity-benign','benign'],['--severity-unknown','unknown']]} />
+
+## Radius, motion & type
+
+- **Radius** — `--nx-radius-sm` · `--nx-radius` · `--nx-radius-lg`.
+- **Motion** — `--nx-motion-fast|base|slow` + `--nx-ease-out|standard`. Standard transitions
+  reference these; the canvas adds a reviewable preset layer (Smooth / Floaty / Snappy) on top.
+- **Type** — `--nx-font-sans` (UI) and `--nx-font-mono` (hashes / indicators).
+
+See the live, interactive versions in the **[Storybook → Foundations](/nexus/storybook/?path=/story/foundations-tokens--colors)** section.
