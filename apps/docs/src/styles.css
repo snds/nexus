@@ -1,0 +1,24 @@
+/* Tokens first (the single source of truth this site documents), then Tailwind. */
+@import "@nexus/tokens/index.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: hsl(var(--nx-bg));
+  color: hsl(var(--nx-fg));
+  font-family: var(--nx-font-sans);
+}
+
+/* Smooth in-page anchor scrolling for the side nav. */
+html {
+  scroll-behavior: smooth;
+}

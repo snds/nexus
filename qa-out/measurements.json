@@ -1,0 +1,32 @@
+{
+  "target": "demo server (Nexus Threat Explorer) — http://localhost:5173",
+  "verb": "audit",
+  "lens": ["ui", "a11y"],
+  "level": "AA",
+  "viewport": "1440x900",
+  "method": "WCAG 2.x contrast computed from live computed CSS colors (deterministic, no screenshot sampling error). visual-qa-toolkit contrast math; visual-qa-ui-design + visual-qa-accessibility lenses.",
+  "themes": {
+    "dark": {
+      "chrome_text_failures_AA": [
+        {"sample": "section labels / sublabels / nav-rail / dashboard metadata", "token": "--nx-fg-subtle", "fg": "rgb(108,120,137)", "bg_range": "rgb(20,23,31)..rgb(27,30,40)", "ratio_range": "3.71-4.11", "threshold": 4.5, "note": "muted token too dim for normal/small text on dark surfaces"}
+      ],
+      "non_text_icon_failures": [
+        {"sample": "verdict/status pip glyph 'warning' (white on orange)", "fg": "rgb(255,255,255)", "bg": "rgb(244,136,42)", "ratio": 2.5, "threshold_nontext": 3.0},
+        {"sample": "'priority_high' white on red pip", "fg": "rgb(255,255,255)", "bg": "rgb(230,55,55)", "ratio": 4.23, "threshold_nontext": 3.0, "pass": true}
+      ]
+    },
+    "light": {
+      "blocker": {
+        "finding": "On-canvas node titles + labels render dark on the permanently-dark graph pane",
+        "fg": "rgb(21,27,40)",
+        "paneBg": "rgb(0,0,0)",
+        "ratio": 1.22,
+        "threshold": 4.5,
+        "affected": ["rcastle@acme.com", "jsmith@acme.com", "Zloader Botnet 18", "TA511", "Zloader (MALWARE)", "ACTOR"],
+        "rootCause": "GraphCanvas pins React Flow colorMode=\"dark\" (pane stays black) while node-label text uses --nx-fg, which flips to a dark value under :root.light.",
+        "userReachable": "Not via UI yet — no light-theme toggle is wired; reachable by adding `light` class to <html>. Latent DS defect since tokens.css ships .light as a supported override."
+      },
+      "chrome_text_failures_AA": []
+    }
+  }
+}

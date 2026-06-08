@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "apps/web/tailwind.config.ts",
+    "css": "packages/tokens/src/index.css",
+    "baseColor": "slate",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@nexus/ui/components",
+    "ui": "@nexus/ui/components/ui",
+    "lib": "@nexus/ui/lib",
+    "utils": "@nexus/ui/lib/utils"
+  }
+}

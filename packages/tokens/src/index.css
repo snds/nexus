@@ -1,0 +1,3 @@
+/* NTX tokens entry — import this once at the app root. */
+@import "./tokens.css";
+@import "./shadcn-bridge.css";

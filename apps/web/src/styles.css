@@ -1,0 +1,110 @@
+/* Tokens first (defines the CSS vars Tailwind + components read), then Tailwind, then xyflow. */
+@import "@nexus/tokens/index.css";
+@import "@xyflow/react/dist/style.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: hsl(var(--nx-bg));
+  color: hsl(var(--nx-fg));
+  font-family: var(--nx-font-sans);
+}
+
+/* Make React Flow chrome theme-aware via tokens.
+ *
+ * RF v12 themes through its OWN `--xy-*` custom properties (its internal rules read
+ * `fill: var(--xy-…)`). Plain `.react-flow__… { fill }` overrides lose the cascade-layer
+ * fight against those rules, so we drive the `--xy-*` vars directly — this is RF's
+ * sanctioned theming surface and keeps every value token-sourced (no component edits).
+ * Without this, the minimap mask, edge-label backdrops, and control glyphs all render
+ * with RF's light-mode defaults and glare against the dark canvas. */
+.react-flow {
+  /* Canvas surface = the cool near-black app background (RF's default is a neutral gray). */
+  background-color: hsl(var(--nx-bg));
+  --xy-background-color: hsl(var(--nx-bg));
+
+  /* Controls: dark button, light glyph (RF defaults invert both). */
+  --xy-controls-button-background-color: hsl(var(--nx-surface-2));
+  --xy-controls-button-background-color-hover: hsl(var(--nx-surface-3));
+  --xy-controls-button-border-color: hsl(var(--nx-border));
+  --xy-controls-button-color: hsl(var(--nx-fg));
+  --xy-controls-button-color-hover: hsl(var(--nx-fg));
+
+  /* Minimap: the bright box. Mask tinted to the app bg so the viewport reads as a
+   * dark inset; off-viewport nodes use the strong-border token. */
+  --xy-minimap-mask-background-color: hsl(var(--nx-bg) / 0.6);
+  --xy-minimap-node-background-color: hsl(var(--nx-border-strong));
+
+  /* Edge-label backdrop: defaults to solid white; tint to a raised surface and let it
+     blend (semi-transparent) so relationship verbs recede behind node identity. */
+  --xy-edge-label-background-color: hsl(var(--nx-surface-2) / 0.72);
+}
+.react-flow__minimap {
+  background: hsl(var(--nx-surface-1));
+}
+.react-flow__edge-text {
+  fill: hsl(var(--nx-fg-muted));
+  font-size: 9px;
+  letter-spacing: 0.02em;
+}
+.react-flow__edge-path {
+  stroke: hsl(var(--nx-border-strong));
+}
+
+/* ── Node motion (preset-driven via --nx-node-* vars set on the canvas) ──────────
+   Node POSITION is animated in JS (GraphCanvas), so edges stay locked to node centers
+   and never draw ahead of an arriving node. CSS here handles the two on-mount beats:
+     1. .nx-shape      — the shape + glyph scale up from the parent as the node travels.
+     2. .nx-after-land — labels + indicators fade in AFTER the node lands (delayed past
+                          the travel duration) so they resolve once the node is in place.
+   .nx-shape is also the hover-scale target (see component); the enter animation only runs
+   once on mount, after which hover scaling takes over. */
+.nx-shape {
+  animation: nxShapeIn var(--nx-node-dur, 0ms) var(--nx-node-ease, ease);
+  animation-delay: var(--nx-enter-delay, 0ms);
+}
+@keyframes nxShapeIn {
+  from {
+    opacity: 0;
+    transform: scale(var(--nx-node-enter, 0.8));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.nx-after-land {
+  animation: nxFadeIn var(--nx-node-dur, 0ms) ease both;
+  animation-delay: calc(var(--nx-enter-delay, 0ms) + var(--nx-node-dur, 0ms));
+}
+@keyframes nxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Edges fade rather than pop when revealed after their child node lands. */
+.react-flow__edge {
+  transition: opacity var(--nx-motion-base) ease;
+}
+/* Accessibility: honor the OS reduced-motion setting — no enter/scale/fade. */
+@media (prefers-reduced-motion: reduce) {
+  .nx-shape,
+  .nx-after-land {
+    animation: none;
+  }
+  .react-flow__edge {
+    transition: none;
+  }
+}

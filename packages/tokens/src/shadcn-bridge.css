@@ -1,0 +1,37 @@
+/**
+ * shadcn variable bridge — THE ONLY place shadcn var names are defined.
+ * Maps shadcn's expected names → NTX tokens. The pristine base (L1) reads these
+ * names; we never edit the base's classNames. Restyle = edit a token, never a component.
+ */
+
+:root {
+  --background: var(--nx-bg);
+  --foreground: var(--nx-fg);
+
+  --card: var(--nx-surface-1);
+  --card-foreground: var(--nx-fg);
+
+  --popover: var(--nx-surface-2);
+  --popover-foreground: var(--nx-fg);
+
+  --primary: var(--nx-accent);
+  --primary-foreground: var(--nx-accent-fg);
+
+  --secondary: var(--nx-surface-3);
+  --secondary-foreground: var(--nx-fg);
+
+  --muted: var(--nx-surface-3);
+  --muted-foreground: var(--nx-fg-muted);
+
+  --accent: var(--nx-surface-3);
+  --accent-foreground: var(--nx-fg);
+
+  --destructive: var(--severity-malicious);
+  --destructive-foreground: 0 0% 100%;
+
+  --border: var(--nx-border);
+  --input: var(--nx-border-strong);
+  --ring: var(--nx-ring);
+
+  --radius: var(--nx-radius);
+}

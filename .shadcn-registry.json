@@ -1,0 +1,12 @@
+{
+  "$comment": "Safety net (architecture §6 / CLAUDE.md). Records the tracked version of every L1 base component. CI re-adds each to a temp dir and diffs against packages/ui/src/components/ui — divergence FAILS the build. A failure means 'this edit is in the wrong layer', not 'silence the guard'.",
+  "registry": "https://ui.shadcn.com",
+  "targetDir": "packages/ui/src/components/ui",
+  "components": {
+    "button": {
+      "tracked": true,
+      "path": "packages/ui/src/components/ui/button.tsx",
+      "note": "Pristine shadcn output. Regenerate with: npx shadcn@latest add button --overwrite"
+    }
+  }
+}

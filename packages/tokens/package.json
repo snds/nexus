@@ -1,0 +1,20 @@
+{
+  "name": "@nexus/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./src/tokens.css",
+    "./shadcn-bridge.css": "./src/shadcn-bridge.css",
+    "./index.css": "./src/index.css",
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "clean": "rm -rf .turbo dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

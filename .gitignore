@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# vite
+.vite/
+
+# env
+.env
+.env.*
+!.env.example
+
+# local agent / tooling config (not a deliverable)
+.claude/
+
+# editor / os
+.DS_Store
+Icon?
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Design source = LOCAL reference only. It holds third-party (Proofpoint) proprietary
+# product screenshots + a Sketch library — not deliverables, and not for a public repo
+# (copyright/IP) — plus ~100MB of binaries that would bloat clones. Kept on disk, never committed.
+design-source/
